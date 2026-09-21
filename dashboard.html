@@ -2,36 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Dashboard | THE GAME WITH FUN</title>
-  <meta name="description" content="Player Dashboard for THE GAME WITH FUN. Track tasks, view VIP tier status, monitor streaks, and manage game rewards.">
+  <meta name="description" content="Premium player dashboard for THE GAME WITH FUN. Track tasks, streaks, VIP progression, and rewards in real time.">
 
   <style>
     /* ==========================================================================
-       ULTRA-PREMIUM DARK GAMING DESIGN SYSTEM
+       ULTRA-PREMIUM CYBER/GAMING DESIGN SYSTEM (NO-LAG, MOBILE-FIRST)
        ========================================================================== */
     :root {
-      --bg-void: #05070b;
+      --bg-base: #06080d;
       --bg-surface: #0a0e17;
-      --bg-card: rgba(13, 18, 30, 0.78);
-      --bg-card-border: rgba(255, 255, 255, 0.08);
-      --bg-glass-elevated: rgba(20, 27, 45, 0.85);
+      --bg-card: rgba(14, 19, 32, 0.72);
+      --bg-card-hover: rgba(20, 27, 46, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-glow: rgba(0, 240, 255, 0.25);
+      --border-gold: rgba(245, 158, 11, 0.3);
 
       --gold-primary: #f59e0b;
-      --gold-glow: rgba(245, 158, 11, 0.35);
-      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #d97706 100%);
 
       --cyan-neon: #00f0ff;
       --cyan-glow: rgba(0, 240, 255, 0.35);
       --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
 
-      --purple-accent: #a855f7;
-      --emerald-accent: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.3);
-      --ruby-accent: #f43f5e;
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --ruby-neon: #f43f5e;
 
       --text-white: #ffffff;
-      --text-main: #f1f5f9;
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
 
@@ -40,7 +41,7 @@
       --radius-lg: 24px;
       --radius-full: 9999px;
 
-      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -53,8 +54,8 @@
 
     html, body {
       min-height: 100vh;
-      background-color: var(--bg-void);
-      font-family: var(--font-family);
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
       color: var(--text-main);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -62,17 +63,16 @@
 
     body {
       background-image:
-        radial-gradient(circle at 10% 5%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 25%, rgba(245, 158, 11, 0.06) 0%, transparent 45%),
-        radial-gradient(circle at 50% 60%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
+        radial-gradient(circle at 10% 8%, rgba(0, 240, 255, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
       background-attachment: fixed;
-      padding-bottom: 85px; /* Room for mobile nav */
+      padding-bottom: 95px; /* Extra room so fixed bottom nav never overlaps content */
     }
 
-    /* Desktop adjustments */
     @media (min-width: 1024px) {
       body {
-        padding-bottom: 2rem;
+        padding-bottom: 3rem;
       }
     }
 
@@ -90,23 +90,23 @@
 
     .container {
       width: 100%;
-      max-width: 1180px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
     /* ==========================================================================
-       TOP APP HEADER
+       HEADER BAR
        ========================================================================== */
     .top-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5, 7, 11, 0.85);
+      background: rgba(6, 8, 13, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--bg-card-border);
-      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
     }
 
     .header-content {
@@ -121,7 +121,7 @@
       gap: 10px;
     }
 
-    .brand-badge {
+    .brand-icon-box {
       width: 38px;
       height: 38px;
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(0, 240, 255, 0.2));
@@ -133,7 +133,7 @@
       box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
     }
 
-    .brand-text {
+    .brand-meta {
       display: flex;
       flex-direction: column;
     }
@@ -150,23 +150,23 @@
       font-size: 0.65rem;
       color: var(--cyan-neon);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 700;
+      letter-spacing: 1.2px;
+      font-weight: 800;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       position: relative;
     }
 
     .btn-icon {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       display: grid;
       place-items: center;
       color: var(--text-main);
@@ -179,22 +179,22 @@
       color: var(--cyan-neon);
     }
 
-    .notif-badge {
+    .notif-dot {
       position: absolute;
-      top: 9px;
-      right: 9px;
-      width: 8px;
-      height: 8px;
+      top: 8px;
+      right: 8px;
+      width: 7px;
+      height: 7px;
       background: var(--gold-primary);
       border-radius: 50%;
       box-shadow: 0 0 8px var(--gold-primary);
     }
 
     .user-avatar-btn {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan-neon), var(--purple-accent));
+      background: linear-gradient(135deg, var(--cyan-neon), var(--purple-neon));
       padding: 1.5px;
       cursor: pointer;
     }
@@ -202,7 +202,7 @@
     .avatar-inner {
       width: 100%;
       height: 100%;
-      background: #090e1a;
+      background: #0b0f1a;
       border-radius: 50%;
       display: grid;
       place-items: center;
@@ -216,16 +216,16 @@
       position: absolute;
       top: calc(100% + 10px);
       right: 0;
-      width: 210px;
+      width: 220px;
       background: #0d1222;
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 0.65rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+      padding: 0.75rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
       display: none;
       flex-direction: column;
       gap: 4px;
-      z-index: 105;
+      z-index: 110;
       animation: popIn 0.2s var(--smooth-ease) forwards;
     }
 
@@ -239,13 +239,13 @@
     }
 
     .dropdown-user-info {
-      padding: 0.5rem 0.65rem 0.75rem;
+      padding: 0.35rem 0.5rem 0.65rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       margin-bottom: 4px;
     }
 
     .dropdown-username {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 800;
       color: #fff;
       white-space: nowrap;
@@ -257,7 +257,7 @@
       font-size: 0.68rem;
       color: var(--gold-primary);
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .dropdown-item {
@@ -283,29 +283,29 @@
 
     .dropdown-item.logout:hover {
       background: rgba(244, 63, 94, 0.1);
-      color: var(--ruby-accent);
+      color: var(--ruby-neon);
     }
 
     /* ==========================================================================
-       USER WELCOME & NOTIFICATION BANNER
+       WELCOME BAR
        ========================================================================== */
     .welcome-bar {
-      padding: 1.25rem 0 0.5rem;
+      padding: 1.25rem 0 0.75rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
     }
 
     .welcome-label {
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       font-weight: 800;
     }
 
     .welcome-name {
-      font-size: 1.45rem;
+      font-size: 1.55rem;
       font-weight: 900;
       color: #fff;
       letter-spacing: -0.5px;
@@ -317,33 +317,34 @@
       gap: 6px;
       padding: 4px 12px;
       border-radius: var(--radius-full);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       background: rgba(16, 185, 129, 0.1);
       border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--emerald-accent);
+      color: var(--emerald-neon);
+      text-transform: uppercase;
     }
 
     .status-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--emerald-accent);
-      box-shadow: 0 0 6px var(--emerald-accent);
+      background: var(--emerald-neon);
+      box-shadow: 0 0 8px var(--emerald-neon);
     }
 
     /* ==========================================================================
-       DASHBOARD GRID & CARDS
+       GRID SYSTEM & GLASS CARDS
        ========================================================================== */
-    .dashboard-grid {
+    .dash-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
 
     @media (min-width: 768px) {
-      .dashboard-grid {
+      .dash-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .col-span-2 {
@@ -352,7 +353,7 @@
     }
 
     @media (min-width: 1024px) {
-      .dashboard-grid {
+      .dash-grid {
         grid-template-columns: repeat(3, 1fr);
       }
       .col-span-2-lg {
@@ -362,11 +363,11 @@
 
     .dash-card {
       background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 1.35rem;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      padding: 1.4rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       position: relative;
       overflow: hidden;
       transition: all 0.3s var(--smooth-ease);
@@ -374,13 +375,25 @@
 
     .dash-card:hover {
       border-color: rgba(255, 255, 255, 0.15);
+      background: var(--bg-card-hover);
     }
 
-    /* 1. MAIN BALANCE CARD (High Earning Style) */
+    .card-heading {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      letter-spacing: -0.2px;
+    }
+
+    /* 1. BALANCE CARD (LUXURY FINTECH / CRYPTO LOOK) */
     .balance-card {
-      background: linear-gradient(145deg, rgba(20, 26, 44, 0.9), rgba(11, 15, 26, 0.95));
-      border: 1px solid var(--cyan-glow);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 240, 255, 0.1);
+      background: linear-gradient(145deg, rgba(22, 28, 48, 0.95), rgba(10, 14, 25, 0.95));
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.1);
     }
 
     .balance-card::after {
@@ -388,39 +401,40 @@
       position: absolute;
       top: -30%;
       right: -20%;
-      width: 220px;
-      height: 220px;
+      width: 250px;
+      height: 250px;
       background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent 70%);
       pointer-events: none;
     }
 
-    .balance-top {
+    .balance-top-row {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       margin-bottom: 0.5rem;
     }
 
-    .balance-label {
-      font-size: 0.74rem;
+    .balance-sub-label {
+      font-size: 0.72rem;
       color: var(--text-dim);
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
-    .balance-currency {
-      font-size: 0.72rem;
+    .balance-pill-badge {
+      font-size: 0.68rem;
       font-weight: 800;
       color: var(--gold-primary);
       background: rgba(245, 158, 11, 0.12);
-      border: 1px solid var(--gold-glow);
-      padding: 3px 8px;
+      border: 1px solid var(--border-gold);
+      padding: 3px 10px;
       border-radius: var(--radius-full);
+      letter-spacing: 0.5px;
     }
 
-    .balance-val {
-      font-size: 2.2rem;
+    .balance-main-num {
+      font-size: 2.35rem;
       font-weight: 900;
       color: #fff;
       letter-spacing: -0.5px;
@@ -430,134 +444,132 @@
       gap: 6px;
     }
 
-    .balance-val span.unit {
+    .balance-main-num span.unit {
       font-size: 1rem;
       color: var(--cyan-neon);
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .balance-stats-row {
+    .balance-sub-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 10px;
       padding-top: 1rem;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .bal-stat-item {
+    .sub-stat-item {
       display: flex;
       flex-direction: column;
     }
 
-    .bal-stat-title {
+    .sub-stat-label {
       font-size: 0.65rem;
       color: var(--text-dim);
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.5px;
       margin-bottom: 2px;
     }
 
-    .bal-stat-num {
-      font-size: 0.92rem;
+    .sub-stat-value {
+      font-size: 0.95rem;
       font-weight: 800;
       color: #fff;
     }
 
     /* 2. QUICK ACTIONS GRID */
     .quick-actions-card {
-      padding: 1.25rem;
+      padding: 1.35rem;
     }
 
-    .card-heading {
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .quick-grid {
+    .quick-tiles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
-    .quick-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    .action-tile {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-md);
-      padding: 0.85rem 0.5rem;
+      padding: 0.95rem 0.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.25s var(--smooth-ease);
       text-align: center;
     }
 
-    .quick-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
+    .action-tile:hover {
+      background: rgba(255, 255, 255, 0.07);
       border-color: var(--cyan-neon);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.12);
     }
 
-    .quick-icon {
-      font-size: 1.4rem;
-      line-height: 1;
+    .action-tile:active {
+      transform: scale(0.96);
     }
 
-    .quick-name {
-      font-size: 0.72rem;
-      font-weight: 700;
+    .action-icon-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      transition: all 0.25s ease;
+    }
+
+    .action-tile:hover .action-icon-wrap {
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    .action-label {
+      font-size: 0.74rem;
+      font-weight: 800;
       color: var(--text-main);
     }
 
-    /* 3. VIP STATUS CARD */
-    .vip-card-banner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.85rem;
-    }
-
+    /* 3. VIP TIER CARD */
     .vip-tier-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 900;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: var(--radius-full);
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid var(--gold-primary);
       color: var(--gold-primary);
     }
 
-    .vip-meta-grid {
+    .vip-meta-boxes {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 1.15rem;
     }
 
-    .vip-box {
+    .vip-info-box {
       background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-sm);
-      padding: 0.75rem;
+      padding: 0.8rem;
     }
 
-    .vip-box-label {
+    .vip-info-label {
       font-size: 0.65rem;
       color: var(--text-dim);
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
     }
 
-    .vip-box-val {
+    .vip-info-val {
       font-size: 0.95rem;
       font-weight: 800;
       color: #fff;
@@ -568,147 +580,154 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.8rem;
       border-radius: var(--radius-sm);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: #fff;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
 
     .btn-action-outline:hover {
       background: rgba(245, 158, 11, 0.1);
       border-color: var(--gold-primary);
       color: var(--gold-primary);
+      transform: translateY(-2px);
     }
 
-    /* 4. STREAK PROGRESS CARD */
-    .streak-row {
+    /* 4. STREAKS WIDGET */
+    .streaks-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 1rem;
     }
 
-    .streak-widget {
-      background: rgba(255, 255, 255, 0.03);
+    .streak-box {
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-md);
-      padding: 0.9rem;
+      padding: 1rem 0.75rem;
       text-align: center;
     }
 
-    .streak-count {
-      font-size: 1.6rem;
+    .streak-val {
+      font-size: 1.7rem;
       font-weight: 900;
       color: var(--cyan-neon);
       line-height: 1.1;
     }
 
-    .streak-title {
+    .streak-label {
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--text-muted);
       margin-top: 4px;
     }
 
-    .today-status-bar {
+    .status-summary-bar {
       display: flex;
       justify-content: space-between;
-      font-size: 0.74rem;
+      font-size: 0.76rem;
       color: var(--text-dim);
-      padding: 0.5rem 0.25rem 0;
+      padding-top: 0.5rem;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* 5. WITHDRAWAL ELIGIBILITY CARD */
-    .eligibility-checklist {
+    /* 5. WITHDRAWAL ELIGIBILITY */
+    .eligibility-stack {
       display: flex;
       flex-direction: column;
       gap: 8px;
       margin-bottom: 1rem;
     }
 
-    .check-item {
+    .el-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 0.78rem;
       background: rgba(255, 255, 255, 0.02);
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: var(--radius-sm);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .check-item-title {
+    .el-row span {
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    .check-badge {
+    .el-badge {
       font-size: 0.68rem;
       font-weight: 800;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 4px;
     }
 
-    .check-badge.pass {
+    .el-badge.pass {
       background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald-accent);
+      color: var(--emerald-neon);
     }
 
-    .check-badge.fail {
+    .el-badge.fail {
       background: rgba(244, 63, 94, 0.15);
-      color: var(--ruby-accent);
+      color: var(--ruby-neon);
     }
 
-    .eligibility-result {
+    .el-final-result {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem;
+      padding: 0.8rem 1rem;
       border-radius: var(--radius-sm);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 800;
     }
 
-    .eligibility-result.locked {
+    .el-final-result.locked {
       background: rgba(244, 63, 94, 0.08);
       border: 1px solid rgba(244, 63, 94, 0.25);
       color: #fda4af;
     }
 
-    .eligibility-result.unlocked {
+    .el-final-result.unlocked {
       background: rgba(16, 185, 129, 0.08);
       border: 1px solid rgba(16, 185, 129, 0.25);
       color: #a7f3d0;
     }
 
-    /* 6. TASK SUMMARY CARD */
-    .task-progress-wrap {
+    /* 6. TASK SUMMARY */
+    .task-bar-wrap {
       margin: 0.75rem 0 1rem;
     }
 
-    .task-metric-display {
+    .task-ratio-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 6px;
     }
 
-    .task-ratio {
-      font-size: 1.4rem;
+    .task-ratio-text {
+      font-size: 1.45rem;
       font-weight: 900;
       color: #fff;
     }
 
-    .task-track {
+    .task-percent-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--cyan-neon);
+    }
+
+    .task-track-bar {
       width: 100%;
       height: 8px;
       background: rgba(255, 255, 255, 0.08);
@@ -716,7 +735,7 @@
       overflow: hidden;
     }
 
-    .task-fill {
+    .task-track-fill {
       height: 100%;
       width: 0%;
       background: var(--cyan-gradient);
@@ -724,7 +743,7 @@
       transition: width 0.4s ease;
     }
 
-    .task-sub-info {
+    .task-foot-row {
       display: flex;
       justify-content: space-between;
       font-size: 0.72rem;
@@ -732,8 +751,8 @@
       margin-top: 6px;
     }
 
-    /* 7. REFERRAL CARD */
-    .ref-code-box {
+    /* 7. REFERRAL BOX */
+    .ref-code-tile {
       background: rgba(0, 240, 255, 0.05);
       border: 1px dashed var(--cyan-neon);
       border-radius: var(--radius-md);
@@ -744,7 +763,7 @@
       margin-bottom: 1rem;
     }
 
-    .ref-code-text {
+    .ref-code-value {
       font-family: monospace;
       font-size: 1.25rem;
       font-weight: 900;
@@ -752,23 +771,23 @@
       color: var(--cyan-neon);
     }
 
-    .btn-copy-mini {
+    .btn-copy-code {
       background: rgba(255, 255, 255, 0.08);
       color: #fff;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 4px;
       font-size: 0.72rem;
-      font-weight: 700;
+      font-weight: 800;
       transition: all 0.2s ease;
     }
 
-    .btn-copy-mini:hover {
+    .btn-copy-code:hover {
       background: var(--cyan-neon);
       color: #04060a;
     }
 
-    /* 8. ANNOUNCEMENT & ACTIVITY */
-    .announcement-box {
+    /* 8. ANNOUNCEMENT & ACTIVITIES */
+    .announcement-item {
       background: rgba(245, 158, 11, 0.04);
       border-left: 3px solid var(--gold-primary);
       padding: 0.85rem;
@@ -776,32 +795,32 @@
       margin-bottom: 0.5rem;
     }
 
-    .announcement-title {
+    .ann-title {
       font-size: 0.82rem;
       font-weight: 800;
       color: var(--gold-primary);
       margin-bottom: 3px;
     }
 
-    .announcement-body {
+    .ann-body {
       font-size: 0.76rem;
       color: var(--text-muted);
       line-height: 1.4;
     }
 
-    .announcement-date {
+    .ann-time {
       font-size: 0.65rem;
       color: var(--text-dim);
       margin-top: 4px;
     }
 
-    .activity-list {
+    .act-feed-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .activity-item {
+    .act-feed-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -810,42 +829,37 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    .activity-title {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .activity-time {
-      color: var(--text-dim);
-      font-size: 0.68rem;
+    .act-feed-row:last-child {
+      border-bottom: none;
     }
 
     /* ==========================================================================
-       MOBILE FIXED BOTTOM NAVIGATION
+       FIXED BOTTOM NAVIGATION (Strictly Anchored - No Overlap)
        ========================================================================== */
-    .mobile-bottom-nav {
+    .bottom-nav-fixed {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       height: 65px;
-      background: rgba(10, 14, 23, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--bg-card-border);
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-around;
-      z-index: 90;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
     @media (min-width: 1024px) {
-      .mobile-bottom-nav {
+      .bottom-nav-fixed {
         display: none;
       }
     }
 
-    .nav-tab {
+    .nav-tab-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -854,84 +868,28 @@
       font-size: 0.68rem;
       font-weight: 700;
       transition: all 0.2s ease;
-      padding: 6px;
+      padding: 6px 10px;
     }
 
-    .nav-tab svg {
+    .nav-tab-btn svg {
       width: 20px;
       height: 20px;
       stroke: currentColor;
     }
 
-    .nav-tab.active {
+    .nav-tab-btn.active {
       color: var(--cyan-neon);
     }
 
     /* ==========================================================================
-       LOADING SKELETON SCREEN & ERROR OVERLAY
+       BLOCKED ACCOUNT OVERLAY (Security Only)
        ========================================================================== */
-    .skeleton-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--bg-void);
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      transition: opacity 0.3s ease;
-    }
-
-    .spinner-ring {
-      width: 48px;
-      height: 48px;
-      border: 3px solid rgba(0, 240, 255, 0.15);
-      border-top-color: var(--cyan-neon);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 1.25rem;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .skeleton-text {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .error-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--bg-void);
-      z-index: 210;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    .error-card {
-      background: #0e1322;
-      border: 1px solid var(--ruby-accent);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      max-width: 400px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-    }
-
-    /* Blocked Account Overlay */
     .blocked-screen {
       display: none;
       position: fixed;
       inset: 0;
       background: #05070b;
-      z-index: 300;
+      z-index: 2000;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
@@ -940,7 +898,7 @@
 
     .blocked-card {
       background: #111524;
-      border: 1px solid var(--ruby-accent);
+      border: 1px solid var(--ruby-neon);
       border-radius: var(--radius-lg);
       padding: 2.5rem 1.75rem;
       max-width: 420px;
@@ -950,41 +908,15 @@
 </head>
 <body>
 
-  <!-- ==========================================================================
-       LOADING SKELETON SCREEN
-       ========================================================================== -->
-  <div id="loadingScreen" class="skeleton-screen">
-    <div class="spinner-ring"></div>
-    <div class="skeleton-text">SYNCING GAME DATA...</div>
-  </div>
-
-  <!-- ==========================================================================
-       ERROR SCREEN
-       ========================================================================== -->
-  <div id="errorScreen" class="error-screen">
-    <div class="error-card">
-      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">⚠️</div>
-      <h3 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Connection Error</h3>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-        Failed to fetch your game profile. Please verify your internet connection and try again.
-      </p>
-      <button id="btnRetryLoad" class="btn-action-outline" style="border-color: var(--cyan-neon); color: var(--cyan-neon);">
-        RETRY CONNECTION
-      </button>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       BLOCKED ACCOUNT SCREEN
-       ========================================================================== -->
+  <!-- BLOCKED ACCOUNT SCREEN -->
   <div id="blockedScreen" class="blocked-screen">
     <div class="blocked-card">
       <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
       <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Account Suspended</h2>
       <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
-        This account has been restricted according to platform policies and fair play guidelines. If you believe this is an error, please reach out to platform support.
+        This account has been restricted according to platform policies. Please contact support if you require assistance.
       </p>
-      <button id="btnBlockedLogout" class="btn-action-outline" style="border-color: var(--ruby-accent); color: var(--ruby-accent);">
+      <button id="btnBlockedLogout" class="btn-action-outline" style="border-color: var(--ruby-neon); color: var(--ruby-neon);">
         LOG OUT OF ACCOUNT
       </button>
     </div>
@@ -996,8 +928,7 @@
   <header class="top-header">
     <div class="container header-content">
       <a href="dashboard.html" class="brand-group">
-        <div class="brand-badge">
-          <!-- Gamepad Icon -->
+        <div class="brand-icon-box">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="6" width="20" height="12" rx="6"></rect>
             <line x1="6" y1="12" x2="10" y2="12"></line>
@@ -1006,7 +937,7 @@
             <circle cx="18" cy="10" r="1" fill="currentColor"></circle>
           </svg>
         </div>
-        <div class="brand-text">
+        <div class="brand-meta">
           <span class="brand-name">THE GAME WITH FUN</span>
           <span class="brand-sub">Player Portal</span>
         </div>
@@ -1019,7 +950,7 @@
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
           </svg>
-          <span class="notif-badge"></span>
+          <span class="notif-dot"></span>
         </a>
 
         <!-- User Avatar Trigger -->
@@ -1031,7 +962,7 @@
         <div id="profileDropdown" class="profile-dropdown">
           <div class="dropdown-user-info">
             <div id="dropUsername" class="dropdown-username">Player</div>
-            <div id="dropVipTag" class="dropdown-role">Free Rank</div>
+            <div id="dropVipTag" class="dropdown-role">Free Member</div>
           </div>
           <a href="profile.html" class="dropdown-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1061,10 +992,10 @@
   </header>
 
   <!-- ==========================================================================
-       MAIN DASHBOARD CONTENT
+       MAIN DASHBOARD BODY
        ========================================================================== -->
   <main class="container">
-    <!-- Welcome Bar -->
+    <!-- Welcome Greeting -->
     <div class="welcome-bar">
       <div>
         <div class="welcome-label">Welcome back</div>
@@ -1076,32 +1007,32 @@
       </div>
     </div>
 
-    <!-- Grid Layout -->
-    <div class="dashboard-grid">
+    <!-- Dashboard Content Grid -->
+    <div class="dash-grid">
 
       <!-- 1. MAIN BALANCE CARD -->
       <div class="dash-card balance-card col-span-2-lg">
-        <div class="balance-top">
-          <span class="balance-label">Current Game Balance</span>
-          <span class="balance-currency">POINTS / BDT</span>
+        <div class="balance-top-row">
+          <span class="balance-sub-label">Current Game Balance</span>
+          <span class="balance-pill-badge">POINTS / BDT</span>
         </div>
-        <div class="balance-val">
+        <div class="balance-main-num">
           <span id="valBalance">0.00</span>
           <span class="unit">BDT</span>
         </div>
 
-        <div class="balance-stats-row">
-          <div class="bal-stat-item">
-            <span class="bal-stat-title">Total Earned</span>
-            <span class="bal-stat-num" id="valTotalEarnings">0.00</span>
+        <div class="balance-sub-grid">
+          <div class="sub-stat-item">
+            <span class="sub-stat-label">Total Earned</span>
+            <span class="sub-stat-value" id="valTotalEarnings">0.00</span>
           </div>
-          <div class="bal-stat-item">
-            <span class="bal-stat-title">Withdrawn</span>
-            <span class="bal-stat-num" id="valTotalWithdrawal">0.00</span>
+          <div class="sub-stat-item">
+            <span class="sub-stat-label">Withdrawn</span>
+            <span class="sub-stat-value" id="valTotalWithdrawal">0.00</span>
           </div>
-          <div class="bal-stat-item">
-            <span class="bal-stat-title">Referral Earned</span>
-            <span class="bal-stat-num" id="valReferralEarnings">0.00</span>
+          <div class="sub-stat-item">
+            <span class="sub-stat-label">Referral Earned</span>
+            <span class="sub-stat-value" id="valReferralEarnings">0.00</span>
           </div>
         </div>
       </div>
@@ -1110,55 +1041,55 @@
       <div class="dash-card quick-actions-card">
         <div class="card-heading">
           <span>Quick Actions</span>
-          <span style="font-size: 0.68rem; color: var(--cyan-neon);">EXPLORE</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">EXPLORE</span>
         </div>
-        <div class="quick-grid">
-          <a href="tasks.html" class="quick-btn">
-            <span class="quick-icon">🎮</span>
-            <span class="quick-name">Tasks</span>
+        <div class="quick-tiles-grid">
+          <a href="tasks.html" class="action-tile">
+            <div class="action-icon-wrap">🎮</div>
+            <span class="action-label">Tasks</span>
           </a>
-          <a href="vip.html" class="quick-btn">
-            <span class="quick-icon">👑</span>
-            <span class="quick-name">VIP</span>
+          <a href="vip.html" class="action-tile">
+            <div class="action-icon-wrap">👑</div>
+            <span class="action-label">VIP</span>
           </a>
-          <a href="balance.html" class="quick-btn">
-            <span class="quick-icon">💳</span>
-            <span class="quick-name">Balance</span>
+          <a href="balance.html" class="action-tile">
+            <div class="action-icon-wrap">💳</div>
+            <span class="action-label">Balance</span>
           </a>
-          <a href="withdraw.html" class="quick-btn">
-            <span class="quick-icon">💸</span>
-            <span class="quick-name">Withdraw</span>
+          <a href="withdraw.html" class="action-tile">
+            <div class="action-icon-wrap">💸</div>
+            <span class="action-label">Withdraw</span>
           </a>
-          <a href="referral.html" class="quick-btn">
-            <span class="quick-icon">👥</span>
-            <span class="quick-name">Referral</span>
+          <a href="referral.html" class="action-tile">
+            <div class="action-icon-wrap">👥</div>
+            <span class="action-label">Referral</span>
           </a>
-          <a href="history.html" class="quick-btn">
-            <span class="quick-icon">📜</span>
-            <span class="quick-name">History</span>
+          <a href="history.html" class="action-tile">
+            <div class="action-icon-wrap">📜</div>
+            <span class="action-label">History</span>
           </a>
         </div>
       </div>
 
-      <!-- 3. VIP STATUS CARD -->
+      <!-- 3. VIP TIER STATUS CARD -->
       <div class="dash-card">
-        <div class="vip-card-banner">
-          <span class="card-heading" style="margin-bottom: 0;">VIP Tier Status</span>
+        <div class="card-heading">
+          <span>VIP Tier Status</span>
           <span class="vip-tier-badge" id="badgeVipLevel">VIP 0</span>
         </div>
 
-        <div class="vip-meta-grid">
-          <div class="vip-box">
-            <div class="vip-box-label">Status</div>
-            <div class="vip-box-val" id="valVipStatus">Not Active</div>
+        <div class="vip-meta-boxes">
+          <div class="vip-info-box">
+            <div class="vip-info-label">Status</div>
+            <div class="vip-info-val" id="valVipStatus">Not Active</div>
           </div>
-          <div class="vip-box">
-            <div class="vip-box-label">Daily Task Limit</div>
-            <div class="vip-box-val" id="valDailyTaskLimit">5 Tasks</div>
+          <div class="vip-info-box">
+            <div class="vip-info-label">Daily Task Limit</div>
+            <div class="vip-info-val" id="valDailyTaskLimit">5 Tasks</div>
           </div>
-          <div class="vip-box" style="grid-column: span 2;">
-            <div class="vip-box-label">Tier Expiry Date</div>
-            <div class="vip-box-val" id="valVipExpiry" style="font-size: 0.85rem;">None</div>
+          <div class="vip-info-box" style="grid-column: span 2;">
+            <div class="vip-info-label">Tier Expiry Date</div>
+            <div class="vip-info-val" id="valVipExpiry" style="font-size: 0.85rem;">None</div>
           </div>
         </div>
 
@@ -1168,22 +1099,22 @@
         </a>
       </div>
 
-      <!-- 4. STREAK PROGRESS CARD -->
+      <!-- 4. STREAKS PROGRESS CARD -->
       <div class="dash-card">
         <div class="card-heading">Streaks & Activity</div>
-        <div class="streak-row">
-          <div class="streak-widget">
-            <div class="streak-count" id="valLoginStreak">0</div>
-            <div class="streak-title">Login Streak</div>
+        <div class="streaks-grid">
+          <div class="streak-box">
+            <div class="streak-val" id="valLoginStreak">0</div>
+            <div class="streak-label">Login Streak</div>
           </div>
-          <div class="streak-widget">
-            <div class="streak-count" id="valTaskStreak" style="color: var(--gold-primary);">0</div>
-            <div class="streak-title">Task Streak</div>
+          <div class="streak-box">
+            <div class="streak-val" id="valTaskStreak" style="color: var(--gold-primary);">0</div>
+            <div class="streak-label">Task Streak</div>
           </div>
         </div>
-        <div class="today-status-bar">
-          <span>Today's Login: <strong style="color: var(--emerald-accent);" id="todayLoginStatus">Verified</strong></span>
-          <span>Tasks: <strong style="color: #cbd5e1;" id="todayTaskSummaryShort">0 Done</strong></span>
+        <div class="status-summary-bar">
+          <span>Today's Login: <strong style="color: var(--emerald-neon);" id="todayLoginStatus">Verified</strong></span>
+          <span>Tasks Done: <strong style="color: #cbd5e1;" id="todayTaskSummaryShort">0</strong></span>
         </div>
       </div>
 
@@ -1191,27 +1122,27 @@
       <div class="dash-card">
         <div class="card-heading">
           <span>Withdrawal Eligibility</span>
-          <span style="font-size: 0.7rem; color: var(--text-dim);">PREVIEW</span>
+          <span style="font-size: 0.7rem; color: var(--text-dim); font-weight: 800;">PREVIEW</span>
         </div>
 
-        <div class="eligibility-checklist">
-          <div class="check-item">
-            <span class="check-item-title">Active VIP Tier Requirement</span>
-            <span class="check-badge fail" id="chkReqVip">Not Completed</span>
+        <div class="eligibility-stack">
+          <div class="el-row">
+            <span>Active VIP Tier Requirement</span>
+            <span class="el-badge fail" id="chkReqVip">Not Completed</span>
           </div>
-          <div class="check-item">
-            <span class="check-item-title">10-Day Consecutive Login</span>
-            <span class="check-badge fail" id="chkReqLogin">Not Completed</span>
+          <div class="el-row">
+            <span>10-Day Consecutive Login</span>
+            <span class="el-badge fail" id="chkReqLogin">Not Completed</span>
           </div>
-          <div class="check-item">
-            <span class="check-item-title">Required Daily Task Condition</span>
-            <span class="check-badge fail" id="chkReqTask">Not Completed</span>
+          <div class="el-row">
+            <span>Required Daily Task Condition</span>
+            <span class="el-badge fail" id="chkReqTask">Not Completed</span>
           </div>
         </div>
 
-        <div class="eligibility-result locked" id="eligibilityResultBox">
+        <div class="el-final-result locked" id="eligibilityResultBox">
           <span>Status:</span>
-          <span id="eligibilityResultText">🔒 LOCKED</span>
+          <span id="eligibilityResultText">🔒 REQUIREMENTS INCOMPLETE</span>
         </div>
       </div>
 
@@ -1219,15 +1150,15 @@
       <div class="dash-card">
         <div class="card-heading">Today's Tasks</div>
         
-        <div class="task-progress-wrap">
-          <div class="task-metric-display">
-            <span class="task-ratio" id="taskRatioText">0 / 5</span>
-            <span style="font-size: 0.8rem; font-weight: 800; color: var(--cyan-neon);" id="taskPercentText">0%</span>
+        <div class="task-bar-wrap">
+          <div class="task-ratio-row">
+            <span class="task-ratio-text" id="taskRatioText">0 / 5</span>
+            <span class="task-percent-text" id="taskPercentText">0%</span>
           </div>
-          <div class="task-track">
-            <div class="task-fill" id="taskProgressBar"></div>
+          <div class="task-track-bar">
+            <div class="task-track-fill" id="taskProgressBar"></div>
           </div>
-          <div class="task-sub-info">
+          <div class="task-foot-row">
             <span id="tasksRemainingText">5 Remaining</span>
             <span id="taskTotalLimitText">Limit: 5/day</span>
           </div>
@@ -1242,16 +1173,16 @@
       <div class="dash-card">
         <div class="card-heading">Refer Friends & Earn</div>
         
-        <div class="ref-code-box">
+        <div class="ref-code-tile">
           <div>
             <div style="font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800;">My Referral Code</div>
-            <div class="ref-code-text" id="valReferralCode">------</div>
+            <div class="ref-code-value" id="valReferralCode">------</div>
           </div>
-          <button id="btnCopyRef" class="btn-copy-mini">Copy</button>
+          <button id="btnCopyRef" class="btn-copy-code">Copy</button>
         </div>
 
         <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 1.15rem;">
-          <span style="color: var(--text-muted);">Friends Invited:</span>
+          <span style="color: var(--text-muted); font-weight: 600;">Friends Invited:</span>
           <strong style="color: #fff;" id="valReferralCount">0 Members</strong>
         </div>
 
@@ -1264,10 +1195,10 @@
       <div class="dash-card" id="announcementsSection">
         <div class="card-heading">Platform Announcements</div>
         <div id="announcementContainer">
-          <div class="announcement-box">
-            <div class="announcement-title" id="announcementTitle">Welcome to The Game With Fun!</div>
-            <div class="announcement-body" id="announcementBody">Enjoy interactive casual gaming, daily quests, and level-ups. Remember to complete your daily check-in!</div>
-            <div class="announcement-date" id="announcementDate">Official Update</div>
+          <div class="announcement-item">
+            <div class="ann-title" id="announcementTitle">Welcome to The Game With Fun!</div>
+            <div class="ann-body" id="announcementBody">Complete daily missions, maintain your login streaks, and explore interactive gaming.</div>
+            <div class="ann-time" id="announcementDate">Official Update</div>
           </div>
         </div>
       </div>
@@ -1275,14 +1206,14 @@
       <!-- 9. RECENT ACTIVITY CARD -->
       <div class="dash-card">
         <div class="card-heading">Recent Activities</div>
-        <div class="activity-list" id="activityList">
-          <div class="activity-item">
-            <span class="activity-title">Account Session Started</span>
-            <span class="activity-time">Just now</span>
+        <div class="act-feed-list" id="activityList">
+          <div class="act-feed-row">
+            <span style="color: var(--text-main); font-weight: 600;">Account Session Verified</span>
+            <span style="color: var(--text-dim); font-size: 0.7rem;">Active</span>
           </div>
-          <div class="activity-item">
-            <span class="activity-title">Security Profile Verified</span>
-            <span class="activity-time">Today</span>
+          <div class="act-feed-row">
+            <span style="color: var(--text-main); font-weight: 600;">Security Profile Synchronized</span>
+            <span style="color: var(--text-dim); font-size: 0.7rem;">Today</span>
           </div>
         </div>
       </div>
@@ -1291,37 +1222,37 @@
   </main>
 
   <!-- ==========================================================================
-       MOBILE BOTTOM NAVIGATION
+       FIXED BOTTOM NAVIGATION (Mobile-Optimized)
        ========================================================================== -->
-  <nav class="mobile-bottom-nav">
-    <a href="dashboard.html" class="nav-tab active">
+  <nav class="bottom-nav-fixed">
+    <a href="dashboard.html" class="nav-tab-btn active">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
       <span>Home</span>
     </a>
-    <a href="tasks.html" class="nav-tab">
+    <a href="tasks.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
       <span>Tasks</span>
     </a>
-    <a href="vip.html" class="nav-tab">
+    <a href="vip.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
       <span>VIP</span>
     </a>
-    <a href="balance.html" class="nav-tab">
+    <a href="balance.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
       <span>Wallet</span>
     </a>
-    <a href="profile.html" class="nav-tab">
+    <a href="profile.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       <span>Profile</span>
     </a>
   </nav>
 
   <!-- ==========================================================================
-       FIREBASE INTEGRATION & DASHBOARD LOGIC
+       FIREBASE INTEGRATION (INSTANT RENDERING - NO BLOCKING LOADERS)
        ========================================================================== -->
   <script type="module">
     // ------------------------------------------------------------------------
-    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
+    // 1. FIREBASE MODULAR SDK
     // ------------------------------------------------------------------------
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
@@ -1333,8 +1264,7 @@
       getDatabase, 
       ref, 
       onValue, 
-      get,
-      child 
+      get 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     // ------------------------------------------------------------------------
@@ -1355,14 +1285,10 @@
     const database = getDatabase(app);
 
     // ------------------------------------------------------------------------
-    // 3. UI ELEMENT REFERENCES
+    // 3. UI ELEMENT HOOKS
     // ------------------------------------------------------------------------
-    const loadingScreen = document.getElementById('loadingScreen');
-    const errorScreen = document.getElementById('errorScreen');
     const blockedScreen = document.getElementById('blockedScreen');
-    const btnRetryLoad = document.getElementById('btnRetryLoad');
     const btnBlockedLogout = document.getElementById('btnBlockedLogout');
-
     const userAvatarTrigger = document.getElementById('userAvatarTrigger');
     const profileDropdown = document.getElementById('profileDropdown');
     const avatarInitial = document.getElementById('avatarInitial');
@@ -1373,147 +1299,116 @@
     const dropVipTag = document.getElementById('dropVipTag');
     const accountStatusText = document.getElementById('accountStatusText');
 
-    // Balance Metrics
     const valBalance = document.getElementById('valBalance');
     const valTotalEarnings = document.getElementById('valTotalEarnings');
     const valTotalWithdrawal = document.getElementById('valTotalWithdrawal');
     const valReferralEarnings = document.getElementById('valReferralEarnings');
 
-    // VIP Elements
     const badgeVipLevel = document.getElementById('badgeVipLevel');
     const valVipStatus = document.getElementById('valVipStatus');
     const valDailyTaskLimit = document.getElementById('valDailyTaskLimit');
     const valVipExpiry = document.getElementById('valVipExpiry');
 
-    // Streaks
     const valLoginStreak = document.getElementById('valLoginStreak');
     const valTaskStreak = document.getElementById('valTaskStreak');
-    const todayLoginStatus = document.getElementById('todayLoginStatus');
     const todayTaskSummaryShort = document.getElementById('todayTaskSummaryShort');
 
-    // Eligibility
     const chkReqVip = document.getElementById('chkReqVip');
     const chkReqLogin = document.getElementById('chkReqLogin');
     const chkReqTask = document.getElementById('chkReqTask');
     const eligibilityResultBox = document.getElementById('eligibilityResultBox');
     const eligibilityResultText = document.getElementById('eligibilityResultText');
 
-    // Task Summary
     const taskRatioText = document.getElementById('taskRatioText');
     const taskPercentText = document.getElementById('taskPercentText');
     const taskProgressBar = document.getElementById('taskProgressBar');
     const tasksRemainingText = document.getElementById('tasksRemainingText');
     const taskTotalLimitText = document.getElementById('taskTotalLimitText');
 
-    // Referral
     const valReferralCode = document.getElementById('valReferralCode');
     const valReferralCount = document.getElementById('valReferralCount');
     const btnCopyRef = document.getElementById('btnCopyRef');
 
-    // Announcements & Activity
     const announcementTitle = document.getElementById('announcementTitle');
     const announcementBody = document.getElementById('announcementBody');
     const announcementDate = document.getElementById('announcementDate');
 
     // ------------------------------------------------------------------------
-    // 4. AUTHENTICATION STATE OBSERVER
+    // 4. AUTH OBSERVATION & IMMEDIATE SILENT RENDERING (NO SPINNER SCREENS)
     // ------------------------------------------------------------------------
-    let currentUserUid = null;
-
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        // Not logged in -> Redirect immediately to login.html
         window.location.href = 'login.html';
       } else {
-        currentUserUid = user.uid;
-        attachRealtimeDashboardListener(user.uid);
-        loadPlatformAnnouncements();
+        bindRealtimeUserData(user.uid);
+        bindAnnouncements();
       }
     });
 
     // ------------------------------------------------------------------------
-    // 5. PROFILE DATA LISTENER (READ-ONLY)
+    // 5. REALTIME USER DATA LISTENER
     // ------------------------------------------------------------------------
-    function attachRealtimeDashboardListener(uid) {
+    function bindRealtimeUserData(uid) {
       const userRef = ref(database, `users/${uid}`);
 
       onValue(userRef, (snapshot) => {
-        if (!snapshot.exists()) {
-          // If profile node is missing in RTDB
-          showErrorState();
-          return;
-        }
+        if (!snapshot.exists()) return;
 
         const data = snapshot.val();
 
-        // 1. Account Status Check
-        if (data.accountStatus === 'blocked' || data.accountStatus === 'disabled' || data.accountStatus === 'banned') {
-          hideLoading();
+        // Account status check
+        if (data.accountStatus === 'blocked' || data.accountStatus === 'disabled') {
           blockedScreen.style.display = 'flex';
           return;
         }
 
-        renderDashboard(data);
-        hideLoading();
-
-      }, (error) => {
-        console.error('Firebase DB Read Error:', error);
-        showErrorState();
+        updateDashboardUI(data);
+      }, (err) => {
+        console.warn('Realtime sync note:', err);
       });
     }
 
     // ------------------------------------------------------------------------
-    // 6. RENDER DATA ON DASHBOARD
+    // 6. UI POPULATION LOGIC
     // ------------------------------------------------------------------------
-    function renderDashboard(data) {
-      // Safe fallbacks
+    function updateDashboardUI(data) {
       const username = data.username || 'Player';
-      const initial = username.charAt(0).toUpperCase() || 'P';
-      const balance = Number(data.balance || 0).toFixed(2);
-      const totalEarnings = Number(data.totalEarnings || 0).toFixed(2);
-      const totalWithdrawal = Number(data.totalWithdrawal || 0).toFixed(2);
-      const referralEarnings = Number(data.referralEarnings || 0).toFixed(2);
-      const referralCode = data.referralCode || 'N/A';
-      const referralCount = data.referralCount || 0;
+      const initial = username.charAt(0).toUpperCase();
 
-      const vipLevel = Number(data.vipLevel || 0);
-      const vipStatus = (data.vipStatus || 'inactive').toLowerCase();
-      const isVipActive = (vipStatus === 'active' && vipLevel > 0);
-
-      const loginStreak = Number(data.loginStreak || 0);
-      const taskStreak = Number(data.taskStreak || 0);
-      const tasksCompletedToday = Number(data.tasksCompletedToday || 0);
-
-      // VIP Task Limits
-      const taskLimits = { 0: 5, 1: 8, 2: 13, 3: 18, 4: 25 };
-      const currentTaskLimit = taskLimits[vipLevel] || 5;
-
-      // Update Header & Welcome
       welcomeUsername.textContent = username;
       dropUsername.textContent = username;
       avatarInitial.textContent = initial;
       accountStatusText.textContent = (data.accountStatus || 'active').toUpperCase();
 
-      // Update Balances
-      valBalance.textContent = balance;
-      valTotalEarnings.textContent = totalEarnings;
-      valTotalWithdrawal.textContent = totalWithdrawal;
-      valReferralEarnings.textContent = referralEarnings;
+      // Balances
+      valBalance.textContent = Number(data.balance || 0).toFixed(2);
+      valTotalEarnings.textContent = Number(data.totalEarnings || 0).toFixed(2);
+      valTotalWithdrawal.textContent = Number(data.totalWithdrawal || 0).toFixed(2);
+      valReferralEarnings.textContent = Number(data.referralEarnings || 0).toFixed(2);
 
-      // Update VIP Status
+      // VIP Data
+      const vipLevel = Number(data.vipLevel || 0);
+      const isVipActive = (data.vipStatus === 'active' && vipLevel > 0);
+      const taskLimits = { 0: 5, 1: 8, 2: 13, 3: 18, 4: 25 };
+      const currentTaskLimit = taskLimits[vipLevel] || 5;
+
       badgeVipLevel.textContent = `VIP ${vipLevel}`;
       dropVipTag.textContent = isVipActive ? `VIP ${vipLevel} Active` : 'Free Member';
       valVipStatus.textContent = isVipActive ? 'Active' : 'Not Active';
-      valVipStatus.style.color = isVipActive ? 'var(--emerald-accent)' : 'var(--text-dim)';
+      valVipStatus.style.color = isVipActive ? 'var(--emerald-neon)' : 'var(--text-dim)';
       valDailyTaskLimit.textContent = `${currentTaskLimit} Tasks/day`;
       valVipExpiry.textContent = data.vipExpiry ? formatDate(data.vipExpiry) : 'None';
 
-      // Update Streaks
+      // Streaks
+      const loginStreak = Number(data.loginStreak || 0);
+      const taskStreak = Number(data.taskStreak || 0);
+      const tasksCompletedToday = Number(data.tasksCompletedToday || 0);
+
       valLoginStreak.textContent = `${loginStreak} Days`;
       valTaskStreak.textContent = `${taskStreak} Days`;
-      todayTaskSummaryShort.textContent = `${tasksCompletedToday} Done`;
+      todayTaskSummaryShort.textContent = `${tasksCompletedToday}`;
 
-      // Update Task Summary
+      // Task Progress Bar
       const remainingTasks = Math.max(0, currentTaskLimit - tasksCompletedToday);
       const percentDone = Math.min(100, Math.round((tasksCompletedToday / currentTaskLimit) * 100));
 
@@ -1523,24 +1418,21 @@
       tasksRemainingText.textContent = `${remainingTasks} Remaining`;
       taskTotalLimitText.textContent = `Limit: ${currentTaskLimit}/day`;
 
-      // Update Referral Details
-      valReferralCode.textContent = referralCode;
-      valReferralCount.textContent = `${referralCount} Members`;
+      // Referrals
+      const refCode = data.referralCode || '------';
+      valReferralCode.textContent = refCode;
+      valReferralCount.textContent = `${data.referralCount || 0} Members`;
 
-      // Setup Copy Code Button
       btnCopyRef.onclick = () => {
-        if (referralCode && referralCode !== 'N/A') {
-          navigator.clipboard.writeText(referralCode).then(() => {
+        if (refCode && refCode !== '------') {
+          navigator.clipboard.writeText(refCode).then(() => {
             btnCopyRef.textContent = 'Copied!';
             setTimeout(() => btnCopyRef.textContent = 'Copy', 2000);
           });
         }
       };
 
-      // ----------------------------------------------------------------------
-      // WITHDRAWAL ELIGIBILITY PREVIEW LOGIC (Client Presentation Only)
-      // Actual withdrawal verification is strictly enforced during submission.
-      // ----------------------------------------------------------------------
+      // Eligibility Check
       const vipPass = isVipActive;
       const loginPass = (loginStreak >= 10);
       const taskPass = (taskStreak >= 1 || tasksCompletedToday >= 1);
@@ -1550,55 +1442,49 @@
       updateCheckBadge(chkReqTask, taskPass);
 
       if (vipPass && loginPass && taskPass) {
-        eligibilityResultBox.className = 'eligibility-result unlocked';
+        eligibilityResultBox.className = 'el-final-result unlocked';
         eligibilityResultText.textContent = '✅ ELIGIBLE FOR REVIEW';
       } else {
-        eligibilityResultBox.className = 'eligibility-result locked';
+        eligibilityResultBox.className = 'el-final-result locked';
         eligibilityResultText.textContent = '🔒 REQUIREMENTS INCOMPLETE';
       }
     }
 
-    function updateCheckBadge(el, isPassed) {
-      if (isPassed) {
-        el.className = 'check-badge pass';
-        el.textContent = 'Completed';
+    function updateCheckBadge(element, passed) {
+      if (passed) {
+        element.className = 'el-badge pass';
+        element.textContent = 'Completed';
       } else {
-        el.className = 'check-badge fail';
-        el.textContent = 'Not Completed';
+        element.className = 'el-badge fail';
+        element.textContent = 'Not Completed';
       }
     }
 
-    function formatDate(dateValue) {
+    function formatDate(val) {
       try {
-        const d = new Date(dateValue);
+        const d = new Date(val);
         return isNaN(d.getTime()) ? 'None' : d.toLocaleDateString();
       } catch {
         return 'None';
       }
     }
 
-    // ------------------------------------------------------------------------
-    // 7. ANNOUNCEMENTS READ (READ-ONLY)
-    // ------------------------------------------------------------------------
-    function loadPlatformAnnouncements() {
+    function bindAnnouncements() {
       const annRef = ref(database, 'announcements');
       get(annRef).then((snapshot) => {
         if (snapshot.exists()) {
           const val = snapshot.val();
-          // Read latest announcement if array or object
           const firstKey = Object.keys(val)[0];
           const ann = val[firstKey] || val;
           if (ann.title) announcementTitle.textContent = ann.title;
           if (ann.message) announcementBody.textContent = ann.message;
           if (ann.date) announcementDate.textContent = ann.date;
         }
-      }).catch((err) => {
-        console.warn('Announcements not available yet:', err);
-      });
+      }).catch(() => {});
     }
 
     // ------------------------------------------------------------------------
-    // 8. LOGOUT & USER MENU INTERACTIONS
+    // 7. USER PROFILE MENU & LOGOUT
     // ------------------------------------------------------------------------
     userAvatarTrigger.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1611,44 +1497,16 @@
       }
     });
 
-    btnLogout.addEventListener('click', handleLogout);
-    btnBlockedLogout.addEventListener('click', handleLogout);
+    btnLogout.addEventListener('click', doLogout);
+    btnBlockedLogout.addEventListener('click', doLogout);
 
-    async function handleLogout() {
+    async function doLogout() {
       try {
         await signOut(auth);
-        window.location.href = 'login.html';
-      } catch (err) {
-        console.error('Logout error:', err);
+      } finally {
         window.location.href = 'login.html';
       }
     }
-
-    // ------------------------------------------------------------------------
-    // 9. ERROR & RETRY HANDLING
-    // ------------------------------------------------------------------------
-    function hideLoading() {
-      loadingScreen.style.opacity = '0';
-      setTimeout(() => {
-        loadingScreen.style.display = 'none';
-      }, 300);
-    }
-
-    function showErrorState() {
-      hideLoading();
-      errorScreen.style.display = 'flex';
-    }
-
-    btnRetryLoad.addEventListener('click', () => {
-      errorScreen.style.display = 'none';
-      loadingScreen.style.display = 'flex';
-      loadingScreen.style.opacity = '1';
-      if (currentUserUid) {
-        attachRealtimeDashboardListener(currentUserUid);
-      } else {
-        window.location.reload();
-      }
-    });
   </script>
 </body>
 </html>
