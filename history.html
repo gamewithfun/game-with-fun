@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>History | THE GAME WITH FUN</title>
+  <meta name="description" content="View your complete activity history including completed tasks, payout withdrawals, VIP tier orders, and referral rewards on THE GAME WITH FUN.">
+
+  <style>
+    /* ==========================================================================
+       ULTRA-PREMIUM CYBER/GAMING DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: #0a0e17;
+      --bg-card: rgba(14, 19, 32, 0.74);
+      --bg-card-hover: rgba(20, 27, 46, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(245, 158, 11, 0.35);
+      --border-cyan: rgba(0, 240, 255, 0.25);
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
+
+      --cyan-neon: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --ruby-neon: #f43f5e;
+
+      --text-white: #ffffff;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 10% 8%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
+      background-attachment: fixed;
+      padding-bottom: 95px; /* Ensures fixed bottom navigation never overlaps content */
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 3rem;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input, select {
+      font-family: inherit;
+      outline: none;
+      border: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ==========================================================================
+       TOP APP HEADER
+       ========================================================================== */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 13, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-back-link {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      transition: all 0.2s var(--smooth-ease);
+    }
+
+    .btn-back-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cyan-neon);
+      transform: translateX(-2px);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 800;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-pill-link {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .header-pill-link:hover {
+      color: var(--cyan-neon);
+      border-color: var(--cyan-glow);
+      background: rgba(0, 240, 255, 0.06);
+    }
+
+    /* ==========================================================================
+       PAGE BANNER
+       ========================================================================== */
+    .page-banner {
+      padding: 1.5rem 0 0.8rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       SUMMARY CARDS BAR (4 TILES)
+       ========================================================================== */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 0.5rem 0 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .summary-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .summary-tile {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.85rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: all 0.2s ease;
+    }
+
+    .summary-tile:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .sum-num {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .sum-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ==========================================================================
+       QUICK ACTIONS BAR
+       ========================================================================== */
+    .quick-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 6px;
+      margin-bottom: 1.25rem;
+      scrollbar-width: none;
+    }
+
+    .quick-actions-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-chip {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-chip:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--cyan-neon);
+      border-color: var(--border-cyan);
+    }
+
+    /* ==========================================================================
+       TABS NAVIGATION
+       ========================================================================== */
+    .tabs-nav-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: rgba(14, 19, 32, 0.95);
+      padding: 5px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 0.4rem;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s var(--smooth-ease);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tab-btn.active {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border-glow);
+      color: var(--gold-primary);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.12);
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    /* ==========================================================================
+       FILTERS, SEARCH & SORT CONTROLS
+       ========================================================================== */
+    .filter-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .filter-panel {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .search-box-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.85rem;
+      gap: 8px;
+    }
+
+    .search-box-wrap:focus-within {
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+    }
+
+    .search-input {
+      width: 100%;
+      background: transparent;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .filter-dropdowns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .select-control {
+      background: #0f1424;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .select-control:focus {
+      border-color: var(--gold-primary);
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       HISTORY CARDS & LIST CONTAINER
+       ========================================================================== */
+    .history-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .record-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.25s var(--smooth-ease);
+      animation: fadeIn 0.25s var(--smooth-ease) forwards;
+    }
+
+    .record-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .rec-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .rec-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rec-primary-title {
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    .rec-meta-info {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+    }
+
+    .rec-amount-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .rec-amount {
+      font-size: 1.05rem;
+      font-weight: 900;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    .rec-amount.plus {
+      color: var(--emerald-neon);
+    }
+
+    .rec-amount.minus {
+      color: var(--ruby-neon);
+    }
+
+    .rec-amount.neutral {
+      color: var(--gold-primary);
+    }
+
+    .status-badge {
+      font-size: 0.66rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge.completed,
+    .status-badge.approved,
+    .status-badge.paid,
+    .status-badge.rewarded,
+    .status-badge.qualified {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--emerald-neon);
+    }
+
+    .status-badge.pending,
+    .status-badge.processing {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--gold-primary);
+    }
+
+    .status-badge.rejected,
+    .status-badge.cancelled {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: var(--ruby-neon);
+    }
+
+    .status-badge.expired {
+      background: rgba(148, 163, 184, 0.15);
+      border: 1px solid #475569;
+      color: #94a3b8;
+    }
+
+    .rec-sub-details {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .rec-detail-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .rec-detail-tag strong {
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       EMPTY & ERROR STATES
+       ========================================================================== */
+    .empty-state-card {
+      background: var(--bg-card);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .empty-icon-bubble {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .empty-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .empty-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      max-width: 320px;
+      line-height: 1.45;
+    }
+
+    .error-banner {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-retry-action {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .btn-retry-action:hover {
+      background: var(--ruby-neon);
+      color: #fff;
+    }
+
+    /* Load More Button */
+    .load-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.25rem;
+    }
+
+    .btn-load-more {
+      padding: 0.8rem 1.8rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-load-more:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== */
+    .bottom-nav-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @media (min-width: 1024px) {
+      .bottom-nav-fixed {
+        display: none;
+      }
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+    }
+
+    .nav-tab-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--cyan-neon);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP APP HEADER
+       ========================================================================== -->
+  <header class="top-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <a href="dashboard.html" class="btn-back-link" aria-label="Back to Dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div class="brand-meta">
+          <span class="brand-name">THE GAME WITH FUN</span>
+          <span class="brand-sub">Activity Records</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <a href="balance.html" class="header-pill-link" aria-label="My Wallet">
+          <span>💳</span>
+          <span>Wallet</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-banner">
+      <h1 class="page-title">
+        <span>📜</span>
+        <span>History</span>
+      </h1>
+      <p class="page-subtitle">Your verified gaming activity logs, transactions, and audit trail.</p>
+    </div>
+
+    <!-- Error State Banner -->
+    <div id="errorBanner" class="error-banner">
+      <div style="font-size: 0.82rem; color: #fca5a5;">
+        ⚠️ Unable to load your records right now. Please check your internet connection.
+      </div>
+      <button id="btnRetrySync" class="btn-retry-action">RETRY</button>
+    </div>
+
+    <!-- 1. SUMMARY CARDS BAR -->
+    <div class="summary-grid">
+      <div class="summary-tile">
+        <span class="sum-num" id="sumTasksCount">0</span>
+        <span class="sum-label">Tasks Completed</span>
+      </div>
+      <div class="summary-tile">
+        <span class="sum-num" id="sumWithdrawCount" style="color: var(--gold-primary);">0</span>
+        <span class="sum-label">Withdrawals</span>
+      </div>
+      <div class="summary-tile">
+        <span class="sum-num" id="sumVipCount" style="color: var(--purple-neon);">0</span>
+        <span class="sum-label">VIP Orders</span>
+      </div>
+      <div class="summary-tile">
+        <span class="sum-num" id="sumRefCount" style="color: var(--emerald-neon);">0</span>
+        <span class="sum-label">Referral Rewards</span>
+      </div>
+    </div>
+
+    <!-- 2. QUICK LINKS ROW -->
+    <div class="quick-actions-bar">
+      <a href="balance.html" class="quick-chip">
+        <span>💳</span>
+        <span>View Wallet</span>
+      </a>
+      <a href="withdraw.html" class="quick-chip">
+        <span>💸</span>
+        <span>Withdraw</span>
+      </a>
+      <a href="referral.html" class="quick-chip">
+        <span>👥</span>
+        <span>Referral Center</span>
+      </a>
+      <a href="tasks.html" class="quick-chip">
+        <span>🎮</span>
+        <span>Play Tasks</span>
+      </a>
+    </div>
+
+    <!-- 3. TABS NAVIGATION -->
+    <nav class="tabs-nav-bar" role="tablist">
+      <button class="tab-btn active" data-tab="tasks" role="tab" aria-selected="true">Tasks</button>
+      <button class="tab-btn" data-tab="withdrawals" role="tab" aria-selected="false">Withdrawals</button>
+      <button class="tab-btn" data-tab="vip" role="tab" aria-selected="false">VIP Orders</button>
+      <button class="tab-btn" data-tab="referrals" role="tab" aria-selected="false">Referrals</button>
+    </nav>
+
+    <!-- 4. FILTER CONTROLS PANEL -->
+    <div class="filter-panel">
+      <div class="search-box-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--text-dim); flex-shrink: 0;">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search in this category..." autocomplete="off">
+      </div>
+
+      <div class="filter-dropdowns">
+        <select id="statusFilter" class="select-control" aria-label="Filter by Status">
+          <option value="all">All Statuses</option>
+          <!-- Injected dynamically per tab -->
+        </select>
+
+        <select id="sortOrder" class="select-control" aria-label="Sort Order">
+          <option value="desc">Newest First</option>
+          <option value="asc">Oldest First</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 5. MAIN RECORDS FEED CONTAINER -->
+    <div id="historyListContainer" class="history-container">
+      <!-- Records injected here dynamically -->
+    </div>
+
+    <!-- 6. LOAD MORE BUTTON -->
+    <div id="loadMoreWrap" class="load-more-wrap" style="display: none;">
+      <button id="btnLoadMore" class="btn-load-more">
+        <span>Load More</span>
+        <span>↓</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== -->
+  <nav class="bottom-nav-fixed">
+    <a href="dashboard.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="tasks.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <span>Tasks</span>
+    </a>
+    <a href="vip.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
+      <span>VIP</span>
+    </a>
+    <a href="balance.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+      <span>Wallet</span>
+    </a>
+    <a href="profile.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       FIREBASE INTEGRATION & HISTORY CLIENT LOGIC
+       ========================================================================== -->
+  <script type="module">
+    // ------------------------------------------------------------------------
+    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
+    // ------------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue, 
+      query, 
+      orderByChild, 
+      equalTo 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // ------------------------------------------------------------------------
+    // 2. FIREBASE CONFIGURATION (REPLACE WITH YOUR PROJECT CONFIG)
+    // ------------------------------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // ------------------------------------------------------------------------
+    // 3. UI ELEMENT REFERENCES
+    // ------------------------------------------------------------------------
+    const errorBanner = document.getElementById('errorBanner');
+    const btnRetrySync = document.getElementById('btnRetrySync');
+    const sumTasksCount = document.getElementById('sumTasksCount');
+    const sumWithdrawCount = document.getElementById('sumWithdrawCount');
+    const sumVipCount = document.getElementById('sumVipCount');
+    const sumRefCount = document.getElementById('sumRefCount');
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
+    const sortOrder = document.getElementById('sortOrder');
+    const historyListContainer = document.getElementById('historyListContainer');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+    const btnLoadMore = document.getElementById('btnLoadMore');
+
+    // ------------------------------------------------------------------------
+    // 4. CLIENT RUNTIME STATE
+    // ------------------------------------------------------------------------
+    let currentUser = null;
+    let activeTab = 'tasks'; // 'tasks' | 'withdrawals' | 'vip' | 'referrals'
+    const PAGE_SIZE = 15;
+    let visibleItemCount = PAGE_SIZE;
+
+    // In-memory data store for the authenticated user
+    const dataStore = {
+      tasks: [],
+      withdrawals: [],
+      vip: [],
+      referrals: []
+    };
+
+    // ------------------------------------------------------------------------
+    // 5. AUTH STATE LISTENER
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        currentUser = user;
+        initHistoryPortal();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 6. INITIALIZE DATA STREAMS
+    // ------------------------------------------------------------------------
+    function initHistoryPortal() {
+      const uid = currentUser.uid;
+
+      // 1. Task Completions (/taskCompletions/{uid})
+      const tasksRef = ref(database, `taskCompletions/${uid}`);
+      onValue(tasksRef, (snapshot) => {
+        dataStore.tasks = [];
+        if (snapshot.exists()) {
+          const val = snapshot.val();
+          Object.keys(val).forEach((k) => {
+            const item = val[k];
+            item.id = k;
+            dataStore.tasks.push(item);
+          });
+        }
+        sumTasksCount.textContent = dataStore.tasks.length;
+        if (activeTab === 'tasks') renderCurrentView();
+      }, handleFirebaseError);
+
+      // 2. Withdrawals (/withdrawals query by uid)
+      const withdrawalsRef = ref(database, 'withdrawals');
+      const userWithdrawalsQuery = query(withdrawalsRef, orderByChild('uid'), equalTo(uid));
+      onValue(userWithdrawalsQuery, (snapshot) => {
+        dataStore.withdrawals = [];
+        if (snapshot.exists()) {
+          const val = snapshot.val();
+          Object.keys(val).forEach((k) => {
+            const item = val[k];
+            item.id = k;
+            dataStore.withdrawals.push(item);
+          });
+        }
+        sumWithdrawCount.textContent = dataStore.withdrawals.length;
+        if (activeTab === 'withdrawals') renderCurrentView();
+      }, handleFirebaseError);
+
+      // 3. VIP Orders (/vipOrders query by userId/uid)
+      const vipOrdersRef = ref(database, 'vipOrders');
+      onValue(vipOrdersRef, (snapshot) => {
+        dataStore.vip = [];
+        if (snapshot.exists()) {
+          const val = snapshot.val();
+          Object.keys(val).forEach((k) => {
+            const item = val[k];
+            // Only records belonging to this user
+            if (item.userId === uid || item.uid === uid) {
+              item.id = k;
+              dataStore.vip.push(item);
+            }
+          });
+        }
+        sumVipCount.textContent = dataStore.vip.length;
+        if (activeTab === 'vip') renderCurrentView();
+      }, handleFirebaseError);
+
+      // 4. Referrals (/referrals/{uid})
+      const referralsRef = ref(database, `referrals/${uid}`);
+      onValue(referralsRef, (snapshot) => {
+        dataStore.referrals = [];
+        if (snapshot.exists()) {
+          const val = snapshot.val();
+          Object.keys(val).forEach((k) => {
+            const item = val[k];
+            item.id = k;
+            dataStore.referrals.push(item);
+          });
+        }
+        sumRefCount.textContent = dataStore.referrals.length;
+        if (activeTab === 'referrals') renderCurrentView();
+      }, handleFirebaseError);
+    }
+
+    function handleFirebaseError(err) {
+      console.warn('Realtime sync note:', err);
+      errorBanner.style.display = 'flex';
+    }
+
+    btnRetrySync.addEventListener('click', () => {
+      errorBanner.style.display = 'none';
+      if (currentUser) initHistoryPortal();
+    });
+
+    // ------------------------------------------------------------------------
+    // 7. TABS & FILTER CONTROLS
+    // ------------------------------------------------------------------------
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        activeTab = btn.getAttribute('data-tab');
+        visibleItemCount = PAGE_SIZE;
+        searchInput.value = '';
+        updateStatusDropdownOptions();
+        renderCurrentView();
+      });
+    });
+
+    searchInput.addEventListener('input', () => {
+      visibleItemCount = PAGE_SIZE;
+      renderCurrentView();
+    });
+
+    statusFilter.addEventListener('change', () => {
+      visibleItemCount = PAGE_SIZE;
+      renderCurrentView();
+    });
+
+    sortOrder.addEventListener('change', () => {
+      renderCurrentView();
+    });
+
+    btnLoadMore.addEventListener('click', () => {
+      visibleItemCount += PAGE_SIZE;
+      renderCurrentView();
+    });
+
+    function updateStatusDropdownOptions() {
+      statusFilter.innerHTML = '<option value="all">All Statuses</option>';
+      const optionsMap = {
+        tasks: ['completed', 'pending', 'rejected'],
+        withdrawals: ['pending', 'processing', 'approved', 'paid', 'rejected'],
+        vip: ['pending', 'approved', 'rejected', 'expired'],
+        referrals: ['pending', 'qualified', 'rewarded', 'rejected']
+      };
+
+      const opts = optionsMap[activeTab] || [];
+      opts.forEach((st) => {
+        const opt = document.createElement('option');
+        opt.value = st;
+        opt.textContent = capitalizeFirst(st);
+        statusFilter.appendChild(opt);
+      });
+    }
+
+    updateStatusDropdownOptions();
+
+    // ------------------------------------------------------------------------
+    // 8. RENDER VIEW (CLIENT-SIDE FILTER, SORT, AND PAGINATION)
+    // ------------------------------------------------------------------------
+    function renderCurrentView() {
+      historyListContainer.innerHTML = '';
+      const rawList = [...(dataStore[activeTab] || [])];
+
+      const queryTerm = searchInput.value.trim().toLowerCase();
+      const selectedStatus = statusFilter.value.toLowerCase();
+      const sort = sortOrder.value; // 'desc' | 'asc'
+
+      // Filter by Status
+      let filtered = rawList.filter((item) => {
+        if (selectedStatus === 'all') return true;
+        const itemStatus = (item.status || 'pending').toLowerCase();
+        return itemStatus === selectedStatus;
+      });
+
+      // Filter by Search Query
+      if (queryTerm) {
+        filtered = filtered.filter((item) => {
+          if (activeTab === 'tasks') {
+            const name = (item.taskName || item.title || '').toLowerCase();
+            const type = (item.type || '').toLowerCase();
+            return name.includes(queryTerm) || type.includes(queryTerm);
+          } else if (activeTab === 'withdrawals') {
+            const method = (item.method || '').toLowerCase();
+            const acc = (item.accountNumber || '').toLowerCase();
+            const note = (item.adminNote || '').toLowerCase();
+            return method.includes(queryTerm) || acc.includes(queryTerm) || note.includes(queryTerm);
+          } else if (activeTab === 'vip') {
+            const method = (item.paymentMethod || '').toLowerCase();
+            const trx = (item.transactionId || '').toLowerCase();
+            const tier = `vip ${item.vipLevel || ''}`.toLowerCase();
+            return method.includes(queryTerm) || trx.includes(queryTerm) || tier.includes(queryTerm);
+          } else if (activeTab === 'referrals') {
+            const username = (item.username || '').toLowerCase();
+            return username.includes(queryTerm);
+          }
+          return false;
+        });
+      }
+
+      // Sort by Date
+      filtered.sort((a, b) => {
+        const timeA = extractTimestamp(a);
+        const timeB = extractTimestamp(b);
+        return sort === 'asc' ? timeA - timeB : timeB - timeA;
+      });
+
+      // Empty State Check
+      if (filtered.length === 0) {
+        historyListContainer.innerHTML = renderEmptyState();
+        loadMoreWrap.style.display = 'none';
+        return;
+      }
+
+      // Pagination slice
+      const displayed = filtered.slice(0, visibleItemCount);
+
+      // Render cards
+      displayed.forEach((record) => {
+        const card = createRecordCard(record, activeTab);
+        historyListContainer.appendChild(card);
+      });
+
+      // Toggle Load More
+      if (filtered.length > visibleItemCount) {
+        loadMoreWrap.style.display = 'flex';
+        btnLoadMore.innerHTML = `<span>Load More (${filtered.length - visibleItemCount} remaining)</span> <span>↓</span>`;
+      } else {
+        loadMoreWrap.style.display = 'none';
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // 9. CARD GENERATOR FACTORY
+    // ------------------------------------------------------------------------
+    function createRecordCard(data, type) {
+      const card = document.createElement('div');
+      card.className = 'record-card';
+      const status = (data.status || 'pending').toLowerCase();
+
+      if (type === 'tasks') {
+        const title = data.taskName || data.title || 'Game Mission';
+        const taskType = data.type || 'Activity Link';
+        const rewardText = data.reward ? `+৳${Number(data.reward).toFixed(2)}` : 'XP Reward';
+        const timeStr = formatDateTime(extractTimestamp(data));
+
+        card.innerHTML = `
+          <div class="rec-top-row">
+            <div class="rec-title-group">
+              <span class="rec-primary-title">${escapeHtml(title)}</span>
+              <span class="rec-meta-info">${escapeHtml(timeStr)}</span>
+            </div>
+            <div class="rec-amount-group">
+              <span class="rec-amount plus">${escapeHtml(rewardText)}</span>
+              <span class="status-badge ${status}">${escapeHtml(status)}</span>
+            </div>
+          </div>
+          <div class="rec-sub-details">
+            <span class="rec-detail-tag">Type: <strong>${escapeHtml(taskType)}</strong></span>
+          </div>
+        `;
+      } else if (type === 'withdrawals') {
+        const method = data.method || 'bKash';
+        const maskedAcc = maskPhone(data.accountNumber);
+        const amountText = `-৳${Number(data.amount || 0).toFixed(2)}`;
+        const timeStr = formatDateTime(extractTimestamp(data));
+        const adminNote = data.adminNote ? `<div style="font-size:0.72rem; color: #fca5a5; margin-top:4px;">Note: ${escapeHtml(data.adminNote)}</div>` : '';
+
+        card.innerHTML = `
+          <div class="rec-top-row">
+            <div class="rec-title-group">
+              <span class="rec-primary-title">${escapeHtml(method)} Payout</span>
+              <span class="rec-meta-info">${escapeHtml(timeStr)}</span>
+            </div>
+            <div class="rec-amount-group">
+              <span class="rec-amount minus">${escapeHtml(amountText)}</span>
+              <span class="status-badge ${status}">${escapeHtml(status)}</span>
+            </div>
+          </div>
+          <div class="rec-sub-details">
+            <span class="rec-detail-tag">Account: <strong>${escapeHtml(maskedAcc)}</strong></span>
+            ${data.processedAt ? `<span class="rec-detail-tag">Processed: <strong>${formatDateTime(data.processedAt)}</strong></span>` : ''}
+          </div>
+          ${adminNote}
+        `;
+      } else if (type === 'vip') {
+        const vipLevel = data.vipLevel || '1';
+        const method = data.paymentMethod || 'bKash';
+        const price = Number(data.amount || data.price || 0).toFixed(2);
+        const maskedTrx = maskTrx(data.transactionId);
+        const timeStr = formatDateTime(extractTimestamp(data));
+
+        card.innerHTML = `
+          <div class="rec-top-row">
+            <div class="rec-title-group">
+              <span class="rec-primary-title">VIP ${escapeHtml(vipLevel)} Upgrade</span>
+              <span class="rec-meta-info">${escapeHtml(timeStr)}</span>
+            </div>
+            <div class="rec-amount-group">
+              <span class="rec-amount neutral">৳${escapeHtml(price)}</span>
+              <span class="status-badge ${status}">${escapeHtml(status)}</span>
+            </div>
+          </div>
+          <div class="rec-sub-details">
+            <span class="rec-detail-tag">Method: <strong>${escapeHtml(method)}</strong></span>
+            <span class="rec-detail-tag">TrxID: <strong>${escapeHtml(maskedTrx)}</strong></span>
+            ${data.expiryDate ? `<span class="rec-detail-tag">Expiry: <strong>${formatDateTime(data.expiryDate)}</strong></span>` : ''}
+          </div>
+        `;
+      } else if (type === 'referrals') {
+        const maskedUser = maskUsername(data.username);
+        const rewardText = data.reward ? `+৳${Number(data.reward).toFixed(2)}` : '+৳40.00';
+        const timeStr = formatDateTime(extractTimestamp(data));
+
+        card.innerHTML = `
+          <div class="rec-top-row">
+            <div class="rec-title-group">
+              <span class="rec-primary-title">Invited ${escapeHtml(maskedUser)}</span>
+              <span class="rec-meta-info">${escapeHtml(timeStr)}</span>
+            </div>
+            <div class="rec-amount-group">
+              <span class="rec-amount plus">${escapeHtml(rewardText)}</span>
+              <span class="status-badge ${status}">${escapeHtml(status)}</span>
+            </div>
+          </div>
+          <div class="rec-sub-details">
+            <span class="rec-detail-tag">Status: <strong>${capitalizeFirst(status)}</strong></span>
+            ${data.qualifiedAt ? `<span class="rec-detail-tag">Qualified: <strong>${formatDateTime(data.qualifiedAt)}</strong></span>` : ''}
+          </div>
+        `;
+      }
+
+      return card;
+    }
+
+    // ------------------------------------------------------------------------
+    // 10. EMPTY STATES
+    // ------------------------------------------------------------------------
+    function renderEmptyState() {
+      const emptyInfo = {
+        tasks: {
+          icon: '🎮',
+          title: 'No task history yet.',
+          desc: 'Complete missions in the task arena to record achievements and rewards.'
+        },
+        withdrawals: {
+          icon: '💸',
+          title: 'No withdrawal requests yet.',
+          desc: 'Your requested payouts and withdrawal status logs will appear here.'
+        },
+        vip: {
+          icon: '👑',
+          title: 'No VIP orders yet.',
+          desc: 'Explore and upgrade through VIP tiers to unlock higher daily quotas.'
+        },
+        referrals: {
+          icon: '👥',
+          title: 'No referral activity yet.',
+          desc: 'Share your referral code with friends to build your gamer crew.'
+        }
+      };
+
+      const info = emptyInfo[activeTab] || emptyInfo.tasks;
+      return `
+        <div class="empty-state-card">
+          <div class="empty-icon-bubble">${info.icon}</div>
+          <h3 class="empty-title">${info.title}</h3>
+          <p class="empty-desc">${info.desc}</p>
+        </div>
+      `;
+    }
+
+    // ------------------------------------------------------------------------
+    // 11. TIME EXTRACTION & DATA HELPERS
+    // ------------------------------------------------------------------------
+    function extractTimestamp(item) {
+      if (!item) return 0;
+      const raw = item.completedAt || item.requestedAt || item.createdAt || item.date;
+      if (!raw) return 0;
+
+      if (typeof raw === 'number') {
+        // In case it's in seconds instead of ms
+        return raw < 1e11 ? raw * 1000 : raw;
+      }
+
+      const parsed = new Date(raw).getTime();
+      return isNaN(parsed) ? 0 : parsed;
+    }
+
+    function formatDateTime(val) {
+      if (!val) return '---';
+      try {
+        const d = new Date(val);
+        if (isNaN(d.getTime())) return '---';
+        return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) + 
+               ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } catch {
+        return '---';
+      }
+    }
+
+    function maskPhone(phone) {
+      if (!phone) return '---';
+      const str = String(phone).trim();
+      if (str.length < 8) return str;
+      return str.slice(0, 2) + '******' + str.slice(-3);
+    }
+
+    function maskTrx(trx) {
+      if (!trx) return '---';
+      const str = String(trx).trim();
+      if (str.length < 6) return str;
+      return str.slice(0, 3) + '*****' + str.slice(-2);
+    }
+
+    function maskUsername(name) {
+      if (!name) return 'User';
+      const str = String(name).trim();
+      if (str.length <= 4) return str.slice(0, 1) + '***';
+      return str.slice(0, 2) + '***' + str.slice(-2);
+    }
+
+    function capitalizeFirst(str) {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
