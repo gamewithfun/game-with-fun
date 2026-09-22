@@ -2,45 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Tasks | THE GAME WITH FUN</title>
-  <meta name="description" content="Engage in interactive casual tasks, level up your rank, and experience legitimate gaming missions on THE GAME WITH FUN.">
+  <meta name="description" content="Engage in legitimate gaming missions, website visits, and interactive challenges on THE GAME WITH FUN.">
 
   <style>
     /* ==========================================================================
-       DESIGN SYSTEM & CSS VARIABLES
+       ULTRA-PREMIUM CYBER/GAMING DESIGN SYSTEM
        ========================================================================== */
     :root {
-      --bg-void: #05070b;
+      --bg-base: #06080d;
       --bg-surface: #0a0e17;
-      --bg-card: rgba(13, 18, 30, 0.78);
-      --bg-card-border: rgba(255, 255, 255, 0.08);
-      --bg-elevated: rgba(20, 27, 45, 0.9);
+      --bg-card: rgba(14, 19, 32, 0.78);
+      --bg-card-hover: rgba(20, 27, 46, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(0, 240, 255, 0.3);
+      --border-gold: rgba(245, 158, 11, 0.35);
 
       --gold-primary: #f59e0b;
-      --gold-glow: rgba(245, 158, 11, 0.35);
-      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
 
       --cyan-neon: #00f0ff;
       --cyan-glow: rgba(0, 240, 255, 0.35);
       --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
 
-      --purple-accent: #a855f7;
-      --emerald-accent: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.3);
-      --ruby-accent: #f43f5e;
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --ruby-neon: #f43f5e;
 
       --text-white: #ffffff;
-      --text-main: #f1f5f9;
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
 
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
       --radius-full: 9999px;
 
-      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -53,8 +54,8 @@
 
     html, body {
       min-height: 100vh;
-      background-color: var(--bg-void);
-      font-family: var(--font-family);
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
       color: var(--text-main);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -63,15 +64,15 @@
     body {
       background-image:
         radial-gradient(circle at 10% 5%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 25%, rgba(245, 158, 11, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.06) 0%, transparent 45%),
         radial-gradient(circle at 50% 60%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
       background-attachment: fixed;
-      padding-bottom: 85px;
+      padding-bottom: 95px; /* Ensures fixed bottom nav never overlaps */
     }
 
     @media (min-width: 1024px) {
       body {
-        padding-bottom: 2.5rem;
+        padding-bottom: 3rem;
       }
     }
 
@@ -89,9 +90,43 @@
 
     .container {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 0 1rem;
+    }
+
+    /* ==========================================================================
+       SESSION RESTORING OVERLAY
+       ========================================================================== */
+    .auth-resolving-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: opacity 0.35s var(--smooth-ease);
+    }
+
+    .auth-resolving-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .auth-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(0, 240, 255, 0.15);
+      border-top-color: var(--cyan-neon);
+      border-radius: 50%;
+      animation: spinAnim 0.8s linear infinite;
+    }
+
+    @keyframes spinAnim {
+      to { transform: rotate(360deg); }
     }
 
     /* ==========================================================================
@@ -101,10 +136,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5, 7, 11, 0.85);
+      background: rgba(6, 8, 13, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--bg-card-border);
+      border-bottom: 1px solid var(--border-subtle);
       padding: 0.75rem 0;
     }
 
@@ -125,7 +160,7 @@
       height: 38px;
       border-radius: var(--radius-sm);
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       display: grid;
       place-items: center;
       color: var(--text-muted);
@@ -138,7 +173,7 @@
       transform: translateX(-2px);
     }
 
-    .brand-text {
+    .brand-meta {
       display: flex;
       flex-direction: column;
     }
@@ -167,7 +202,7 @@
 
     .header-balance-pill {
       background: rgba(245, 158, 11, 0.1);
-      border: 1px solid var(--gold-glow);
+      border: 1px solid var(--border-gold);
       padding: 5px 12px;
       border-radius: var(--radius-full);
       display: flex;
@@ -182,7 +217,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan-neon), var(--purple-accent));
+      background: linear-gradient(135deg, var(--cyan-neon), var(--purple-neon));
       padding: 1.5px;
       display: grid;
       place-items: center;
@@ -204,14 +239,11 @@
        PAGE BANNER
        ========================================================================== */
     .page-banner {
-      padding: 1.5rem 0 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      padding: 1.5rem 0 0.8rem;
     }
 
     .page-title {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
       font-weight: 900;
       letter-spacing: -0.5px;
       color: #fff;
@@ -223,18 +255,46 @@
     .page-subtitle {
       font-size: 0.86rem;
       color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Error Alert */
+    .error-banner {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-retry-action {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .btn-retry-action:hover {
+      background: var(--ruby-neon);
     }
 
     /* ==========================================================================
-       TASK SUMMARY WIDGET
+       1. TASK SUMMARY / TODAY'S QUOTA CARD
        ========================================================================== */
     .summary-card {
-      background: linear-gradient(145deg, rgba(20, 26, 44, 0.9), rgba(11, 15, 26, 0.95));
-      border: 1px solid var(--bg-card-border);
+      background: linear-gradient(145deg, rgba(20, 26, 44, 0.95), rgba(11, 15, 26, 0.95));
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 1.5rem;
+      padding: 1.4rem;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.15rem;
       position: relative;
       overflow: hidden;
     }
@@ -259,12 +319,12 @@
 
     .summary-badge-vip {
       font-size: 0.72rem;
-      font-weight: 800;
+      font-weight: 900;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: var(--radius-full);
       background: rgba(245, 158, 11, 0.12);
-      border: 1px solid var(--gold-glow);
+      border: 1px solid var(--border-gold);
       color: var(--gold-primary);
     }
 
@@ -272,7 +332,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.15rem;
     }
 
     .metric-box {
@@ -284,16 +344,17 @@
     }
 
     .metric-val {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 900;
       color: #fff;
       line-height: 1.1;
+      font-family: monospace;
     }
 
     .metric-label {
       font-size: 0.68rem;
       color: var(--text-dim);
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       margin-top: 4px;
     }
@@ -323,7 +384,7 @@
     }
 
     /* ==========================================================================
-       VIP PROMOTION OR ACTIVE NOTICE
+       2. VIP PROMOTION / STATUS BANNER
        ========================================================================== */
     .vip-banner {
       background: rgba(245, 158, 11, 0.05);
@@ -333,7 +394,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1.5rem;
+      gap: 12px;
+      margin-bottom: 1.15rem;
     }
 
     .vip-banner-text h4 {
@@ -349,11 +411,11 @@
     }
 
     .btn-vip-link {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.1rem;
       background: var(--gold-gradient);
       color: #05070e;
       font-size: 0.75rem;
-      font-weight: 800;
+      font-weight: 900;
       border-radius: var(--radius-sm);
       text-transform: uppercase;
       white-space: nowrap;
@@ -366,17 +428,17 @@
     }
 
     /* ==========================================================================
-       STREAK BANNER
+       3. STREAK PROGRESS BANNER
        ========================================================================== */
     .streak-banner {
       background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       padding: 0.85rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-around;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
       font-size: 0.8rem;
     }
 
@@ -388,10 +450,11 @@
 
     .streak-banner-item strong {
       color: var(--cyan-neon);
+      font-weight: 800;
     }
 
     /* ==========================================================================
-       TASK SECTION HEADER
+       4. AVAILABLE MISSIONS SECTION
        ========================================================================== */
     .section-header-row {
       display: flex;
@@ -406,9 +469,6 @@
       color: #fff;
     }
 
-    /* ==========================================================================
-       TASKS GRID & CARDS
-       ========================================================================== */
     .tasks-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -423,7 +483,7 @@
 
     .task-card {
       background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 1.35rem;
       display: flex;
@@ -439,9 +499,9 @@
       transform: translateY(-2px);
     }
 
-    .task-card.completed-state {
-      opacity: 0.6;
-      filter: grayscale(0.4);
+    .task-card.in-cooldown {
+      border-color: rgba(245, 158, 11, 0.25);
+      background: rgba(14, 19, 32, 0.65);
     }
 
     .task-card-top {
@@ -457,7 +517,7 @@
       padding: 3px 9px;
       border-radius: var(--radius-full);
       background: rgba(0, 240, 255, 0.1);
-      border: 1px solid var(--cyan-glow);
+      border: 1px solid var(--border-glow);
       color: var(--cyan-neon);
       text-transform: uppercase;
     }
@@ -485,6 +545,24 @@
       margin-bottom: 1.25rem;
     }
 
+    .cooldown-indicator-bar {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      margin-bottom: 1rem;
+    }
+
+    .task-card.in-cooldown .cooldown-indicator-bar {
+      display: flex;
+    }
+
     .task-meta-footer {
       display: flex;
       justify-content: space-between;
@@ -507,16 +585,17 @@
     }
 
     .task-reward-val {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 900;
       color: var(--gold-primary);
+      font-family: monospace;
     }
 
     .btn-start-task {
-      padding: 0.65rem 1.25rem;
+      padding: 0.7rem 1.3rem;
       border-radius: var(--radius-md);
       font-size: 0.8rem;
-      font-weight: 800;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       background: var(--cyan-gradient);
@@ -538,24 +617,24 @@
       color: var(--text-dim);
       cursor: not-allowed;
       box-shadow: none;
+      filter: grayscale(0.5);
     }
 
-    /* Empty state */
     .empty-tasks-box {
       background: var(--bg-card);
-      border: 1px dashed var(--bg-card-border);
+      border: 1px dashed var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem;
       text-align: center;
     }
 
     .empty-icon {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 0.75rem;
     }
 
     /* ==========================================================================
-       TODAY'S ACTIVITY LOG
+       5. TODAY'S COMPLETED MISSIONS LOG
        ========================================================================== */
     .activity-section {
       margin-top: 2.5rem;
@@ -563,7 +642,7 @@
 
     .activity-card-container {
       background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 1.25rem;
     }
@@ -584,7 +663,7 @@
     .act-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .act-status-badge {
@@ -593,27 +672,25 @@
       padding: 2px 7px;
       border-radius: 4px;
       text-transform: uppercase;
-    }
-
-    .act-status-badge.completed {
       background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald-accent);
+      color: var(--emerald-neon);
+      border: 1px solid rgba(16, 185, 129, 0.35);
     }
 
     /* ==========================================================================
-       MODAL: TASK PROGRESS & TIMER
+       MODAL: TASK PROGRESS, COUNTDOWN & EARLY EXIT
        ========================================================================== */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(4, 6, 12, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(4, 6, 12, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 1.25rem;
-      z-index: 1000;
+      z-index: 2000;
       opacity: 0;
       transition: opacity 0.3s var(--smooth-ease);
     }
@@ -627,7 +704,7 @@
       width: 100%;
       max-width: 440px;
       background: #0d1222;
-      border: 1px solid var(--cyan-glow);
+      border: 1px solid var(--border-glow);
       border-radius: var(--radius-lg);
       padding: 2rem 1.75rem;
       text-align: center;
@@ -642,26 +719,26 @@
     }
 
     .timer-circle {
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      background: rgba(0, 240, 255, 0.05);
+      background: rgba(0, 240, 255, 0.04);
       border: 2px solid var(--cyan-neon);
       display: grid;
       place-items: center;
-      margin: 1rem auto 1.5rem;
+      margin: 1.25rem auto 1.5rem;
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
     }
 
     .timer-digits {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 900;
       color: var(--cyan-neon);
       font-family: monospace;
     }
 
     .modal-task-title {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 900;
       color: #fff;
       margin-bottom: 0.5rem;
@@ -678,13 +755,14 @@
       width: 100%;
       padding: 0.95rem;
       border-radius: var(--radius-md);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       background: var(--gold-gradient);
       color: #05070e;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 15px var(--gold-glow);
     }
 
     .modal-action-btn:disabled {
@@ -695,39 +773,63 @@
     }
 
     .btn-cancel-task {
-      margin-top: 0.85rem;
+      margin-top: 1rem;
       background: transparent;
-      color: var(--text-dim);
-      font-size: 0.78rem;
-      font-weight: 700;
+      color: var(--ruby-neon);
+      font-size: 0.8rem;
+      font-weight: 800;
       text-decoration: underline;
+      display: inline-block;
     }
 
-    .btn-cancel-task:hover {
-      color: var(--ruby-accent);
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: rgba(10, 14, 23, 0.95);
+      border: 1px solid var(--cyan-neon);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+      backdrop-filter: blur(16px);
+      z-index: 3000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s var(--smooth-ease);
+      transform: translateY(15px);
+    }
+
+    .toast-popup.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ==========================================================================
-       BOTTOM NAVIGATION (MOBILE)
+       FIXED BOTTOM NAVIGATION (Mobile)
        ========================================================================== */
-    .mobile-bottom-nav {
+    .bottom-nav-fixed {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       height: 65px;
-      background: rgba(10, 14, 23, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--bg-card-border);
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-around;
-      z-index: 90;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
     @media (min-width: 1024px) {
-      .mobile-bottom-nav {
+      .bottom-nav-fixed {
         display: none;
       }
     }
@@ -754,41 +856,13 @@
       color: var(--cyan-neon);
     }
 
-    /* ==========================================================================
-       LOADING SKELETON & BLOCKED OVERLAY
-       ========================================================================== */
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--bg-void);
-      z-index: 300;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s ease;
-    }
-
-    .spinner-ring {
-      width: 44px;
-      height: 44px;
-      border: 3px solid rgba(0, 240, 255, 0.15);
-      border-top-color: var(--cyan-neon);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 1rem;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
+    /* Blocked Account Notice Screen */
     .blocked-screen {
       display: none;
       position: fixed;
       inset: 0;
       background: #05070b;
-      z-index: 400;
+      z-index: 3000;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
@@ -797,33 +871,38 @@
 
     .blocked-card {
       background: #111524;
-      border: 1px solid var(--ruby-accent);
+      border: 1px solid var(--ruby-neon);
       border-radius: var(--radius-lg);
       padding: 2.5rem 1.75rem;
-      max-width: 400px;
+      max-width: 420px;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
     }
   </style>
 </head>
 <body>
 
-  <!-- LOADING OVERLAY -->
-  <div id="loadingOverlay" class="loading-overlay">
-    <div class="spinner-ring"></div>
-    <div style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted);">LOADING TASK ARENA...</div>
+  <!-- AUTHENTICATION CHECKING OVERLAY -->
+  <div id="authCheckingOverlay" class="auth-resolving-overlay">
+    <div class="auth-spinner"></div>
+    <div style="font-size:0.85rem; font-weight:800; color:var(--text-muted); letter-spacing:0.8px;">LOADING MISSION ARENA...</div>
   </div>
 
-  <!-- BLOCKED ACCOUNT SCREEN -->
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="toast-popup" role="status" aria-live="polite">
+    <span id="toastMessage">Action completed</span>
+  </div>
+
+  <!-- BLOCKED ACCOUNT NOTICE -->
   <div id="blockedScreen" class="blocked-screen">
     <div class="blocked-card">
-      <div style="font-size: 3rem; margin-bottom: 0.75rem;">🚫</div>
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
       <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
       <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
-        Your account status is currently blocked or suspended. You cannot participate in platform tasks.
+        Your account status is currently restricted. You cannot participate in platform tasks.
       </p>
-      <button id="btnBlockedLogout" style="padding: 0.8rem 1.5rem; background: var(--ruby-accent); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
-        LOG OUT
-      </button>
+      <div style="font-size: 0.78rem; color: var(--text-dim);">
+        Session remains active. Contact support at support@thegamewithfun.com
+      </div>
     </div>
   </div>
 
@@ -839,7 +918,7 @@
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
         </a>
-        <div class="brand-text">
+        <div class="brand-meta">
           <span class="brand-name">THE GAME WITH FUN</span>
           <span class="brand-sub">Missions</span>
         </div>
@@ -870,10 +949,16 @@
       <p class="page-subtitle">Complete available activities and enjoy the experience.</p>
     </div>
 
-    <!-- 1. Task Summary Widget -->
+    <!-- Error Banner (Realtime sync note, never signs out) -->
+    <div id="errorBanner" class="error-banner">
+      <span style="font-size: 0.8rem; color: #fca5a5;">Unable to sync task data right now. Check connection.</span>
+      <button id="btnRetrySync" class="btn-retry-action">RETRY</button>
+    </div>
+
+    <!-- 1. TASK SUMMARY / TODAY'S QUOTA CARD -->
     <div class="summary-card">
       <div class="summary-top">
-        <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">Today's Quota</span>
+        <span style="font-size: 0.74rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px;">Today's Quota</span>
         <span id="vipBadgeDisplay" class="summary-badge-vip">FREE TIER</span>
       </div>
 
@@ -902,7 +987,7 @@
       </div>
     </div>
 
-    <!-- 2. VIP Promotion or Active VIP Banner -->
+    <!-- 2. VIP PROMOTION / STATUS BANNER -->
     <div id="vipBannerBox" class="vip-banner">
       <div class="vip-banner-text">
         <h4 id="vipBannerHeading">Want more daily tasks?</h4>
@@ -911,7 +996,7 @@
       <a href="vip.html" id="vipBannerBtn" class="btn-vip-link">Explore VIP</a>
     </div>
 
-    <!-- 3. Streak Banner -->
+    <!-- 3. STREAK BANNER -->
     <div class="streak-banner">
       <div class="streak-banner-item">
         <span>🔥 Login Streak:</span>
@@ -923,23 +1008,23 @@
       </div>
     </div>
 
-    <!-- 4. Tasks List Section -->
+    <!-- 4. AVAILABLE MISSIONS SECTION -->
     <div class="section-header-row">
       <h2 class="section-title">Available Missions</h2>
-      <span id="activeTasksCountBadge" style="font-size: 0.76rem; color: var(--cyan-neon); font-weight: 800;">0 AVAILABLE</span>
+      <span id="activeTasksCountBadge" style="font-size: 0.76rem; color: var(--cyan-neon); font-weight: 800;">0 MISSIONS</span>
     </div>
 
     <div id="tasksContainer" class="tasks-grid">
       <!-- Injected Dynamically -->
     </div>
 
-    <!-- 5. Today's Activity Section -->
+    <!-- 5. TODAY'S COMPLETED MISSIONS LOG -->
     <div class="activity-section">
       <div class="section-header-row">
         <h3 class="section-title">Today's Completed Missions</h3>
       </div>
       <div class="activity-card-container" id="activityContainer">
-        <div style="font-size: 0.82rem; color: var(--text-dim); text-align: center; padding: 1rem 0;">
+        <div style="font-size: 0.82rem; color: var(--text-dim); text-align: center; padding: 1.25rem 0;">
           No missions completed today yet.
         </div>
       </div>
@@ -947,14 +1032,14 @@
   </main>
 
   <!-- ==========================================================================
-       TASK PROGRESS MODAL WITH TIMER
+       TASK PROGRESS MODAL WITH MANDATORY COUNTDOWN & EARLY EXIT PROTECTION
        ========================================================================== -->
   <div id="taskTimerModal" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-card">
-      <div id="modalTaskTypeTag" class="task-type-badge" style="display: inline-block; margin-bottom: 0.5rem;">WEBSITE VISIT</div>
-      <h3 id="modalTaskTitle" class="modal-task-title">Visiting Destination</h3>
+      <div id="modalTaskTypeTag" class="task-type-badge" style="display: inline-block; margin-bottom: 0.5rem;">WEBSITE LINK</div>
+      <h3 id="modalTaskTitle" class="modal-task-title">Mission in Progress</h3>
       <p class="modal-task-instruction">
-        The task window has opened in a new tab. Please browse the designated page until the countdown completes. Do not click random advertisements or use bot scripts.
+        The task window has opened in a new tab. Please browse the designated page until the countdown finishes. <strong>Do not leave early or close the session</strong>, or the mission will be cancelled without reward.
       </p>
 
       <div class="timer-circle">
@@ -962,19 +1047,19 @@
       </div>
 
       <button id="btnCompleteTask" class="modal-action-btn" disabled>
-        COMPLETE TASK
+        WAIT (30s)
       </button>
 
       <div>
-        <button id="btnCancelTask" class="btn-cancel-task">Cancel Task</button>
+        <button id="btnCancelTask" class="btn-cancel-task">Cancel Task & Exit</button>
       </div>
     </div>
   </div>
 
   <!-- ==========================================================================
-       MOBILE BOTTOM NAVIGATION
+       FIXED BOTTOM NAVIGATION (Mobile)
        ========================================================================== -->
-  <nav class="mobile-bottom-nav">
+  <nav class="bottom-nav-fixed">
     <a href="dashboard.html" class="nav-tab">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
       <span>Home</span>
@@ -998,30 +1083,26 @@
   </nav>
 
   <!-- ==========================================================================
-       FIREBASE INTEGRATION & SECURE TASK CLIENT ARCHITECTURE
+       FIREBASE INTEGRATION & 24-HOUR TASK COOLDOWN SYSTEM
        ========================================================================== -->
   <script type="module">
-    // ------------------------------------------------------------------------
-    // 1. FIREBASE MODULAR SDK IMPORTS (Auth & Realtime Database Only)
-    // ------------------------------------------------------------------------
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
       getAuth, 
-      onAuthStateChanged, 
-      signOut 
+      onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { 
       getDatabase, 
       ref, 
       get, 
-      push, 
       set, 
-      onValue, 
-      child 
+      update, 
+      push, 
+      onValue 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     // ------------------------------------------------------------------------
-    // 2. FIREBASE CONFIGURATION
+    // FIREBASE CONFIGURATION
     // ------------------------------------------------------------------------
     const firebaseConfig = {
       apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
@@ -1038,11 +1119,12 @@
     const database = getDatabase(app);
 
     // ------------------------------------------------------------------------
-    // 3. UI ELEMENT REFERENCES
+    // UI HOOKS
     // ------------------------------------------------------------------------
-    const loadingOverlay = document.getElementById('loadingOverlay');
+    const authCheckingOverlay = document.getElementById('authCheckingOverlay');
     const blockedScreen = document.getElementById('blockedScreen');
-    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
+    const errorBanner = document.getElementById('errorBanner');
+    const btnRetrySync = document.getElementById('btnRetrySync');
 
     const userBalanceText = document.getElementById('userBalanceText');
     const userAvatarLetter = document.getElementById('userAvatarLetter');
@@ -1055,7 +1137,6 @@
     const progressPercentLabel = document.getElementById('progressPercentLabel');
     const vipTierTaskNote = document.getElementById('vipTierTaskNote');
 
-    const vipBannerBox = document.getElementById('vipBannerBox');
     const vipBannerHeading = document.getElementById('vipBannerHeading');
     const vipBannerDesc = document.getElementById('vipBannerDesc');
     const vipBannerBtn = document.getElementById('vipBannerBtn');
@@ -1067,7 +1148,7 @@
     const activeTasksCountBadge = document.getElementById('activeTasksCountBadge');
     const activityContainer = document.getElementById('activityContainer');
 
-    // Modal elements
+    // Modal
     const taskTimerModal = document.getElementById('taskTimerModal');
     const modalTaskTypeTag = document.getElementById('modalTaskTypeTag');
     const modalTaskTitle = document.getElementById('modalTaskTitle');
@@ -1075,75 +1156,140 @@
     const btnCompleteTask = document.getElementById('btnCompleteTask');
     const btnCancelTask = document.getElementById('btnCancelTask');
 
+    const toastNotification = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+
     // ------------------------------------------------------------------------
-    // 4. CLIENT RUNTIME STATE
+    // RUNTIME CONSTANTS & STATE
     // ------------------------------------------------------------------------
+    const COOLDOWN_24H_MS = 24 * 60 * 60 * 1000; // Exact 24 Hours in milliseconds
+
     let currentUser = null;
     let userProfile = null;
     let allActiveTasks = [];
-    let completedTaskIdsToday = new Set();
-    let todayCompletionRecords = [];
+    let userCooldowns = {}; // taskId -> { lastCompletedAt }
+    let todayCompletionsList = [];
 
-    let currentActiveTask = null;
+    // Active Task Session State
+    let activeTaskSession = null;
     let countdownInterval = null;
-    let timerSecondsLeft = 0;
-
-    const todayDateString = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-
-    // ------------------------------------------------------------------------
-    // 5. AUTH STATE LISTENER
-    // ------------------------------------------------------------------------
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.href = 'login.html';
-        return;
-      }
-
-      currentUser = user;
-      initTasksArena();
-    });
+    let isSubmitting = false;
+    let toastTimeout = null;
 
     // ------------------------------------------------------------------------
-    // 6. INITIALIZATION & DATA FETCHING
+    // TOAST NOTIFICATION HELPER
     // ------------------------------------------------------------------------
-    async function initTasksArena() {
-      try {
-        // Read user profile
-        const userRef = ref(database, `users/${currentUser.uid}`);
-        onValue(userRef, (snapshot) => {
-          if (!snapshot.exists()) {
-            window.location.href = 'login.html';
-            return;
-          }
-
-          userProfile = snapshot.val();
-
-          // Account restriction check
-          if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
-            loadingOverlay.style.display = 'none';
-            blockedScreen.style.display = 'flex';
-            return;
-          }
-
-          renderHeaderAndProfile();
-          loadTodayCompletions();
-        });
-
-      } catch (err) {
-        console.error('Task arena init error:', err);
-        loadingOverlay.style.display = 'none';
-      }
+    function showToast(msg) {
+      toastMessage.textContent = msg;
+      toastNotification.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastNotification.classList.remove('show');
+      }, 3000);
     }
 
     // ------------------------------------------------------------------------
-    // 7. RENDER USER PROFILE & VIP TASK LIMITS
+    // AUTH STATE LISTENER (STRICT NO AUTO-LOGOUT)
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        initArenaStreams();
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // REALTIME DATABASE INITIALIZATION
+    // ------------------------------------------------------------------------
+    function initArenaStreams() {
+      errorBanner.style.display = 'none';
+
+      // 1. User Profile Listener (/users/{uid})
+      onValue(ref(database, `users/${currentUser.uid}`), (snapshot) => {
+        if (!snapshot.exists()) return;
+        userProfile = snapshot.val();
+
+        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'suspended') {
+          blockedScreen.style.display = 'flex';
+          hideOverlay();
+          return;
+        }
+
+        renderHeaderAndProfile();
+        renderQuotaWidget();
+      }, handleDatabaseError);
+
+      // 2. User 24-Hour Cooldowns Listener (/taskCooldowns/{uid})
+      onValue(ref(database, `taskCooldowns/${currentUser.uid}`), (snapshot) => {
+        userCooldowns = snapshot.exists() ? snapshot.val() : {};
+        renderTasksArena();
+      }, handleDatabaseError);
+
+      // 3. User Completions History Listener (/taskCompletions/{uid})
+      onValue(ref(database, `taskCompletions/${currentUser.uid}`), (snapshot) => {
+        todayCompletionsList = [];
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((k) => {
+            const item = data[k] || {};
+            item.completionId = k;
+            const ts = extractTimestamp(item.completedAt || item.date);
+            if (isToday(ts) && (item.status === 'completed' || !item.status)) {
+              todayCompletionsList.push(item);
+            }
+          });
+        }
+        renderActivityLog();
+        renderQuotaWidget();
+      }, handleDatabaseError);
+
+      // 4. Admin Tasks Listener (/tasks) - Realtime updates for permanent tasks
+      onValue(ref(database, 'tasks'), (snapshot) => {
+        allActiveTasks = [];
+
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((id) => {
+            const t = data[id] || {};
+            t.taskId = id;
+
+            // Only show tasks that admin has marked active
+            const isManualActive = t.active === true || t.active === 'true' || t.active === undefined;
+            if (isManualActive) {
+              allActiveTasks.push(t);
+            }
+          });
+        }
+
+        renderTasksArena();
+        hideOverlay();
+      }, handleDatabaseError);
+    }
+
+    function handleDatabaseError(err) {
+      console.warn('Realtime database sync notice:', err);
+      errorBanner.style.display = 'flex';
+      hideOverlay();
+    }
+
+    btnRetrySync.addEventListener('click', initArenaStreams);
+
+    function hideOverlay() {
+      authCheckingOverlay.classList.add('hidden');
+      setTimeout(() => {
+        authCheckingOverlay.style.display = 'none';
+      }, 400);
+    }
+
+    // ------------------------------------------------------------------------
+    // VIP LIMIT CALCULATOR & HEADER
     // ------------------------------------------------------------------------
     function getVipTaskLimit(level, status, expiry) {
-      // Base limit
       const limits = { 0: 5, 1: 8, 2: 13, 3: 18, 4: 25 };
       const parsedLevel = Number(level) || 0;
 
-      // Check active VIP & expiration
       if (status === 'active' && parsedLevel > 0) {
         if (expiry) {
           const expTime = new Date(expiry).getTime();
@@ -1157,23 +1303,22 @@
     }
 
     function renderHeaderAndProfile() {
-      const balance = Number(userProfile.balance || 0).toFixed(2);
-      const username = userProfile.username || 'Player';
+      const balance = Number(userProfile?.balance || 0).toFixed(2);
+      const username = userProfile?.username || 'Player';
       userBalanceText.textContent = balance;
       userAvatarLetter.textContent = username.charAt(0).toUpperCase();
 
-      streakLoginDays.textContent = `${userProfile.loginStreak || 0} Days`;
-      streakTaskDays.textContent = `${userProfile.taskStreak || 0} Days`;
+      streakLoginDays.textContent = `${userProfile?.loginStreak || 0} Days`;
+      streakTaskDays.textContent = `${userProfile?.taskStreak || 0} Days`;
 
-      const vipLevel = Number(userProfile.vipLevel) || 0;
-      const vipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
-      const limit = getVipTaskLimit(vipLevel, vipStatus, userProfile.vipExpiry);
+      const vipLevel = Number(userProfile?.vipLevel) || 0;
+      const vipStatus = (userProfile?.vipStatus || 'inactive').toLowerCase();
+      const limit = getVipTaskLimit(vipLevel, vipStatus, userProfile?.vipExpiry);
 
-      // VIP Banner updates
       if (vipStatus === 'active' && vipLevel > 0) {
         vipBadgeDisplay.textContent = `VIP ${vipLevel} ACTIVE`;
         vipBannerHeading.textContent = `VIP ${vipLevel} Active`;
-        vipBannerDesc.textContent = `Enjoy up to ${limit} tasks per day until expiration.`;
+        vipBannerDesc.textContent = `Enjoy up to ${limit} tasks per day until your tier expires.`;
         vipBannerBtn.textContent = 'Manage VIP';
         vipTierTaskNote.textContent = `VIP ${vipLevel}: Limit ${limit}/day`;
       } else {
@@ -1185,39 +1330,13 @@
       }
     }
 
-    // ------------------------------------------------------------------------
-    // 8. LOAD TODAY'S COMPLETIONS FOR PREVENTING DUPLICATES & QUOTA CALC
-    // ------------------------------------------------------------------------
-    function loadTodayCompletions() {
-      const completionsRef = ref(database, `taskCompletions/${currentUser.uid}`);
-
-      onValue(completionsRef, (snapshot) => {
-        completedTaskIdsToday.clear();
-        todayCompletionRecords = [];
-
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          Object.keys(data).forEach((key) => {
-            const item = data[key];
-            if (item.date === todayDateString && (item.status === 'completed' || item.status === 'pending')) {
-              completedTaskIdsToday.add(item.taskId);
-              todayCompletionRecords.push(item);
-            }
-          });
-        }
-
-        renderQuotaWidget();
-        renderActivityLog();
-        loadAvailableTasks();
-      });
-    }
-
     function renderQuotaWidget() {
+      if (!userProfile) return;
       const vipLevel = Number(userProfile.vipLevel) || 0;
       const vipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
       const dailyLimit = getVipTaskLimit(vipLevel, vipStatus, userProfile.vipExpiry);
 
-      const doneCount = completedTaskIdsToday.size;
+      const doneCount = todayCompletionsList.length;
       const remainCount = Math.max(0, dailyLimit - doneCount);
       const percent = Math.min(100, Math.round((doneCount / dailyLimit) * 100));
 
@@ -1226,49 +1345,26 @@
       todayRemainCount.textContent = remainCount;
 
       summaryProgressFill.style.width = `${percent}%`;
-      progressPercentLabel.textContent = `${percent}% Completed`;
+      progressPercentLabel.textContent = `${percent}% Done`;
     }
 
     // ------------------------------------------------------------------------
-    // 9. LOAD AVAILABLE ADMIN TASKS FROM /tasks
+    // RENDER AVAILABLE TASKS & 24-HOUR COOLDOWN CHECK
     // ------------------------------------------------------------------------
-    function loadAvailableTasks() {
-      const tasksRef = ref(database, 'tasks');
+    function getRemainingCooldown(taskId) {
+      const cdRecord = userCooldowns[taskId];
+      if (!cdRecord || !cdRecord.lastCompletedAt) return 0;
 
-      onValue(tasksRef, (snapshot) => {
-        allActiveTasks = [];
+      const lastTs = extractTimestamp(cdRecord.lastCompletedAt);
+      const elapsed = Date.now() - lastTs;
 
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          const now = Date.now();
-
-          Object.keys(data).forEach((id) => {
-            const task = data[id];
-            task.taskId = id;
-
-            // Date filtering if admin defined start/end
-            let dateEligible = true;
-            if (task.startDate && new Date(task.startDate).getTime() > now) dateEligible = false;
-            if (task.endDate && new Date(task.endDate).getTime() < now) dateEligible = false;
-
-            if (task.status === 'active' && dateEligible) {
-              allActiveTasks.push(task);
-            }
-          });
-        }
-
-        renderTaskList();
-        loadingOverlay.style.display = 'none';
-      }, (err) => {
-        console.error('Failed reading tasks:', err);
-        loadingOverlay.style.display = 'none';
-      });
+      if (elapsed < COOLDOWN_24H_MS) {
+        return COOLDOWN_24H_MS - elapsed;
+      }
+      return 0;
     }
 
-    // ------------------------------------------------------------------------
-    // 10. RENDER TASK CARDS
-    // ------------------------------------------------------------------------
-    function renderTaskList() {
+    function renderTasksArena() {
       tasksContainer.innerHTML = '';
       activeTasksCountBadge.textContent = `${allActiveTasks.length} MISSIONS`;
 
@@ -1276,193 +1372,317 @@
         tasksContainer.innerHTML = `
           <div class="empty-tasks-box" style="grid-column: 1 / -1;">
             <div class="empty-icon">🎮</div>
-            <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 4px;">No Tasks Available Right Now</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Please check back later for exciting new gaming missions and activities.</p>
+            <h3 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 4px;">No Tasks Available Right Now</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Please check again later. Admin will post new permanent missions soon.</p>
           </div>
         `;
         return;
       }
 
-      const vipLevel = Number(userProfile.vipLevel) || 0;
-      const vipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
-      const dailyLimit = getVipTaskLimit(vipLevel, vipStatus, userProfile.vipExpiry);
-      const isQuotaFull = completedTaskIdsToday.size >= dailyLimit;
+      const vipLevel = Number(userProfile?.vipLevel) || 0;
+      const vipStatus = (userProfile?.vipStatus || 'inactive').toLowerCase();
+      const dailyLimit = getVipTaskLimit(vipLevel, vipStatus, userProfile?.vipExpiry);
+      const isDailyLimitReached = todayCompletionsList.length >= dailyLimit;
 
       allActiveTasks.forEach((task) => {
-        const isDoneToday = completedTaskIdsToday.has(task.taskId);
-        const taskTime = task.timer ? `${task.timer}s` : 'Instant';
-        const taskReward = task.reward ? `৳${task.reward}` : 'XP Bonus';
+        const remainingCd = getRemainingCooldown(task.taskId);
+        const isOnCooldown = remainingCd > 0;
+        const timerSeconds = task.timerSeconds || task.timer || 30;
+        const rewardText = task.reward !== undefined ? `৳${Number(task.reward).toFixed(2)}` : '৳0.50';
 
         const card = document.createElement('div');
-        card.className = `task-card ${isDoneToday ? 'completed-state' : ''}`;
+        card.className = `task-card ${isOnCooldown ? 'in-cooldown' : ''}`;
+
+        let cdMessage = '';
+        if (isOnCooldown) {
+          const hrs = Math.floor(remainingCd / 3600000);
+          const mins = Math.floor((remainingCd % 3600000) / 60000);
+          cdMessage = `Available again in ${hrs}h ${mins}m`;
+        }
 
         card.innerHTML = `
           <div>
             <div class="task-card-top">
-              <span class="task-type-badge">${escapeHtml(task.type || 'Activity Link')}</span>
+              <span class="task-type-badge">${escapeHtml(task.type || 'Website Link')}</span>
               <span class="task-time-pill">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                <span>${taskTime}</span>
+                <span>${timerSeconds}s</span>
               </span>
             </div>
-            <h3 class="task-title">${escapeHtml(task.title || 'Mission Objective')}</h3>
-            <p class="task-desc">${escapeHtml(task.description || 'Visit the designated task link according to guidelines.')}</p>
+            <h3 class="task-title">${escapeHtml(task.name || task.title || 'Mission Objective')}</h3>
+            <p class="task-desc">${escapeHtml(task.description || 'Visit the designated task destination and explore until timer completes.')}</p>
+            
+            <div class="cooldown-indicator-bar">
+              <span>⏳</span>
+              <span class="cooldown-timer-text">${cdMessage}</span>
+            </div>
           </div>
 
           <div class="task-meta-footer">
             <div class="task-reward-info">
-              <span class="task-reward-label">Task Reward</span>
-              <span class="task-reward-val">${escapeHtml(taskReward)}</span>
+              <span class="task-reward-label">Reward Amount</span>
+              <span class="task-reward-val">${rewardText}</span>
             </div>
-            <button class="btn-start-task" data-id="${task.taskId}" ${isDoneToday || isQuotaFull ? 'disabled' : ''}>
-              <span>${isDoneToday ? 'COMPLETED' : (isQuotaFull ? 'LIMIT REACHED' : 'START TASK')}</span>
+            <button class="btn-start-task" ${isOnCooldown || isDailyLimitReached ? 'disabled' : ''}>
+              <span>${isOnCooldown ? 'COOLDOWN ACTIVE' : (isDailyLimitReached ? 'LIMIT REACHED' : 'START TASK')}</span>
             </button>
           </div>
         `;
 
         const startBtn = card.querySelector('.btn-start-task');
-        if (!isDoneToday && !isQuotaFull) {
-          startBtn.addEventListener('click', () => triggerStartTask(task));
+        if (!isOnCooldown && !isDailyLimitReached) {
+          startBtn.addEventListener('click', () => initiateTaskSession(task));
         }
 
         tasksContainer.appendChild(card);
       });
     }
 
+    // Keep live cooldown timers refreshed every 30 seconds
+    setInterval(() => {
+      if (!activeTaskSession) {
+        renderTasksArena();
+      }
+    }, 30000);
+
     // ------------------------------------------------------------------------
-    // 11. START TASK WORKFLOW & TIMER SIMULATION
+    // TASK SESSION INITIATION (OPENS URL + STARTS TIMER)
     // ------------------------------------------------------------------------
-    function triggerStartTask(task) {
-      const vipLevel = Number(userProfile.vipLevel) || 0;
-      const vipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
-      const dailyLimit = getVipTaskLimit(vipLevel, vipStatus, userProfile.vipExpiry);
-
-      if (completedTaskIdsToday.size >= dailyLimit) {
-        alert('Daily task limit reached. Come back tomorrow for more tasks!');
+    function initiateTaskSession(task) {
+      if (activeTaskSession) {
+        alert('You already have a mission session in progress.');
         return;
       }
 
-      if (completedTaskIdsToday.has(task.taskId)) {
-        alert('You have already completed this task today.');
+      // 1. Check 24-hour cooldown
+      const remainingCd = getRemainingCooldown(task.taskId);
+      if (remainingCd > 0) {
+        alert('This task is currently on 24-hour cooldown for your account.');
         return;
       }
 
-      if (!task.url) {
-        alert('Invalid task destination URL.');
+      // 2. Check Daily limit
+      const vipLevel = Number(userProfile?.vipLevel) || 0;
+      const vipStatus = (userProfile?.vipStatus || 'inactive').toLowerCase();
+      const dailyLimit = getVipTaskLimit(vipLevel, vipStatus, userProfile?.vipExpiry);
+      if (todayCompletionsList.length >= dailyLimit) {
+        alert('You have reached your total daily task limit for today.');
         return;
       }
 
-      currentActiveTask = task;
-      timerSecondsLeft = parseInt(task.timer, 10) || 15;
+      const timerDuration = parseInt(task.timerSeconds || task.timer, 10) || 30;
 
-      // 1. Open destination safely in a new browser tab
-      window.open(task.url, '_blank', 'noopener,noreferrer');
+      // 3. Open Legitimate Task Destination in a new tab
+      if (task.url) {
+        window.open(task.url, '_blank', 'noopener,noreferrer');
+      }
 
-      // 2. Open task countdown modal
+      // 4. Create active task session
+      activeTaskSession = {
+        taskId: task.taskId,
+        uid: currentUser.uid,
+        task: task,
+        startedAt: Date.now(),
+        requiredSeconds: timerDuration,
+        secondsRemaining: timerDuration
+      };
+
+      // 5. Open Modal & Start Live Countdown
       modalTaskTypeTag.textContent = task.type || 'WEBSITE LINK';
-      modalTaskTitle.textContent = task.title || 'Mission Progress';
-      modalCountdownDigits.textContent = timerSecondsLeft;
+      modalTaskTitle.textContent = task.name || task.title || 'Mission in Progress';
+      modalCountdownDigits.textContent = timerDuration;
       btnCompleteTask.disabled = true;
-      btnCompleteTask.textContent = `WAIT (${timerSecondsLeft}s)`;
+      btnCompleteTask.textContent = `WAIT (${timerDuration}s)`;
       taskTimerModal.classList.add('open');
 
-      // 3. Start Timer
       clearInterval(countdownInterval);
       countdownInterval = setInterval(() => {
-        timerSecondsLeft--;
-        modalCountdownDigits.textContent = timerSecondsLeft;
-        btnCompleteTask.textContent = `WAIT (${timerSecondsLeft}s)`;
+        if (!activeTaskSession) return;
 
-        if (timerSecondsLeft <= 0) {
+        // Accurate time calculation using elapsed timestamp
+        const elapsed = Math.floor((Date.now() - activeTaskSession.startedAt) / 1000);
+        const remaining = Math.max(0, activeTaskSession.requiredSeconds - elapsed);
+        activeTaskSession.secondsRemaining = remaining;
+        modalCountdownDigits.textContent = remaining;
+
+        if (remaining > 0) {
+          btnCompleteTask.textContent = `WAIT (${remaining}s)`;
+        } else {
           clearInterval(countdownInterval);
           btnCompleteTask.disabled = false;
-          btnCompleteTask.textContent = 'COMPLETE TASK';
-          modalCountdownDigits.textContent = '0';
+          btnCompleteTask.textContent = `CLAIM ${task.reward !== undefined ? '৳' + Number(task.reward).toFixed(2) : 'REWARD'}`;
         }
       }, 1000);
     }
 
     // ------------------------------------------------------------------------
-    // 12. TASK COMPLETION & SUBMISSION TO REALTIME DATABASE
+    // EARLY EXIT = CANCEL (NO REWARD, NO 24H COOLDOWN)
+    // ------------------------------------------------------------------------
+    function cancelActiveTaskSession() {
+      if (!activeTaskSession) return;
+
+      clearInterval(countdownInterval);
+      activeTaskSession = null;
+      taskTimerModal.classList.remove('open');
+
+      // Cancellation feedback
+      showToast('Task Cancelled: You left the task before the required time was completed.');
+      renderTasksArena();
+    }
+
+    btnCancelTask.addEventListener('click', cancelActiveTaskSession);
+
+    // ------------------------------------------------------------------------
+    // COMPLETION & REWARD (AFTER FULL TIMER ONLY)
     // ------------------------------------------------------------------------
     btnCompleteTask.addEventListener('click', async () => {
-      if (!currentActiveTask) return;
+      if (!activeTaskSession || isSubmitting) return;
 
+      const elapsed = Math.floor((Date.now() - activeTaskSession.startedAt) / 1000);
+      if (elapsed < activeTaskSession.requiredSeconds - 1) {
+        alert('Please finish the remaining timer before claiming reward.');
+        return;
+      }
+
+      isSubmitting = true;
       btnCompleteTask.disabled = true;
-      btnCompleteTask.textContent = 'RECORDING...';
+      btnCompleteTask.textContent = 'VERIFYING...';
 
       try {
-        // Record task completion in /taskCompletions/{uid}/{completionId}
-        const completionRef = push(ref(database, `taskCompletions/${currentUser.uid}`));
-        const completionRecord = {
-          taskId: currentActiveTask.taskId,
-          date: todayDateString,
-          completedAt: Date.now(),
-          type: currentActiveTask.type || 'link',
-          title: currentActiveTask.title || 'Task',
-          rewardRef: currentActiveTask.reward || 0,
+        const taskId = activeTaskSession.taskId;
+        const taskObj = activeTaskSession.task;
+        const reward = parseFloat(taskObj.reward || 0);
+        const now = Date.now();
+
+        // 1. Anti-Cheat: Re-verify cooldown in Realtime Database before awarding
+        const cdSnap = await get(ref(database, `taskCooldowns/${currentUser.uid}/${taskId}`));
+        if (cdSnap.exists()) {
+          const lastTs = extractTimestamp(cdSnap.val().lastCompletedAt);
+          if (now - lastTs < COOLDOWN_24H_MS) {
+            alert('This task is already in 24-hour cooldown.');
+            cancelActiveTaskSession();
+            isSubmitting = false;
+            return;
+          }
+        }
+
+        // 2. Anti-Cheat: Re-verify task is still active
+        const taskSnap = await get(ref(database, `tasks/${taskId}`));
+        if (!taskSnap.exists()) {
+          alert('Task no longer exists.');
+          cancelActiveTaskSession();
+          isSubmitting = false;
+          return;
+        }
+
+        // 3. Record task completion in /taskCompletions/{uid}/{completionId}
+        const compRef = push(ref(database, `taskCompletions/${currentUser.uid}`));
+        await set(compRef, {
+          taskId: taskId,
+          uid: currentUser.uid,
+          title: taskObj.name || taskObj.title || 'Mission',
+          startedAt: activeTaskSession.startedAt,
+          completedAt: now,
+          reward: reward,
+          timerSeconds: activeTaskSession.requiredSeconds,
           status: 'completed'
-        };
+        });
 
-        await set(completionRef, completionRecord);
+        // 4. Record 24-hour cooldown in /taskCooldowns/{uid}/{taskId}
+        await set(ref(database, `taskCooldowns/${currentUser.uid}/${taskId}`), {
+          lastCompletedAt: now
+        });
 
-        // Close modal
-        closeTaskModal();
+        // 5. Update user's wallet fields: balance, totalEarnings, tasksCompletedToday
+        const curBal = Number(userProfile?.balance || 0);
+        const curEarnings = Number(userProfile?.totalEarnings || 0);
+        const curDoneToday = Number(userProfile?.tasksCompletedToday || 0);
 
-        alert('Mission Completed Successfully! Your completion record has been updated.');
+        await update(ref(database, `users/${currentUser.uid}`), {
+          balance: curBal + reward,
+          totalEarnings: curEarnings + reward,
+          tasksCompletedToday: curDoneToday + 1,
+          lastTaskDate: now
+        });
+
+        // 6. Record transaction in /transactions/{uid}
+        const txRef = push(ref(database, `transactions/${currentUser.uid}`));
+        await set(txRef, {
+          type: "task_reward",
+          amount: reward,
+          taskId: taskId,
+          taskName: taskObj.name || taskObj.title || 'Mission',
+          status: "completed",
+          createdAt: now
+        });
+
+        // Clean up session
+        clearInterval(countdownInterval);
+        activeTaskSession = null;
+        taskTimerModal.classList.remove('open');
+
+        showToast(`Mission Completed! ৳${reward.toFixed(2)} credited. Same task on 24h cooldown.`);
       } catch (err) {
-        console.error('Task submission error:', err);
-        alert('Failed to register task completion. Please check your internet connection.');
+        console.error('Task completion error:', err);
+        alert('Failed to record completion. Please check your network connection.');
         btnCompleteTask.disabled = false;
-        btnCompleteTask.textContent = 'COMPLETE TASK';
+        btnCompleteTask.textContent = 'CLAIM REWARD';
+      } finally {
+        isSubmitting = false;
       }
     });
 
-    function closeTaskModal() {
-      clearInterval(countdownInterval);
-      taskTimerModal.classList.remove('open');
-      currentActiveTask = null;
-    }
-
-    btnCancelTask.addEventListener('click', closeTaskModal);
-
     // ------------------------------------------------------------------------
-    // 13. RENDER TODAY'S ACTIVITY LOG
+    // RENDER TODAY'S COMPLETED MISSIONS
     // ------------------------------------------------------------------------
     function renderActivityLog() {
       activityContainer.innerHTML = '';
 
-      if (todayCompletionRecords.length === 0) {
+      if (todayCompletionsList.length === 0) {
         activityContainer.innerHTML = `
-          <div style="font-size: 0.82rem; color: var(--text-dim); text-align: center; padding: 1rem 0;">
+          <div style="font-size: 0.82rem; color: var(--text-dim); text-align: center; padding: 1.25rem 0;">
             No missions completed today yet.
           </div>
         `;
         return;
       }
 
-      todayCompletionRecords.forEach((item) => {
-        const timeStr = new Date(item.completedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      // Sort newest first
+      todayCompletionsList.sort((a, b) => extractTimestamp(b.completedAt) - extractTimestamp(a.completedAt));
+
+      todayCompletionsList.forEach((item) => {
+        const timeStr = new Date(extractTimestamp(item.completedAt)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const rew = Number(item.reward || 0).toFixed(2);
         const row = document.createElement('div');
         row.className = 'activity-row-item';
         row.innerHTML = `
           <div class="act-left">
-            <span class="act-status-badge completed">Done</span>
-            <span style="font-weight: 700; color: #fff;">${escapeHtml(item.title || 'Game Mission')}</span>
+            <span class="act-status-badge">Done</span>
+            <span style="font-weight: 700; color: #fff;">${escapeHtml(item.title || 'Mission')}</span>
           </div>
-          <span style="font-size: 0.72rem; color: var(--text-dim);">${timeStr}</span>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <strong style="color:var(--gold-primary); font-family:monospace;">+৳${rew}</strong>
+            <span style="font-size: 0.72rem; color: var(--text-dim);">${timeStr}</span>
+          </div>
         `;
         activityContainer.appendChild(row);
       });
     }
 
     // ------------------------------------------------------------------------
-    // 14. LOGOUT & UTILITIES
+    // DATE & UTILITIES
     // ------------------------------------------------------------------------
-    btnBlockedLogout.addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = 'login.html';
-    });
+    function extractTimestamp(val) {
+      if (!val) return 0;
+      if (typeof val === 'number') return val < 1e11 ? val * 1000 : val;
+      const parsed = new Date(val).getTime();
+      return isNaN(parsed) ? 0 : parsed;
+    }
+
+    function isToday(ts) {
+      if (!ts) return false;
+      return new Date(ts).toDateString() === new Date().toDateString();
+    }
 
     function escapeHtml(text) {
       if (!text) return '';
