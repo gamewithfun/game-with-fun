@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Admin Dashboard | THE GAME WITH FUN</title>
+  <meta name="description" content="Official administrative management control center for THE GAME WITH FUN entertainment platform.">
+
+  <style>
+    /* ==========================================================================
+       ADMIN ULTRA-PREMIUM CYBER/DARK DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: #0a0e17;
+      --bg-card: rgba(14, 19, 32, 0.78);
+      --bg-card-hover: rgba(20, 27, 46, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(245, 158, 11, 0.35);
+      --border-cyan: rgba(0, 240, 255, 0.25);
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
+
+      --cyan-neon: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --ruby-neon: #f43f5e;
+
+      --text-white: #ffffff;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 10% 5%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 15%, rgba(245, 158, 11, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 50% 60%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
+      background-attachment: fixed;
+      padding-bottom: 95px; /* Room for mobile fixed bottom nav */
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 2.5rem;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ==========================================================================
+       SESSION RESTORING OVERLAY
+       ========================================================================== */
+    .auth-resolving-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: opacity 0.35s var(--smooth-ease);
+    }
+
+    .auth-resolving-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .auth-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(245, 158, 11, 0.15);
+      border-top-color: var(--gold-primary);
+      border-radius: 50%;
+      animation: spinSpinner 0.8s linear infinite;
+    }
+
+    @keyframes spinSpinner {
+      to { transform: rotate(360deg); }
+    }
+
+    .auth-loading-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       ACCESS DENIED SCREEN (SHOWN IF USER IS NOT IN ADMIN_UIDS)
+       ========================================================================== */
+    .access-denied-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #06080d;
+      z-index: 5000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .denied-card {
+      background: #0d1222;
+      border: 1px solid var(--ruby-neon);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.75rem;
+      max-width: 460px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .denied-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid var(--ruby-neon);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      color: var(--ruby-neon);
+    }
+
+    .denied-uid-box {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--cyan-neon);
+      word-break: break-all;
+      user-select: all;
+    }
+
+    /* ==========================================================================
+       TOP APP HEADER
+       ========================================================================== */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 13, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(0, 240, 255, 0.2));
+      border: 1px solid var(--gold-glow);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      color: var(--gold-primary);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+    }
+
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle-tag {
+      font-size: 0.65rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-pill {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid var(--border-cyan);
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--cyan-neon);
+    }
+
+    @media (min-width: 640px) {
+      .admin-pill {
+        display: inline-flex;
+      }
+    }
+
+    .btn-header-action {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-refresh {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .btn-refresh:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+    }
+
+    .btn-logout {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: var(--ruby-neon);
+    }
+
+    .btn-logout:hover {
+      background: var(--ruby-neon);
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       PAGE BANNER
+       ========================================================================== */
+    .page-banner {
+      padding: 1.5rem 0 0.8rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       ERROR BANNER
+       ========================================================================== */
+    .error-banner {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ==========================================================================
+       10 OVERVIEW STATISTICS TILES (GRID)
+       ========================================================================== */
+    .stats-master-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .stats-master-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .stats-master-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .stat-tile {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.85rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: all 0.2s var(--smooth-ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-tile:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .stat-num {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      font-family: monospace;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ==========================================================================
+       QUICK ACTIONS BAR
+       ========================================================================== */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .quick-actions-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .action-card-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.25s var(--smooth-ease);
+    }
+
+    .action-card-btn:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--cyan-neon);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.12);
+    }
+
+    .action-icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .action-text-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .action-main-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .action-sub-title {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+    }
+
+    /* ==========================================================================
+       DATA SECTIONS & GLASS TABLES
+       ========================================================================== */
+    .section-wrap {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ui-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .data-table th {
+      padding: 0.75rem 0.85rem;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .data-table td {
+      padding: 0.8rem 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    .data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      font-size: 0.65rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    .status-badge.active,
+    .status-badge.completed,
+    .status-badge.approved,
+    .status-badge.paid {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--emerald-neon);
+    }
+
+    .status-badge.pending,
+    .status-badge.processing {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--gold-primary);
+    }
+
+    .status-badge.blocked,
+    .status-badge.suspended,
+    .status-badge.rejected {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: var(--ruby-neon);
+    }
+
+    .empty-placeholder {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.84rem;
+    }
+
+    /* Announcements List */
+    .announcements-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .announcements-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .ann-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-left: 3px solid var(--gold-primary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ann-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ann-title-text {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .ann-body-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .ann-footer-date {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       MODAL: CONFIRM LOGOUT
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 12, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      z-index: 6000;
+      opacity: 0;
+      transition: opacity 0.3s var(--smooth-ease);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 420px;
+      background: #0d1222;
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.6rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+      text-align: center;
+      transform: scale(0.94);
+      transition: transform 0.3s var(--smooth-ease);
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    /* ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== */
+    .bottom-nav-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @media (min-width: 1024px) {
+      .bottom-nav-fixed {
+        display: none;
+      }
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+    }
+
+    .nav-tab-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--gold-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       SESSION RESTORING OVERLAY
+       ========================================================================== -->
+  <div id="authCheckingOverlay" class="auth-resolving-overlay">
+    <div class="auth-spinner"></div>
+    <div class="auth-loading-text">AUTHENTICATING ADMIN...</div>
+  </div>
+
+  <!-- ==========================================================================
+       ACCESS DENIED SCREEN
+       ========================================================================== -->
+  <div id="accessDeniedScreen" class="access-denied-screen">
+    <div class="denied-card">
+      <div class="denied-icon">🚫</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff;">Access Denied</h2>
+      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5;">
+        You are authenticated, but your user ID is not registered in the authorized <strong>ADMIN_UIDS</strong> list.
+      </p>
+      
+      <div style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800;">Your User UID:</div>
+      <div class="denied-uid-box" id="deniedUserUidText">Loading UID...</div>
+
+      <a href="dashboard.html" style="width: 100%; padding: 0.85rem; border-radius: var(--radius-sm); background: var(--cyan-gradient); color: #04060a; font-weight: 800; font-size: 0.84rem; text-transform: uppercase;">
+        Return to Player Portal
+      </a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOP APP HEADER
+       ========================================================================== -->
+  <header class="top-header">
+    <div class="container header-content">
+      <div class="brand-meta">
+        <div class="brand-logo-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+            <line x1="6" y1="12" x2="10" y2="12"></line>
+            <line x1="8" y1="10" x2="8" y2="14"></line>
+            <circle cx="15" cy="12" r="1"></circle>
+            <circle cx="18" cy="10" r="1"></circle>
+          </svg>
+        </div>
+        <div class="brand-title-wrap">
+          <span class="brand-title">THE GAME WITH FUN</span>
+          <span class="brand-subtitle-tag">ADMIN CONTROL</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="admin-pill" id="adminEmailBadge">
+          <span>🛡️</span>
+          <span id="adminIdentifierText">admin</span>
+        </div>
+
+        <button type="button" id="btnRefreshData" class="btn-header-action btn-refresh" aria-label="Refresh Data">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+          <span>Sync</span>
+        </button>
+
+        <button type="button" id="btnOpenLogoutModal" class="btn-header-action btn-logout" aria-label="Admin Logout">
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-banner">
+      <h1 class="page-title">
+        <span>⚡</span>
+        <span>ADMIN DASHBOARD</span>
+      </h1>
+      <p class="page-subtitle">Real-time system telemetry, user audits, payout oversight, and task performance.</p>
+    </div>
+
+    <!-- Error Banner -->
+    <div id="errorBanner" class="error-banner">
+      <span style="font-size: 0.8rem; color: #fca5a5;">Failed to synchronize telemetry records. Check network connection.</span>
+      <button id="btnRetrySync" style="background: rgba(255,255,255,0.1); color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.72rem; font-weight: 800;">RETRY</button>
+    </div>
+
+    <!-- 1. OVERVIEW STATISTICS TILES (10 Dynamic Telemetry Metrics) -->
+    <div class="stats-master-grid">
+      <div class="stat-tile">
+        <span class="stat-num" id="statTotalUsers">0</span>
+        <span class="stat-label">Total Users</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statActiveUsers" style="color: var(--emerald-neon);">0</span>
+        <span class="stat-label">Active Users</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statBlockedUsers" style="color: var(--ruby-neon);">0</span>
+        <span class="stat-label">Blocked Users</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statPendingVip" style="color: var(--gold-primary);">0</span>
+        <span class="stat-label">Pending VIP</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statActiveVip" style="color: var(--gold-primary);">0</span>
+        <span class="stat-label">Active VIPs</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statTaskCompletions" style="color: var(--cyan-neon);">0</span>
+        <span class="stat-label">Task Completions</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statPendingWithdrawals" style="color: var(--gold-primary);">0</span>
+        <span class="stat-label">Pending Payouts</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statTotalWithdrawalAmount" style="color: #fff;">৳0.00</span>
+        <span class="stat-label">Total Withdrawn</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statTotalReferrals" style="color: var(--purple-neon);">0</span>
+        <span class="stat-label">Total Referrals</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num" id="statTotalEarnings" style="color: var(--cyan-neon);">৳0.00</span>
+        <span class="stat-label">Platform Assets</span>
+      </div>
+    </div>
+
+    <!-- 2. QUICK ACTIONS GRID -->
+    <div class="quick-actions-grid">
+      <a href="admin-users.html" class="action-card-btn">
+        <div class="action-icon-circle">👥</div>
+        <div class="action-text-info">
+          <span class="action-main-title">Users Control</span>
+          <span class="action-sub-title">admin-users.html</span>
+        </div>
+      </a>
+      <a href="admin-tasks.html" class="action-card-btn">
+        <div class="action-icon-circle">🎮</div>
+        <div class="action-text-info">
+          <span class="action-main-title">Tasks Manager</span>
+          <span class="action-sub-title">admin-tasks.html</span>
+        </div>
+      </a>
+      <a href="admin-withdraw.html" class="action-card-btn">
+        <div class="action-icon-circle">💸</div>
+        <div class="action-text-info">
+          <span class="action-main-title">Withdrawals</span>
+          <span class="action-sub-title">admin-withdraw.html</span>
+        </div>
+      </a>
+      <a href="dashboard.html" class="action-card-btn">
+        <div class="action-icon-circle">🌐</div>
+        <div class="action-text-info">
+          <span class="action-main-title">Main Portal</span>
+          <span class="action-sub-title">dashboard.html</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 3. RECENT VIP ORDERS -->
+    <div class="section-wrap">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <span>👑</span>
+          <span>Recent VIP Orders</span>
+        </h2>
+        <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">LIVE STREAM</span>
+      </div>
+      <div class="ui-panel">
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>UID</th>
+                <th>VIP Tier</th>
+                <th>Method</th>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="tableVipOrdersBody">
+              <tr><td colspan="8" class="empty-placeholder">Loading VIP orders...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. RECENT WITHDRAWALS -->
+    <div class="section-wrap">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <span>💸</span>
+          <span>Recent Withdrawals</span>
+        </h2>
+        <span style="font-size: 0.72rem; color: var(--ruby-neon); font-weight: 800;">PAYOUT AUDIT</span>
+      </div>
+      <div class="ui-panel">
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>UID</th>
+                <th>Method</th>
+                <th>Account</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Request Date</th>
+              </tr>
+            </thead>
+            <tbody id="tableWithdrawalsBody">
+              <tr><td colspan="7" class="empty-placeholder">Loading withdrawals...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. RECENT REGISTERED USERS -->
+    <div class="section-wrap">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <span>👤</span>
+          <span>Recent User Registrations</span>
+        </h2>
+        <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">MEMBER ROSTER</span>
+      </div>
+      <div class="ui-panel">
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Referral Code</th>
+                <th>VIP Rank</th>
+                <th>Status</th>
+                <th>Join Date</th>
+              </tr>
+            </thead>
+            <tbody id="tableUsersBody">
+              <tr><td colspan="6" class="empty-placeholder">Loading users roster...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SYSTEM ANNOUNCEMENTS -->
+    <div class="section-wrap">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <span>📢</span>
+          <span>Platform Announcements</span>
+        </h2>
+        <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 800;">BROADCASTS</span>
+      </div>
+      <div class="ui-panel">
+        <div id="announcementsList" class="announcements-grid">
+          <div class="empty-placeholder" style="grid-column: 1 / -1;">No announcements active.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       LOGOUT CONFIRMATION MODAL
+       ========================================================================== -->
+  <div id="logoutModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚪</div>
+      <h3 style="font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Confirm Logout</h3>
+      <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.45;">
+        Are you sure you want to end your administrator session?
+      </p>
+      <div style="display: flex; gap: 10px;">
+        <button type="button" id="btnCancelLogout" style="flex: 1; padding: 0.8rem; background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
+          Cancel
+        </button>
+        <button type="button" id="btnConfirmLogout" style="flex: 1; padding: 0.8rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== -->
+  <nav class="bottom-nav-fixed">
+    <a href="admin.html" class="nav-tab-btn active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="admin-users.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      <span>Users</span>
+    </a>
+    <a href="admin-tasks.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <span>Tasks</span>
+    </a>
+    <a href="admin-withdraw.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+      <span>Payouts</span>
+    </a>
+    <a href="dashboard.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon></svg>
+      <span>Portal</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       FIREBASE INTEGRATION & ADMIN DASHBOARD ENGINE
+       ========================================================================== -->
+  <script type="module">
+    // ------------------------------------------------------------------------
+    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
+    // ------------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // ------------------------------------------------------------------------
+    // 2. CONFIGURABLE ADMIN ACCESS LIST
+    // Insert your authorized Firebase Authentication UID here.
+    // ------------------------------------------------------------------------
+    const ADMIN_UIDS = [
+      "YOUR_ADMIN_UID_HERE"
+    ];
+
+    // ------------------------------------------------------------------------
+    // 3. FIREBASE CONFIGURATION
+    // ------------------------------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
+      authDomain: "game-with-fun-a1988.firebaseapp.com",
+      databaseURL: "https://game-with-fun-a1988-default-rtdb.firebaseio.com",
+      projectId: "game-with-fun-a1988",
+      storageBucket: "game-with-fun-a1988.firebasestorage.app",
+      messagingSenderId: "226037846599",
+      appId: "1:226037846599:web:415dc67b9d06007646d762"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // ------------------------------------------------------------------------
+    // 4. UI HOOKS
+    // ------------------------------------------------------------------------
+    const authCheckingOverlay = document.getElementById('authCheckingOverlay');
+    const accessDeniedScreen = document.getElementById('accessDeniedScreen');
+    const deniedUserUidText = document.getElementById('deniedUserUidText');
+    const adminIdentifierText = document.getElementById('adminIdentifierText');
+    const errorBanner = document.getElementById('errorBanner');
+    const btnRetrySync = document.getElementById('btnRetrySync');
+    const btnRefreshData = document.getElementById('btnRefreshData');
+
+    // Modals
+    const logoutModal = document.getElementById('logoutModal');
+    const btnOpenLogoutModal = document.getElementById('btnOpenLogoutModal');
+    const btnCancelLogout = document.getElementById('btnCancelLogout');
+    const btnConfirmLogout = document.getElementById('btnConfirmLogout');
+
+    // Overview Stats
+    const statTotalUsers = document.getElementById('statTotalUsers');
+    const statActiveUsers = document.getElementById('statActiveUsers');
+    const statBlockedUsers = document.getElementById('statBlockedUsers');
+    const statPendingVip = document.getElementById('statPendingVip');
+    const statActiveVip = document.getElementById('statActiveVip');
+    const statTaskCompletions = document.getElementById('statTaskCompletions');
+    const statPendingWithdrawals = document.getElementById('statPendingWithdrawals');
+    const statTotalWithdrawalAmount = document.getElementById('statTotalWithdrawalAmount');
+    const statTotalReferrals = document.getElementById('statTotalReferrals');
+    const statTotalEarnings = document.getElementById('statTotalEarnings');
+
+    // Tables & Feeds
+    const tableVipOrdersBody = document.getElementById('tableVipOrdersBody');
+    const tableWithdrawalsBody = document.getElementById('tableWithdrawalsBody');
+    const tableUsersBody = document.getElementById('tableUsersBody');
+    const announcementsList = document.getElementById('announcementsList');
+
+    // ------------------------------------------------------------------------
+    // 5. ASYNC AUTHENTICATION OBSERVATION & ACCESS CONTROL
+    // ------------------------------------------------------------------------
+    let currentAdminUser = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentAdminUser = user;
+        
+        // Verify against ADMIN_UIDS list
+        if (!ADMIN_UIDS.includes(user.uid)) {
+          // Denied access: display notification, do NOT log out automatically
+          hideOverlay();
+          deniedUserUidText.textContent = user.uid;
+          accessDeniedScreen.style.display = 'flex';
+          return;
+        }
+
+        // Admin Access Granted
+        adminIdentifierText.textContent = user.email || user.uid.slice(0, 8);
+        hideOverlay();
+        initAdminTelemetry();
+
+      } else {
+        // Only redirect to login when Firebase Auth confirms that there is no session
+        window.location.href = "login.html";
+      }
+    });
+
+    function hideOverlay() {
+      authCheckingOverlay.classList.add('hidden');
+      setTimeout(() => {
+        authCheckingOverlay.style.display = 'none';
+      }, 400);
+    }
+
+    // ------------------------------------------------------------------------
+    // 6. INITIALIZE ADMIN TELEMETRY STREAMS
+    // ------------------------------------------------------------------------
+    function initAdminTelemetry() {
+      errorBanner.style.display = 'none';
+
+      // 1. Users Telemetry (/users)
+      onValue(ref(database, 'users'), (snapshot) => {
+        let total = 0, active = 0, blocked = 0, activeVip = 0, totalRef = 0, totalEarn = 0;
+        const usersList = [];
+
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((uid) => {
+            const u = data[uid];
+            u.uid = uid;
+            usersList.push(u);
+            total++;
+
+            const status = (u.accountStatus || 'active').toLowerCase();
+            if (status === 'blocked' || status === 'suspended') {
+              blocked++;
+            } else {
+              active++;
+            }
+
+            if ((u.vipStatus || '').toLowerCase() === 'active' && Number(u.vipLevel || 0) > 0) {
+              activeVip++;
+            }
+
+            totalRef += Number(u.referralCount || 0);
+            totalEarn += Number(u.balance || 0);
+          });
+        }
+
+        statTotalUsers.textContent = total;
+        statActiveUsers.textContent = active;
+        statBlockedUsers.textContent = blocked;
+        statActiveVip.textContent = activeVip;
+        statTotalReferrals.textContent = totalRef;
+        statTotalEarnings.textContent = `৳${totalEarn.toFixed(2)}`;
+
+        renderRecentUsers(usersList);
+      }, handleDatabaseError);
+
+      // 2. VIP Orders Telemetry (/vipOrders)
+      onValue(ref(database, 'vipOrders'), (snapshot) => {
+        let pending = 0;
+        const orders = [];
+
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((id) => {
+            const ord = data[id];
+            ord.id = id;
+            orders.push(ord);
+            if ((ord.status || '').toLowerCase() === 'pending') {
+              pending++;
+            }
+          });
+        }
+
+        statPendingVip.textContent = pending;
+        renderRecentVipOrders(orders);
+      }, handleDatabaseError);
+
+      // 3. Withdrawals Telemetry (/withdrawals)
+      onValue(ref(database, 'withdrawals'), (snapshot) => {
+        let pendingWith = 0, totalWithdrawn = 0;
+        const withList = [];
+
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((id) => {
+            const w = data[id];
+            w.id = id;
+            withList.push(w);
+
+            const st = (w.status || '').toLowerCase();
+            if (st === 'pending') {
+              pendingWith++;
+            }
+            if (st === 'paid' || st === 'approved' || st === 'completed') {
+              totalWithdrawn += Number(w.amount || 0);
+            }
+          });
+        }
+
+        statPendingWithdrawals.textContent = pendingWith;
+        statTotalWithdrawalAmount.textContent = `৳${totalWithdrawn.toFixed(2)}`;
+        renderRecentWithdrawals(withList);
+      }, handleDatabaseError);
+
+      // 4. Task Completions Telemetry (/taskCompletions)
+      onValue(ref(database, 'taskCompletions'), (snapshot) => {
+        let count = 0;
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((userKey) => {
+            const userComps = data[userKey];
+            if (typeof userComps === 'object') {
+              count += Object.keys(userComps).length;
+            }
+          });
+        }
+        statTaskCompletions.textContent = count;
+      }, handleDatabaseError);
+
+      // 5. Announcements (/announcements)
+      onValue(ref(database, 'announcements'), (snapshot) => {
+        const annList = [];
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          Object.keys(data).forEach((k) => {
+            const ann = data[k];
+            ann.id = k;
+            annList.push(ann);
+          });
+        }
+        renderAnnouncements(annList);
+      }, handleDatabaseError);
+    }
+
+    function handleDatabaseError(err) {
+      console.warn('Realtime database sync notice:', err);
+      errorBanner.style.display = 'flex';
+    }
+
+    btnRetrySync.addEventListener('click', initAdminTelemetry);
+    btnRefreshData.addEventListener('click', () => {
+      initAdminTelemetry();
+    });
+
+    // ------------------------------------------------------------------------
+    // 7. RENDER TELEMETRY TABLES
+    // ------------------------------------------------------------------------
+    function renderRecentVipOrders(orders) {
+      tableVipOrdersBody.innerHTML = '';
+      if (orders.length === 0) {
+        tableVipOrdersBody.innerHTML = '<tr><td colspan="8" class="empty-placeholder">No VIP orders recorded.</td></tr>';
+        return;
+      }
+
+      orders.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      orders.slice(0, 6).forEach((ord) => {
+        const status = (ord.status || 'pending').toLowerCase();
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(ord.username || 'User')}</strong></td>
+          <td><span style="font-family:monospace; color:var(--text-dim);">${maskIdentifier(ord.userId || ord.uid)}</span></td>
+          <td><span class="status-badge" style="background:rgba(245,158,11,0.1); color:var(--gold-primary);">VIP ${ord.vipLevel || '1'}</span></td>
+          <td>${escapeHtml(ord.paymentMethod || 'bKash')}</td>
+          <td><span style="font-family:monospace; color:var(--cyan-neon);">${escapeHtml(maskTrx(ord.transactionId))}</span></td>
+          <td><strong>৳${Number(ord.price || ord.amount || 0).toFixed(2)}</strong></td>
+          <td><span class="status-badge ${status}">${status}</span></td>
+          <td>${formatDate(ord.createdAt)}</td>
+        `;
+        tableVipOrdersBody.appendChild(tr);
+      });
+    }
+
+    function renderRecentWithdrawals(list) {
+      tableWithdrawalsBody.innerHTML = '';
+      if (list.length === 0) {
+        tableWithdrawalsBody.innerHTML = '<tr><td colspan="7" class="empty-placeholder">No withdrawal requests found.</td></tr>';
+        return;
+      }
+
+      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      list.slice(0, 6).forEach((w) => {
+        const status = (w.status || 'pending').toLowerCase();
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(w.username || 'Player')}</strong></td>
+          <td><span style="font-family:monospace; color:var(--text-dim);">${maskIdentifier(w.uid)}</span></td>
+          <td>${escapeHtml(w.method || 'bKash')}</td>
+          <td><span style="font-family:monospace;">${maskPhone(w.accountNumber)}</span></td>
+          <td><strong style="color:var(--gold-primary);">৳${Number(w.amount || 0).toFixed(2)}</strong></td>
+          <td><span class="status-badge ${status}">${status}</span></td>
+          <td>${formatDate(w.createdAt)}</td>
+        `;
+        tableWithdrawalsBody.appendChild(tr);
+      });
+    }
+
+    function renderRecentUsers(users) {
+      tableUsersBody.innerHTML = '';
+      if (users.length === 0) {
+        tableUsersBody.innerHTML = '<tr><td colspan="6" class="empty-placeholder">No registered users in database.</td></tr>';
+        return;
+      }
+
+      users.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      users.slice(0, 6).forEach((u) => {
+        const status = (u.accountStatus || 'active').toLowerCase();
+        const vip = Number(u.vipLevel || 0);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(u.username || 'User')}</strong></td>
+          <td>${escapeHtml(u.email || 'N/A')}</td>
+          <td><span style="font-family:monospace; color:var(--cyan-neon);">${escapeHtml(u.referralCode || 'None')}</span></td>
+          <td>${vip > 0 ? `VIP ${vip}` : 'Free'}</td>
+          <td><span class="status-badge ${status}">${status}</span></td>
+          <td>${formatDate(u.createdAt)}</td>
+        `;
+        tableUsersBody.appendChild(tr);
+      });
+    }
+
+    function renderAnnouncements(list) {
+      announcementsList.innerHTML = '';
+      if (list.length === 0) {
+        announcementsList.innerHTML = '<div class="empty-placeholder" style="grid-column: 1 / -1;">No active system announcements.</div>';
+        return;
+      }
+
+      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      list.slice(0, 4).forEach((ann) => {
+        const div = document.createElement('div');
+        div.className = 'ann-card';
+        div.innerHTML = `
+          <div class="ann-head">
+            <span class="ann-title-text">${escapeHtml(ann.title || 'Notice')}</span>
+            <span class="status-badge active">${escapeHtml(ann.status || 'Active')}</span>
+          </div>
+          <div class="ann-body-text">${escapeHtml(ann.message || 'No description provided.')}</div>
+          <div class="ann-footer-date">${formatDate(ann.createdAt || ann.date)}</div>
+        `;
+        announcementsList.appendChild(div);
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // 8. LOGOUT CONFIRMATION MODAL & HANDLERS
+    // ------------------------------------------------------------------------
+    btnOpenLogoutModal.addEventListener('click', () => {
+      logoutModal.classList.add('open');
+    });
+
+    btnCancelLogout.addEventListener('click', () => {
+      logoutModal.classList.remove('open');
+    });
+
+    btnConfirmLogout.addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+      } finally {
+        window.location.href = "login.html";
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 9. SECURITY & DATA MASKING HELPERS
+    // ------------------------------------------------------------------------
+    function maskIdentifier(id) {
+      if (!id) return '---';
+      const s = String(id);
+      if (s.length < 8) return s;
+      return s.slice(0, 4) + '...' + s.slice(-4);
+    }
+
+    function maskPhone(phone) {
+      if (!phone) return '---';
+      const s = String(phone).trim();
+      if (s.length < 8) return s;
+      return s.slice(0, 3) + '****' + s.slice(-4);
+    }
+
+    function maskTrx(trx) {
+      if (!trx) return '---';
+      const s = String(trx).trim();
+      if (s.length < 6) return s;
+      return s.slice(0, 3) + '***' + s.slice(-2);
+    }
+
+    function formatDate(val) {
+      if (!val) return '---';
+      try {
+        const d = new Date(val);
+        if (isNaN(d.getTime())) return '---';
+        return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+      } catch {
+        return '---';
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
