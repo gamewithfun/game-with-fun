@@ -346,7 +346,7 @@
       color: var(--text-dim);
     }
 
-    /* Ref Code Quick Card */
+    /* Ref Code Quick Bar */
     .hero-ref-bar {
       background: rgba(0, 240, 255, 0.04);
       border: 1px dashed var(--cyan-neon);
@@ -971,7 +971,7 @@
   </nav>
 
   <!-- ==========================================================================
-       FIREBASE INTEGRATION & CLIENT LOGIC
+       FIREBASE INTEGRATION & CLIENT LOGIC (AUTHENTICATION BUG FIXED)
        ========================================================================== -->
   <script type="module">
     // ------------------------------------------------------------------------
@@ -990,16 +990,16 @@
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     // ------------------------------------------------------------------------
-    // 2. FIREBASE CONFIGURATION (REPLACE WITH YOUR PROJECT CONFIG)
+    // 2. FIREBASE CONFIGURATION
     // ------------------------------------------------------------------------
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-      projectId: "YOUR_PROJECT",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
+      authDomain: "game-with-fun-a1988.firebaseapp.com",
+      databaseURL: "https://game-with-fun-a1988-default-rtdb.firebaseio.com",
+      projectId: "game-with-fun-a1988",
+      storageBucket: "game-with-fun-a1988.firebasestorage.app",
+      messagingSenderId: "226037846599",
+      appId: "1:226037846599:web:415dc67b9d06007646d762"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -1058,22 +1058,10 @@
     let toastTimeout = null;
 
     // ------------------------------------------------------------------------
-    // 5. AUTH STATE LISTENER
+    // 5. ASYNC PROFILE LOADER
     // ------------------------------------------------------------------------
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = 'login.html';
-      } else {
-        currentUser = user;
-        initProfileData();
-      }
-    });
-
-    // ------------------------------------------------------------------------
-    // 6. INITIALIZE DATA STREAM
-    // ------------------------------------------------------------------------
-    function initProfileData() {
-      const userRef = ref(database, `users/${currentUser.uid}`);
+    async function loadUserProfile(uid) {
+      const userRef = ref(database, `users/${uid}`);
       onValue(userRef, (snapshot) => {
         if (!snapshot.exists()) return;
         userProfile = snapshot.val();
@@ -1087,6 +1075,20 @@
         renderProfileUI();
       });
     }
+
+    // ------------------------------------------------------------------------
+    // 6. CORRECT ASYNC AUTH STATE LISTENER (FIXED REDIRECT BUG)
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User session successfully resolved by Firebase Auth
+        currentUser = user;
+        await loadUserProfile(user.uid);
+      } else {
+        // Only redirect after Firebase explicitly confirms no authenticated session exists
+        window.location.replace("login.html");
+      }
+    });
 
     // ------------------------------------------------------------------------
     // 7. RENDER PROFILE UI
@@ -1214,7 +1216,7 @@
       try {
         await signOut(auth);
       } finally {
-        window.location.href = 'login.html';
+        window.location.replace("login.html");
       }
     }
 
