@@ -103,7 +103,48 @@
     }
 
     /* ==========================================================================
-       HEADER BAR
+       SESSION RESTORING OVERLAY (PREVENTS PREMATURE REDIRECT OR FLICKER)
+       ========================================================================== */
+    .auth-resolving-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: opacity 0.35s var(--smooth-ease);
+    }
+
+    .auth-resolving-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .auth-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(0, 240, 255, 0.15);
+      border-top-color: var(--cyan-neon);
+      border-radius: 50%;
+      animation: spinSpinner 0.8s linear infinite;
+    }
+
+    @keyframes spinSpinner {
+      to { transform: rotate(360deg); }
+    }
+
+    .auth-loading-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+    }
+
+    /* ==========================================================================
+       TOP APP HEADER
        ========================================================================== */
     .top-header {
       position: sticky;
@@ -188,6 +229,35 @@
       font-size: 0.86rem;
       color: var(--text-muted);
       margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       ERROR BANNER
+       ========================================================================== */
+    .error-banner {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-retry-action {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .btn-retry-action:hover {
+      background: var(--ruby-neon);
     }
 
     /* ==========================================================================
@@ -419,30 +489,6 @@
       transform: translateY(-1px);
     }
 
-    .btn-danger-logout {
-      width: 100%;
-      padding: 0.95rem;
-      border-radius: var(--radius-md);
-      background: rgba(244, 63, 94, 0.1);
-      border: 1px solid rgba(244, 63, 94, 0.35);
-      color: var(--ruby-neon);
-      font-size: 0.88rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.75px;
-      transition: all 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-danger-logout:hover {
-      background: var(--ruby-neon);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
-    }
-
     /* Privacy Note Box */
     .privacy-box {
       background: rgba(0, 240, 255, 0.03);
@@ -459,7 +505,7 @@
     }
 
     /* ==========================================================================
-       MODALS (PASSWORD, LOGOUT, SUPPORT)
+       MODALS (PASSWORD, SUPPORT)
        ========================================================================== */
     .modal-overlay {
       position: fixed;
@@ -627,6 +673,12 @@
 </head>
 <body>
 
+  <!-- AUTHENTICATION CHECKING OVERLAY (PREVENTS PREMATURE REDIRECT OR FLICKER) -->
+  <div id="authCheckingOverlay" class="auth-resolving-overlay">
+    <div class="auth-spinner"></div>
+    <div class="auth-loading-text">CHECKING ACCOUNT...</div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
   <div id="toastNotification" class="toast-popup" role="status" aria-live="polite">
     <span style="color: var(--cyan-neon);">✓</span>
@@ -664,6 +716,12 @@
         <span>Settings</span>
       </h1>
       <p class="page-subtitle">Manage your account preferences, security options, and device settings.</p>
+    </div>
+
+    <!-- Error Banner (Shown only on real DB connection error, NEVER logs out) -->
+    <div id="errorBanner" class="error-banner">
+      <span style="font-size: 0.8rem; color: #fca5a5;">Unable to synchronize settings right now. Your session remains safe.</span>
+      <button id="btnRetrySync" class="btn-retry-action">RETRY</button>
     </div>
 
     <!-- Content Grid -->
@@ -749,7 +807,7 @@
         </div>
       </div>
 
-      <!-- 3. SECURITY / PASSWORD CONTROLS -->
+      <!-- 3. SECURITY / PASSWORD CONTROLS (NO LOGOUTS) -->
       <div class="ui-card">
         <div class="card-heading">
           <span>Security & Password</span>
@@ -861,21 +919,20 @@
         </div>
       </div>
 
-      <!-- 7 & 8. ACTIONS: LOGOUT & SUPPORT -->
+      <!-- 7. ACCOUNT SUPPORT (NOTICE: NO LOGOUT BUTTON HERE) -->
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
-          <span>Account Actions</span>
-          <span style="font-size: 0.72rem; color: var(--ruby-neon); font-weight: 800;">SENSITIVE</span>
+          <span>Account Support & Inquiries</span>
+          <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">ASSISTANCE</span>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <button type="button" id="btnOpenSupport" class="btn-action-outline" style="border-color: rgba(255,255,255,0.15);">
-            <span>Request Account Support / Closure</span>
-          </button>
-          <button type="button" id="btnOpenLogout" class="btn-danger-logout">
-            <span>LOG OUT OF PLATFORM</span>
-          </button>
-        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+          Need assistance with your profile, dispute review, or requesting account closure? Submit an inquiry to our team.
+        </p>
+
+        <button type="button" id="btnOpenSupport" class="btn-action-outline" style="border-color: rgba(255,255,255,0.18);">
+          <span>Request Account Support / Closure</span>
+        </button>
       </div>
 
     </div>
@@ -901,23 +958,6 @@
           <button type="button" id="btnModalResetEmail" class="btn-action-outline">Send Reset Email Instead</button>
         </div>
       </form>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       MODAL: LOGOUT CONFIRMATION
-       ========================================================================== -->
-  <div id="logoutModal" class="modal-overlay" role="dialog" aria-modal="true">
-    <div class="modal-card" style="text-align: center;">
-      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚪</div>
-      <h3 class="modal-head-title" style="margin-bottom: 0.5rem;">Confirm Logout</h3>
-      <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-        Are you sure you want to log out of your session on THE GAME WITH FUN?
-      </p>
-      <div style="display: flex; gap: 10px;">
-        <button type="button" id="btnCancelLogout" class="btn-action-outline" style="flex: 1;">Cancel</button>
-        <button type="button" id="btnConfirmLogout" class="btn-danger-logout" style="flex: 1; margin: 0;">Logout</button>
-      </div>
     </div>
   </div>
 
@@ -969,7 +1009,7 @@
   </nav>
 
   <!-- ==========================================================================
-       FIREBASE INTEGRATION & CLIENT SCRIPT (AUTHENTICATION FIX APPLIED)
+       FIREBASE INTEGRATION & CLIENT SCRIPT (NO AUTO-LOGOUT, STRICT SESSION GUARD)
        ========================================================================== -->
   <script type="module">
     // ------------------------------------------------------------------------
@@ -979,7 +1019,6 @@
     import { 
       getAuth, 
       onAuthStateChanged, 
-      signOut,
       sendPasswordResetEmail,
       updatePassword
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -1009,6 +1048,10 @@
     // ------------------------------------------------------------------------
     // 3. UI ELEMENT HOOKS
     // ------------------------------------------------------------------------
+    const authCheckingOverlay = document.getElementById('authCheckingOverlay');
+    const errorBanner = document.getElementById('errorBanner');
+    const btnRetrySync = document.getElementById('btnRetrySync');
+
     const valUsername = document.getElementById('valUsername');
     const valEmail = document.getElementById('valEmail');
     const valUidShort = document.getElementById('valUidShort');
@@ -1030,11 +1073,6 @@
     const newPassInput = document.getElementById('newPassInput');
     const btnModalResetEmail = document.getElementById('btnModalResetEmail');
     const btnSendResetEmail = document.getElementById('btnSendResetEmail');
-
-    const logoutModal = document.getElementById('logoutModal');
-    const btnOpenLogout = document.getElementById('btnOpenLogout');
-    const btnCancelLogout = document.getElementById('btnCancelLogout');
-    const btnConfirmLogout = document.getElementById('btnConfirmLogout');
 
     const supportModal = document.getElementById('supportModal');
     const btnOpenSupport = document.getElementById('btnOpenSupport');
@@ -1065,31 +1103,58 @@
     let toastTimeout = null;
 
     // ------------------------------------------------------------------------
-    // 5. ASYNC USER PROFILE LOADER
+    // 5. ASYNC USER PROFILE LOADER (NEVER SIGNS OUT ON DB ERROR)
     // ------------------------------------------------------------------------
     async function loadUserProfile(uid) {
       const userRef = ref(database, `users/${uid}`);
+
       onValue(userRef, (snapshot) => {
-        if (!snapshot.exists()) return;
-        userProfile = snapshot.val();
-        renderSettingsData();
+        errorBanner.style.display = 'none';
+
+        if (snapshot.exists()) {
+          userProfile = snapshot.val();
+          renderSettingsData();
+        } else {
+          // If profile node is generating or empty, use fallback without logging out
+          userProfile = {
+            username: currentUser.displayName || 'Player',
+            email: currentUser.email || 'N/A'
+          };
+          renderSettingsData();
+        }
+
+        hideLoadingOverlay();
+      }, (err) => {
+        console.warn('Realtime database sync notice:', err);
+        // Show retry option while preserving user session
+        errorBanner.style.display = 'flex';
+        hideLoadingOverlay();
       });
 
-      // Load Local Preferences
+      // Load Local Preferences (safe in localStorage)
       loadLocalPreferences();
     }
 
+    function hideLoadingOverlay() {
+      authCheckingOverlay.classList.add('hidden');
+      setTimeout(() => {
+        authCheckingOverlay.style.display = 'none';
+      }, 400);
+    }
+
     // ------------------------------------------------------------------------
-    // 6. CORRECT ASYNC AUTH STATE LISTENER (FIXES PREMATURE REDIRECT BUG)
+    // 6. STRICT AUTH STATE LISTENER (PREVENTS PREMATURE REDIRECT OR AUTO-LOGOUT)
+    // Rule: Never check `!auth.currentUser` synchronously on load.
+    // Wait for onAuthStateChanged to resolve session from IndexedDB.
     // ------------------------------------------------------------------------
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // User session successfully restored by Firebase Auth
+        // User session authenticated and restored
         currentUser = user;
         await loadUserProfile(user.uid);
       } else {
-        // Only redirect after Firebase Auth confirms that there is definitely no authenticated user
-        window.location.replace("login.html");
+        // Only redirect when Firebase explicitly confirms that no session exists
+        window.location.href = "login.html";
       }
     });
 
@@ -1097,10 +1162,10 @@
     // 7. RENDER PROFILE DATA IN SETTINGS
     // ------------------------------------------------------------------------
     function renderSettingsData() {
-      const username = userProfile.username || 'Player';
-      const email = userProfile.email || currentUser.email || 'N/A';
-      const refCode = userProfile.referralCode || '------';
-      const accStatus = (userProfile.accountStatus || 'active').toUpperCase();
+      const username = userProfile?.username || 'Player';
+      const email = userProfile?.email || currentUser?.email || 'N/A';
+      const refCode = userProfile?.referralCode || '------';
+      const accStatus = (userProfile?.accountStatus || 'active').toUpperCase();
 
       valUsername.textContent = username;
       valEmail.textContent = email;
@@ -1108,14 +1173,14 @@
       valAccountStatus.textContent = accStatus;
       valAccountStatus.style.color = (accStatus === 'ACTIVE') ? 'var(--emerald-neon)' : 'var(--gold-primary)';
 
-      const rawUid = currentUser.uid;
-      valUidShort.textContent = rawUid.slice(0, 4) + '...' + rawUid.slice(-4);
+      const rawUid = currentUser?.uid || '';
+      valUidShort.textContent = rawUid ? (rawUid.slice(0, 4) + '...' + rawUid.slice(-4)) : '------';
 
       // Audits
-      auditCreatedAt.textContent = userProfile.createdAt ? formatReadableDate(userProfile.createdAt) : 'Recent';
-      auditLastLogin.textContent = userProfile.lastLoginDate ? formatReadableDate(userProfile.lastLoginDate) : 'Today';
-      auditLastTask.textContent = userProfile.lastTaskDate ? formatReadableDate(userProfile.lastTaskDate) : 'None';
-      auditVipExpiry.textContent = userProfile.vipExpiry ? formatReadableDate(userProfile.vipExpiry) : 'None';
+      auditCreatedAt.textContent = userProfile?.createdAt ? formatReadableDate(userProfile.createdAt) : 'Recent';
+      auditLastLogin.textContent = userProfile?.lastLoginDate ? formatReadableDate(userProfile.lastLoginDate) : 'Today';
+      auditLastTask.textContent = userProfile?.lastTaskDate ? formatReadableDate(userProfile.lastTaskDate) : 'None';
+      auditVipExpiry.textContent = userProfile?.vipExpiry ? formatReadableDate(userProfile.vipExpiry) : 'None';
     }
 
     // ------------------------------------------------------------------------
@@ -1178,7 +1243,7 @@
     });
 
     // ------------------------------------------------------------------------
-    // 9. PASSWORD & SECURITY WORKFLOWS
+    // 9. PASSWORD & SECURITY WORKFLOWS (NO LOGOUTS)
     // ------------------------------------------------------------------------
     function openPasswordModal() {
       passwordModal.classList.add('open');
@@ -1206,7 +1271,7 @@
         closePasswordModal();
         showToast('Password updated successfully!');
       } catch (err) {
-        console.error('Password update error:', err);
+        console.error('Password update notice:', err);
         if (err.code === 'auth/requires-recent-login') {
           closePasswordModal();
           alert('Firebase requires recent authentication. Please send a password reset email or log in again.');
@@ -1228,7 +1293,7 @@
         closePasswordModal();
         showToast(`Reset link sent to ${email}`);
       } catch (err) {
-        console.error('Password reset email error:', err);
+        console.error('Password reset notice:', err);
         showToast('Failed to send reset email');
       }
     }
@@ -1237,24 +1302,8 @@
     btnModalResetEmail.addEventListener('click', sendResetLink);
 
     // ------------------------------------------------------------------------
-    // 10. LOGOUT & MODALS
+    // 10. ACCOUNT SUPPORT MODAL
     // ------------------------------------------------------------------------
-    btnOpenLogout.addEventListener('click', () => {
-      logoutModal.classList.add('open');
-    });
-
-    btnCancelLogout.addEventListener('click', () => {
-      logoutModal.classList.remove('open');
-    });
-
-    btnConfirmLogout.addEventListener('click', async () => {
-      try {
-        await signOut(auth);
-      } finally {
-        window.location.replace("login.html");
-      }
-    });
-
     btnOpenSupport.addEventListener('click', () => {
       supportModal.classList.add('open');
     });
@@ -1268,7 +1317,7 @@
     });
 
     // ------------------------------------------------------------------------
-    // 11. CLIPBOARD COPY HANDLERS
+    // 11. CLIPBOARD COPY & RETRY HANDLERS
     // ------------------------------------------------------------------------
     btnCopyUid.addEventListener('click', () => {
       if (currentUser?.uid) {
@@ -1283,6 +1332,12 @@
         navigator.clipboard.writeText(userProfile.referralCode).then(() => {
           showToast('Referral code copied');
         });
+      }
+    });
+
+    btnRetrySync.addEventListener('click', () => {
+      if (currentUser) {
+        loadUserProfile(currentUser.uid);
       }
     });
 
