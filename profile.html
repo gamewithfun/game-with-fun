@@ -97,6 +97,47 @@
     }
 
     /* ==========================================================================
+       INITIAL AUTH / SESSION RESOLVING OVERLAY
+       ========================================================================== */
+    .auth-resolving-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-base);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: opacity 0.35s var(--smooth-ease);
+    }
+
+    .auth-resolving-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .auth-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(0, 240, 255, 0.15);
+      border-top-color: var(--cyan-neon);
+      border-radius: 50%;
+      animation: spinSpinner 0.8s linear infinite;
+    }
+
+    @keyframes spinSpinner {
+      to { transform: rotate(360deg); }
+    }
+
+    .auth-loading-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+    }
+
+    /* ==========================================================================
        HEADER BAR
        ========================================================================== */
     .top-header {
@@ -167,24 +208,17 @@
       gap: 10px;
     }
 
-    .btn-logout-header {
-      padding: 6px 14px;
+    .header-balance-pill {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-glow);
+      padding: 5px 12px;
       border-radius: var(--radius-full);
-      background: rgba(244, 63, 94, 0.1);
-      border: 1px solid rgba(244, 63, 94, 0.3);
-      color: var(--ruby-neon);
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      transition: all 0.2s ease;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 5px;
-    }
-
-    .btn-logout-header:hover {
-      background: var(--ruby-neon);
-      color: #fff;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--gold-primary);
     }
 
     /* ==========================================================================
@@ -208,6 +242,35 @@
       font-size: 0.86rem;
       color: var(--text-muted);
       margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       ERROR BANNER
+       ========================================================================== */
+    .error-banner {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-retry-action {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .btn-retry-action:hover {
+      background: var(--ruby-neon);
     }
 
     /* ==========================================================================
@@ -572,32 +635,6 @@
       color: var(--text-main);
     }
 
-    /* Logout Action Button */
-    .btn-danger-logout {
-      width: 100%;
-      padding: 0.95rem;
-      border-radius: var(--radius-md);
-      background: rgba(244, 63, 94, 0.1);
-      border: 1px solid rgba(244, 63, 94, 0.35);
-      color: var(--ruby-neon);
-      font-size: 0.88rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.75px;
-      transition: all 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 1rem;
-    }
-
-    .btn-danger-logout:hover {
-      background: var(--ruby-neon);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
-    }
-
     /* ==========================================================================
        TOAST NOTIFICATION (POPUP)
        ========================================================================== */
@@ -677,7 +714,7 @@
       color: var(--cyan-neon);
     }
 
-    /* Blocked Account Overlay */
+    /* Blocked Account Notice Screen */
     .blocked-screen {
       display: none;
       position: fixed;
@@ -702,23 +739,29 @@
 </head>
 <body>
 
+  <!-- AUTHENTICATION CHECKING OVERLAY (PREVENTS PREMATURE REDIRECT OR FLICKER) -->
+  <div id="authCheckingOverlay" class="auth-resolving-overlay">
+    <div class="auth-spinner"></div>
+    <div class="auth-loading-text">RESTORING SESSION...</div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
   <div id="toastNotification" class="toast-popup" role="status" aria-live="polite">
     <span style="color: var(--cyan-neon);">✓</span>
     <span id="toastMessage">Copied to clipboard!</span>
   </div>
 
-  <!-- BLOCKED ACCOUNT SCREEN -->
+  <!-- BLOCKED / SUSPENDED ACCOUNT STATUS NOTICE -->
   <div id="blockedScreen" class="blocked-screen">
     <div class="blocked-card">
-      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
-      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
+      <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Account Notice</h2>
       <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
-        Your account status is currently restricted. You cannot access player profile features.
+        Your account status is currently flagged or restricted according to platform policies. Please contact platform support for review.
       </p>
-      <button id="btnBlockedLogout" style="padding: 0.8rem 1.6rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
-        LOG OUT
-      </button>
+      <div style="font-size: 0.78rem; color: var(--text-dim);">
+        Session remains active. Contact support at support@thegamewithfun.com
+      </div>
     </div>
   </div>
 
@@ -736,19 +779,15 @@
         </a>
         <div class="brand-meta">
           <span class="brand-name">THE GAME WITH FUN</span>
-          <span class="brand-sub">Profile & Security</span>
+          <span class="brand-sub">Player Profile</span>
         </div>
       </div>
 
       <div class="header-right">
-        <button id="btnHeaderLogout" class="btn-logout-header" aria-label="Logout Account">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          <span>Logout</span>
-        </button>
+        <div class="header-balance-pill">
+          <span>৳</span>
+          <span id="headerBalanceText">0.00</span>
+        </div>
       </div>
     </div>
   </header>
@@ -764,6 +803,12 @@
         <span>My Profile</span>
       </h1>
       <p class="page-subtitle">Account credentials, standing, streak milestones, and statistics.</p>
+    </div>
+
+    <!-- Error Banner (Shown only on real DB connection error, NEVER logs out) -->
+    <div id="errorBanner" class="error-banner">
+      <span style="font-size: 0.8rem; color: #fca5a5;">Unable to load profile data right now. Please check your connection.</span>
+      <button id="btnRetrySync" class="btn-retry-action">RETRY</button>
     </div>
 
     <!-- 1. HERO PROFILE CARD -->
@@ -835,7 +880,7 @@
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
           <span>Account Information</span>
-          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">SECURITY AUDIT</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">AUDIT PROFILE</span>
         </div>
 
         <div class="details-table-list">
@@ -897,7 +942,7 @@
         </div>
       </div>
 
-      <!-- Quick Platform Shortcuts Card -->
+      <!-- Quick Platform Shortcuts Card (Notice: NO logout button here) -->
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
           <span>Quick Shortcuts</span>
@@ -930,15 +975,6 @@
             <span class="shortcut-name">History</span>
           </a>
         </div>
-
-        <button type="button" id="btnMainLogout" class="btn-danger-logout">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          <span>LOG OUT OF PLATFORM</span>
-        </button>
       </div>
 
     </div>
@@ -971,7 +1007,7 @@
   </nav>
 
   <!-- ==========================================================================
-       FIREBASE INTEGRATION & CLIENT LOGIC (AUTHENTICATION BUG FIXED)
+       FIREBASE INTEGRATION & SESSION PRESERVATION LOGIC
        ========================================================================== -->
   <script type="module">
     // ------------------------------------------------------------------------
@@ -980,8 +1016,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
       getAuth, 
-      onAuthStateChanged, 
-      signOut 
+      onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { 
       getDatabase, 
@@ -1009,12 +1044,12 @@
     // ------------------------------------------------------------------------
     // 3. UI ELEMENT HOOKS
     // ------------------------------------------------------------------------
+    const authCheckingOverlay = document.getElementById('authCheckingOverlay');
+    const errorBanner = document.getElementById('errorBanner');
+    const btnRetrySync = document.getElementById('btnRetrySync');
     const blockedScreen = document.getElementById('blockedScreen');
-    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
-    const btnHeaderLogout = document.getElementById('btnHeaderLogout');
-    const btnMainLogout = document.getElementById('btnMainLogout');
 
-    // Hero Profile Card
+    const headerBalanceText = document.getElementById('headerBalanceText');
     const profileAvatarInitial = document.getElementById('profileAvatarInitial');
     const profileWelcomeName = document.getElementById('profileWelcomeName');
     const profileUsernameHandle = document.getElementById('profileUsernameHandle');
@@ -1058,35 +1093,63 @@
     let toastTimeout = null;
 
     // ------------------------------------------------------------------------
-    // 5. ASYNC PROFILE LOADER
+    // 5. ASYNC PROFILE LOADER (NEVER LOGS OUT ON DATABASE ERRORS)
     // ------------------------------------------------------------------------
     async function loadUserProfile(uid) {
       const userRef = ref(database, `users/${uid}`);
-      onValue(userRef, (snapshot) => {
-        if (!snapshot.exists()) return;
-        userProfile = snapshot.val();
 
-        // Handle blocked/suspended account state
-        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
-          blockedScreen.style.display = 'flex';
-          return;
+      onValue(userRef, (snapshot) => {
+        errorBanner.style.display = 'none';
+
+        if (snapshot.exists()) {
+          userProfile = snapshot.val();
+
+          // Check if account status is flagged/blocked
+          if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'suspended') {
+            blockedScreen.style.display = 'flex';
+          }
+
+          renderProfileUI();
+        } else {
+          // Profile record missing or being generated: use safe defaults without signing out
+          userProfile = {
+            username: currentUser.displayName || 'Player',
+            email: currentUser.email || 'N/A'
+          };
+          renderProfileUI();
         }
 
-        renderProfileUI();
+        // Hide overlay smoothly once data stream is verified
+        hideLoadingOverlay();
+
+      }, (error) => {
+        console.warn('Realtime database sync warning:', error);
+        // Show retry option while preserving user session
+        errorBanner.style.display = 'flex';
+        hideLoadingOverlay();
       });
     }
 
+    function hideLoadingOverlay() {
+      authCheckingOverlay.classList.add('hidden');
+      setTimeout(() => {
+        authCheckingOverlay.style.display = 'none';
+      }, 400);
+    }
+
     // ------------------------------------------------------------------------
-    // 6. CORRECT ASYNC AUTH STATE LISTENER (FIXED REDIRECT BUG)
+    // 6. CORRECT ASYNC AUTH STATE LISTENER
+    // Rule: Never check `!auth.currentUser` synchronously.
+    // Wait for onAuthStateChanged to resolve session from IndexedDB.
     // ------------------------------------------------------------------------
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // User session successfully resolved by Firebase Auth
+        // User session authenticated and restored
         currentUser = user;
         await loadUserProfile(user.uid);
       } else {
-        // Only redirect after Firebase explicitly confirms no authenticated session exists
-        window.location.replace("login.html");
+        // Only redirect when Firebase explicitly confirms that no session exists
+        window.location.href = "login.html";
       }
     });
 
@@ -1094,8 +1157,8 @@
     // 7. RENDER PROFILE UI
     // ------------------------------------------------------------------------
     function renderProfileUI() {
-      const username = userProfile.username || 'Player';
-      const email = userProfile.email || currentUser.email || 'N/A';
+      const username = userProfile?.username || 'Player';
+      const email = userProfile?.email || currentUser?.email || 'N/A';
       const initial = username.charAt(0).toUpperCase();
 
       // Avatar & Names
@@ -1103,22 +1166,26 @@
       profileWelcomeName.textContent = `Welcome, ${username}`;
       profileUsernameHandle.textContent = `@${username.toLowerCase()}`;
 
+      // Balance header pill
+      const currentBal = Number(userProfile?.balance || 0).toFixed(2);
+      headerBalanceText.textContent = currentBal;
+
       // Account Status Badge
-      const accStatus = (userProfile.accountStatus || 'active').toLowerCase();
+      const accStatus = (userProfile?.accountStatus || 'active').toLowerCase();
       badgeAccountStatus.textContent = accStatus.toUpperCase();
       badgeAccountStatus.className = `profile-pill account-${accStatus}`;
       detAccountStatusText.textContent = capitalizeFirst(accStatus);
       detAccountStatusText.style.color = (accStatus === 'active') ? 'var(--emerald-neon)' : 'var(--gold-primary)';
 
       // VIP Status Calculations
-      const vipLevel = Number(userProfile.vipLevel || 0);
-      const rawVipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
+      const vipLevel = Number(userProfile?.vipLevel || 0);
+      const rawVipStatus = (userProfile?.vipStatus || 'inactive').toLowerCase();
       const now = Date.now();
       let isVipActive = false;
       let isVipExpired = false;
 
       if (rawVipStatus === 'active' && vipLevel > 0) {
-        if (userProfile.vipExpiry) {
+        if (userProfile?.vipExpiry) {
           const expTime = new Date(userProfile.vipExpiry).getTime();
           if (!isNaN(expTime) && expTime < now) {
             isVipExpired = true;
@@ -1142,37 +1209,36 @@
       }
 
       // Referral Code Display
-      const refCode = userProfile.referralCode || '------';
+      const refCode = userProfile?.referralCode || '------';
       heroRefCode.textContent = refCode;
       detReferralCode.textContent = refCode;
 
       // Statistics (Formatted safely with 0 fallbacks)
-      statBalance.textContent = `৳${Number(userProfile.balance || 0).toFixed(2)}`;
-      statTotalEarnings.textContent = `৳${Number(userProfile.totalEarnings || 0).toFixed(2)}`;
-      statTotalWithdrawal.textContent = `৳${Number(userProfile.totalWithdrawal || 0).toFixed(2)}`;
-      statReferralEarnings.textContent = `৳${Number(userProfile.referralEarnings || 0).toFixed(2)}`;
-      statReferralCount.textContent = userProfile.referralCount || 0;
-      statLoginStreak.textContent = userProfile.loginStreak || 0;
-      statTaskStreak.textContent = userProfile.taskStreak || 0;
+      statBalance.textContent = `৳${currentBal}`;
+      statTotalEarnings.textContent = `৳${Number(userProfile?.totalEarnings || 0).toFixed(2)}`;
+      statTotalWithdrawal.textContent = `৳${Number(userProfile?.totalWithdrawal || 0).toFixed(2)}`;
+      statReferralEarnings.textContent = `৳${Number(userProfile?.referralEarnings || 0).toFixed(2)}`;
+      statReferralCount.textContent = userProfile?.referralCount || 0;
+      statLoginStreak.textContent = userProfile?.loginStreak || 0;
+      statTaskStreak.textContent = userProfile?.taskStreak || 0;
 
-      // Account & Security Details
+      // Account Details
       detUsername.textContent = username;
       detEmail.textContent = email;
 
-      const rawUid = currentUser.uid;
+      const rawUid = currentUser?.uid || '';
       detUidShort.textContent = maskUid(rawUid);
 
-      // Mask referredBy if present
-      if (userProfile.referredBy) {
+      if (userProfile?.referredBy) {
         detReferredBy.textContent = maskCode(userProfile.referredBy);
       } else {
         detReferredBy.textContent = 'None';
       }
 
-      detVipExpiry.textContent = userProfile.vipExpiry ? formatReadableDate(userProfile.vipExpiry) : 'None';
-      detCreatedAt.textContent = userProfile.createdAt ? formatReadableDate(userProfile.createdAt) : 'Recent';
-      detLastLogin.textContent = userProfile.lastLoginDate ? formatReadableDate(userProfile.lastLoginDate) : 'Today';
-      detLastTask.textContent = userProfile.lastTaskDate ? formatReadableDate(userProfile.lastTaskDate) : 'None';
+      detVipExpiry.textContent = userProfile?.vipExpiry ? formatReadableDate(userProfile.vipExpiry) : 'None';
+      detCreatedAt.textContent = userProfile?.createdAt ? formatReadableDate(userProfile.createdAt) : 'Recent';
+      detLastLogin.textContent = userProfile?.lastLoginDate ? formatReadableDate(userProfile.lastLoginDate) : 'Today';
+      detLastTask.textContent = userProfile?.lastTaskDate ? formatReadableDate(userProfile.lastTaskDate) : 'None';
     }
 
     // ------------------------------------------------------------------------
@@ -1199,6 +1265,12 @@
       copyText(currentUser?.uid, 'UID copied to clipboard!');
     });
 
+    btnRetrySync.addEventListener('click', () => {
+      if (currentUser) {
+        loadUserProfile(currentUser.uid);
+      }
+    });
+
     function showToast(msg) {
       toastMessage.textContent = msg;
       toastNotification.classList.add('show');
@@ -1210,22 +1282,7 @@
     }
 
     // ------------------------------------------------------------------------
-    // 9. LOGOUT ACTIONS
-    // ------------------------------------------------------------------------
-    async function doLogout() {
-      try {
-        await signOut(auth);
-      } finally {
-        window.location.replace("login.html");
-      }
-    }
-
-    btnHeaderLogout.addEventListener('click', doLogout);
-    btnMainLogout.addEventListener('click', doLogout);
-    btnBlockedLogout.addEventListener('click', doLogout);
-
-    // ------------------------------------------------------------------------
-    // 10. FORMATTING & MASKING HELPERS
+    // 9. FORMATTING & MASKING HELPERS
     // ------------------------------------------------------------------------
     function maskUid(uid) {
       if (!uid || uid.length < 8) return uid || '------';
