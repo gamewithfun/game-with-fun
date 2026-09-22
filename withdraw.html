@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Withdraw | THE GAME WITH FUN</title>
+  <meta name="description" content="Submit and review withdrawal requests on THE GAME WITH FUN. Check requirements, track payout statuses, and view history.">
+
+  <style>
+    /* ==========================================================================
+       ULTRA-PREMIUM CYBER/FINTECH DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: #0a0e17;
+      --bg-card: rgba(14, 19, 32, 0.74);
+      --bg-card-hover: rgba(20, 27, 46, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(245, 158, 11, 0.3);
+      --border-cyan: rgba(0, 240, 255, 0.25);
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
+
+      --cyan-neon: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --ruby-neon: #f43f5e;
+
+      --text-white: #ffffff;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 10% 8%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
+      background-attachment: fixed;
+      padding-bottom: 95px; /* Ensures mobile fixed bottom nav never overlaps content */
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 3rem;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ==========================================================================
+       HEADER BAR
+       ========================================================================== */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 13, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-back-link {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      transition: all 0.2s var(--smooth-ease);
+    }
+
+    .btn-back-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cyan-neon);
+      transform: translateX(-2px);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 800;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .balance-badge {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-glow);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+    }
+
+    .user-avatar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-primary), var(--purple-neon));
+      padding: 1.5px;
+      display: grid;
+      place-items: center;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      background: #0b0f1a;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+    }
+
+    /* ==========================================================================
+       PAGE BANNER & NOTICES
+       ========================================================================== */
+    .page-banner {
+      padding: 1.5rem 0 0.8rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .disclaimer-banner {
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-left: 4px solid var(--gold-primary);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.15rem;
+      margin: 1rem 0 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .disclaimer-banner span.icon {
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    .disclaimer-banner p {
+      font-size: 0.8rem;
+      color: #fde68a;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       DASHBOARD GRID & CARDS
+       ========================================================================== */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.15rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .dash-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .col-span-2 {
+        grid-column: span 2;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .dash-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .col-span-2-lg {
+        grid-column: span 2;
+      }
+    }
+
+    .ui-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.45rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .ui-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: var(--bg-card-hover);
+    }
+
+    .card-heading {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      letter-spacing: -0.2px;
+    }
+
+    /* 1. BALANCE OVERVIEW CARD */
+    .balance-overview-card {
+      background: linear-gradient(145deg, rgba(24, 30, 52, 0.95), rgba(10, 14, 25, 0.95));
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(245, 158, 11, 0.1);
+    }
+
+    .b-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .b-label {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .b-pill {
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid var(--border-glow);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .b-main-amount {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .b-main-amount span.currency-sign {
+      color: var(--gold-primary);
+      font-size: 1.8rem;
+    }
+
+    .b-main-amount span.currency-code {
+      font-size: 1rem;
+      color: var(--cyan-neon);
+      font-weight: 800;
+    }
+
+    .b-sub-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .b-sub-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .b-sub-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .b-sub-val {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* 2. ELIGIBILITY CARD */
+    .checklist-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .req-item {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .req-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .req-name {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .req-progress {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      font-size: 0.7rem;
+      font-weight: 900;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+    }
+
+    .status-badge.pass {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--emerald-neon);
+    }
+
+    .status-badge.fail {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: var(--ruby-neon);
+    }
+
+    .overall-eligibility-box {
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .overall-eligibility-box.locked {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+    }
+
+    .overall-eligibility-box.unlocked {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #a7f3d0;
+    }
+
+    /* Active Pending Order Notice */
+    .pending-lock-banner {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      display: none;
+    }
+
+    .pending-lock-banner.show {
+      display: block;
+    }
+
+    /* 3. WITHDRAWAL FORM */
+    .method-selector-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .method-tab-btn {
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .method-tab-btn.active {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+    }
+
+    .form-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-dim);
+      margin-bottom: 0.45rem;
+    }
+
+    .input-wrap {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .input-wrap:focus-within {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+    }
+
+    .input-control {
+      width: 100%;
+      background: transparent;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .input-control::placeholder {
+      color: #475569;
+      font-weight: 500;
+      font-size: 0.88rem;
+    }
+
+    .btn-submit-withdraw {
+      width: 100%;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      background: var(--gold-gradient);
+      color: #05070e;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px var(--gold-glow);
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit-withdraw:hover:not(:disabled) {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit-withdraw:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      filter: grayscale(0.5);
+    }
+
+    /* 4. WITHDRAWAL HISTORY FEED */
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.95rem 1.1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .history-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .h-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .h-method {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .h-meta {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .h-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .h-amount {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: monospace;
+    }
+
+    .h-status-tag {
+      font-size: 0.65rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .h-status-tag.pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-primary);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .h-status-tag.approved,
+    .h-status-tag.paid {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald-neon);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .h-status-tag.rejected {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--ruby-neon);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .history-empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* Modal Confirmation */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 12, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.3s var(--smooth-ease);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 440px;
+      background: #0d1222;
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+      transform: scale(0.94);
+      transition: transform 0.3s var(--smooth-ease);
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-icon-badge {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--gold-primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1.25rem;
+      color: var(--gold-primary);
+    }
+
+    /* ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== */
+    .bottom-nav-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @media (min-width: 1024px) {
+      .bottom-nav-fixed {
+        display: none;
+      }
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+    }
+
+    .nav-tab-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--gold-primary);
+    }
+
+    /* Blocked Account Modal */
+    .blocked-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #05070b;
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .blocked-card {
+      background: #111524;
+      border: 1px solid var(--ruby-neon);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.75rem;
+      max-width: 420px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BLOCKED ACCOUNT OVERLAY -->
+  <div id="blockedScreen" class="blocked-screen">
+    <div class="blocked-card">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
+      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
+        Your account status is currently restricted. You cannot access withdrawal or wallet services.
+      </p>
+      <button id="btnBlockedLogout" style="padding: 0.8rem 1.6rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
+        LOG OUT
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOP APP HEADER
+       ========================================================================== -->
+  <header class="top-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <a href="dashboard.html" class="btn-back-link" aria-label="Back to Dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div class="brand-meta">
+          <span class="brand-name">THE GAME WITH FUN</span>
+          <span class="brand-sub">Payout Gateway</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="balance-badge">
+          <span>৳</span>
+          <span id="headerBalanceText">0.00</span>
+        </div>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="avatar-inner" id="userAvatarLetter">P</div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main class="container">
+    <!-- Page Title -->
+    <div class="page-banner">
+      <h1 class="page-title">
+        <span>💸</span>
+        <span>WITHDRAW</span>
+      </h1>
+      <p class="page-subtitle">Submit payout requests and review your verified platform transaction history.</p>
+    </div>
+
+    <!-- Official Notice -->
+    <div class="disclaimer-banner">
+      <span class="icon">⚠️</span>
+      <p>
+        <strong>Notice:</strong> This is a game-style "Just for Fun" platform. Withdrawals are subject to verification and platform rules. They do not constitute a promise of guaranteed income or financial return.
+      </p>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="dash-grid">
+
+      <!-- 1. AVAILABLE BALANCE CARD -->
+      <div class="ui-card balance-overview-card col-span-2-lg">
+        <div class="b-top-row">
+          <span class="b-label">Available Balance</span>
+          <span class="b-pill">VERIFIED ASSETS</span>
+        </div>
+
+        <div class="b-main-amount">
+          <span class="currency-sign">৳</span>
+          <span id="valAvailableBalance">0.00</span>
+          <span class="currency-code">BDT</span>
+        </div>
+
+        <div class="b-sub-metrics">
+          <div class="b-sub-item">
+            <span class="b-sub-label">Total Earnings</span>
+            <span class="b-sub-val" id="valTotalEarnings">0.00</span>
+          </div>
+          <div class="b-sub-item">
+            <span class="b-sub-label">Total Withdrawal</span>
+            <span class="b-sub-val" id="valTotalWithdrawal">0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. WITHDRAWAL ELIGIBILITY CHECKLIST CARD -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Withdrawal Eligibility</span>
+          <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">RULES & REQUIREMENTS</span>
+        </div>
+
+        <div class="checklist-stack">
+          <!-- Requirement 1: Active VIP -->
+          <div class="req-item">
+            <div class="req-info">
+              <span class="req-name">👑 Active VIP Tier</span>
+              <span class="req-progress" id="progressVipText">Checking VIP status...</span>
+            </div>
+            <span class="status-badge fail" id="badgeReqVip">Not Completed</span>
+          </div>
+
+          <!-- Requirement 2: 10-Day Login Streak -->
+          <div class="req-item">
+            <div class="req-info">
+              <span class="req-name">🔥 10-Day Login Streak</span>
+              <span class="req-progress" id="progressLoginText">0 / 10 Days</span>
+            </div>
+            <span class="status-badge fail" id="badgeReqLogin">Not Completed</span>
+          </div>
+
+          <!-- Requirement 3: Daily Task Activity -->
+          <div class="req-item">
+            <div class="req-info">
+              <span class="req-name">✅ Daily Task Requirement</span>
+              <span class="req-progress" id="progressTaskText">Incomplete today</span>
+            </div>
+            <span class="status-badge fail" id="badgeReqTask">Not Completed</span>
+          </div>
+        </div>
+
+        <!-- Overall Gate Status Banner -->
+        <div class="overall-eligibility-box locked" id="overallEligibilityBanner">
+          <div>
+            <div style="font-size: 0.88rem; font-weight: 900;" id="overallStatusTitle">🔒 Withdrawal Locked</div>
+            <div style="font-size: 0.72rem; opacity: 0.85;" id="overallStatusSub">All 3 conditions above must be completed before you can submit a payout.</div>
+          </div>
+          <span class="status-badge fail" id="overallBadge">LOCKED</span>
+        </div>
+      </div>
+
+      <!-- 3. WITHDRAWAL SUBMISSION FORM CARD -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Submit Payout Request</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;" id="minWithdrawLabel">Min: ৳100</span>
+        </div>
+
+        <!-- Existing Pending Order Alert -->
+        <div id="pendingOrderLockBanner" class="pending-lock-banner">
+          <div style="font-size: 0.85rem; font-weight: 800; color: var(--gold-primary); margin-bottom: 2px;">
+            ⚠️ Pending Request In Progress
+          </div>
+          <div style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.4;" id="pendingOrderLockText">
+            You currently have a withdrawal request waiting for admin verification. Only one pending request is permitted at a time.
+          </div>
+        </div>
+
+        <form id="withdrawForm" novalidate>
+          <!-- Payment Method Selection -->
+          <label class="form-label">Payout Method</label>
+          <div class="method-selector-grid">
+            <button type="button" class="method-tab-btn active" id="btnMethodBkash">
+              <span>bKash</span>
+            </button>
+            <button type="button" class="method-tab-btn" id="btnMethodNagad">
+              <span>Nagad</span>
+            </button>
+          </div>
+
+          <!-- Mobile Account Number -->
+          <div class="form-group">
+            <label class="form-label" for="accountNumberInput">
+              <span>Mobile Account Number</span>
+              <span style="font-size: 0.68rem; color: var(--text-dim);">11 Digits (01XXXXXXXXX)</span>
+            </label>
+            <div class="input-wrap">
+              <input 
+                type="tel" 
+                id="accountNumberInput" 
+                class="input-control" 
+                placeholder="01712345678" 
+                maxlength="11" 
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Withdrawal Amount -->
+          <div class="form-group">
+            <label class="form-label" for="amountInput">
+              <span>Withdrawal Amount (BDT)</span>
+              <span style="font-size: 0.68rem; color: var(--cyan-neon);">No Max Limit</span>
+            </label>
+            <div class="input-wrap">
+              <input 
+                type="number" 
+                id="amountInput" 
+                class="input-control" 
+                placeholder="Enter amount" 
+                min="1" 
+                step="any"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Optional Reference/Note -->
+          <div class="form-group">
+            <label class="form-label" for="noteInput">
+              <span>Reference Note</span>
+              <span style="font-size: 0.68rem; color: var(--text-dim);">Optional</span>
+            </label>
+            <div class="input-wrap">
+              <input 
+                type="text" 
+                id="noteInput" 
+                class="input-control" 
+                placeholder="e.g. Personal wallet" 
+                maxlength="40"
+              />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btnSubmitWithdraw" class="btn-submit-withdraw" disabled>
+            SUBMIT WITHDRAWAL
+          </button>
+        </form>
+      </div>
+
+      <!-- 4. RECENT WITHDRAWAL HISTORY FEED -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>My Withdrawal History</span>
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 800;">CONFIDENTIAL LOG</span>
+        </div>
+
+        <div class="history-list" id="historyList">
+          <div class="history-empty">No withdrawal requests found.</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       SUBMISSION CONFIRMATION MODAL
+       ========================================================================== -->
+  <div id="successModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-icon-badge">✓</div>
+      <h3 style="font-size: 1.35rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Withdrawal Request Submitted</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.25rem;">
+        Your request is currently <strong>Pending Admin Review</strong>. Once verified according to platform terms, your payout will be processed.
+      </p>
+
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; text-align: left; font-size: 0.82rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <span style="color: var(--text-dim);">Amount:</span>
+          <strong style="color: var(--gold-primary);" id="modalReqAmount">৳0.00</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <span style="color: var(--text-dim);">Method:</span>
+          <strong style="color: #fff;" id="modalReqMethod">bKash</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <span style="color: var(--text-dim);">Account:</span>
+          <strong style="color: #fff;" id="modalReqAccount">017****5678</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-dim);">Status:</span>
+          <span style="color: var(--gold-primary); font-weight: 800;">Pending Review</span>
+        </div>
+      </div>
+
+      <button id="btnCloseModal" class="btn-submit-withdraw" style="margin: 0; width: 100%;">
+        CLOSE
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== -->
+  <nav class="bottom-nav-fixed">
+    <a href="dashboard.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="tasks.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <span>Tasks</span>
+    </a>
+    <a href="vip.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
+      <span>VIP</span>
+    </a>
+    <a href="balance.html" class="nav-tab-btn active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+      <span>Wallet</span>
+    </a>
+    <a href="profile.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       FIREBASE INTEGRATION & CLIENT LOGIC
+       ========================================================================== -->
+  <script type="module">
+    // ------------------------------------------------------------------------
+    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
+    // ------------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue, 
+      get, 
+      push, 
+      set, 
+      query, 
+      orderByChild, 
+      equalTo 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // ------------------------------------------------------------------------
+    // 2. FIREBASE CONFIGURATION
+    // ------------------------------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
+      authDomain: "game-with-fun-a1988.firebaseapp.com",
+      databaseURL: "https://game-with-fun-a1988-default-rtdb.firebaseio.com",
+      projectId: "game-with-fun-a1988",
+      storageBucket: "game-with-fun-a1988.firebasestorage.app",
+      messagingSenderId: "226037846599",
+      appId: "1:226037846599:web:415dc67b9d06007646d762"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // ------------------------------------------------------------------------
+    // 3. UI ELEMENT HOOKS
+    // ------------------------------------------------------------------------
+    const blockedScreen = document.getElementById('blockedScreen');
+    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
+
+    const headerBalanceText = document.getElementById('headerBalanceText');
+    const userAvatarLetter = document.getElementById('userAvatarLetter');
+
+    const valAvailableBalance = document.getElementById('valAvailableBalance');
+    const valTotalEarnings = document.getElementById('valTotalEarnings');
+    const valTotalWithdrawal = document.getElementById('valTotalWithdrawal');
+
+    // Checklist Elements
+    const progressVipText = document.getElementById('progressVipText');
+    const badgeReqVip = document.getElementById('badgeReqVip');
+    const progressLoginText = document.getElementById('progressLoginText');
+    const badgeReqLogin = document.getElementById('badgeReqLogin');
+    const progressTaskText = document.getElementById('progressTaskText');
+    const badgeReqTask = document.getElementById('badgeReqTask');
+
+    const overallEligibilityBanner = document.getElementById('overallEligibilityBanner');
+    const overallStatusTitle = document.getElementById('overallStatusTitle');
+    const overallStatusSub = document.getElementById('overallStatusSub');
+    const overallBadge = document.getElementById('overallBadge');
+
+    // Form Hooks
+    const pendingOrderLockBanner = document.getElementById('pendingOrderLockBanner');
+    const pendingOrderLockText = document.getElementById('pendingOrderLockText');
+    const minWithdrawLabel = document.getElementById('minWithdrawLabel');
+    const btnMethodBkash = document.getElementById('btnMethodBkash');
+    const btnMethodNagad = document.getElementById('btnMethodNagad');
+    const accountNumberInput = document.getElementById('accountNumberInput');
+    const amountInput = document.getElementById('amountInput');
+    const noteInput = document.getElementById('noteInput');
+    const btnSubmitWithdraw = document.getElementById('btnSubmitWithdraw');
+    const withdrawForm = document.getElementById('withdrawForm');
+
+    // History
+    const historyList = document.getElementById('historyList');
+
+    // Modal
+    const successModal = document.getElementById('successModal');
+    const btnCloseModal = document.getElementById('btnCloseModal');
+    const modalReqAmount = document.getElementById('modalReqAmount');
+    const modalReqMethod = document.getElementById('modalReqMethod');
+    const modalReqAccount = document.getElementById('modalReqAccount');
+
+    // ------------------------------------------------------------------------
+    // 4. CLIENT RUNTIME STATE
+    // ------------------------------------------------------------------------
+    let currentUser = null;
+    let userProfile = null;
+    let selectedMethod = 'bKash';
+    let minimumWithdrawalAmount = 100; // Default fallback
+    let isWithdrawalEligible = false;
+    let hasPendingWithdrawal = false;
+
+    // ------------------------------------------------------------------------
+    // 5. AUTH STATE LISTENER
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        currentUser = user;
+        initWithdrawPortal();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 6. INITIALIZATION & LIVE DATA BINDINGS
+    // ------------------------------------------------------------------------
+    function initWithdrawPortal() {
+      // 1. User Profile Listener
+      const userRef = ref(database, `users/${currentUser.uid}`);
+      onValue(userRef, (snapshot) => {
+        if (!snapshot.exists()) return;
+        userProfile = snapshot.val();
+
+        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
+          blockedScreen.style.display = 'flex';
+          return;
+        }
+
+        renderUserData();
+        evaluateEligibility();
+      });
+
+      // 2. Minimum Withdrawal Settings
+      const minSettingRef = ref(database, 'settings/withdrawal/minimumAmount');
+      onValue(minSettingRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const val = Number(snapshot.val());
+          if (!isNaN(val) && val > 0) {
+            minimumWithdrawalAmount = val;
+          }
+        }
+        minWithdrawLabel.textContent = `Min: ৳${minimumWithdrawalAmount}`;
+      });
+
+      // 3. User Withdrawal History Listener
+      bindWithdrawalHistory();
+    }
+
+    // ------------------------------------------------------------------------
+    // 7. RENDER USER BALANCE AND PROFILE STATS
+    // ------------------------------------------------------------------------
+    function renderUserData() {
+      const username = userProfile.username || 'Player';
+      userAvatarLetter.textContent = username.charAt(0).toUpperCase();
+
+      const bal = Number(userProfile.balance || 0);
+      headerBalanceText.textContent = bal.toFixed(2);
+      valAvailableBalance.textContent = bal.toFixed(2);
+      valTotalEarnings.textContent = Number(userProfile.totalEarnings || 0).toFixed(2);
+      valTotalWithdrawal.textContent = Number(userProfile.totalWithdrawal || 0).toFixed(2);
+    }
+
+    // ------------------------------------------------------------------------
+    // 8. ELIGIBILITY EVALUATION & REQUIREMENTS VERIFICATION
+    // ------------------------------------------------------------------------
+    function evaluateEligibility() {
+      const now = Date.now();
+      const vipLevel = Number(userProfile.vipLevel || 0);
+      const vipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
+
+      // Rule 1: Active VIP requirement
+      let vipPassed = false;
+      if (vipStatus === 'active' && vipLevel > 0 && userProfile.vipExpiry) {
+        const exp = new Date(userProfile.vipExpiry).getTime();
+        if (!isNaN(exp) && exp > now) {
+          vipPassed = true;
+          progressVipText.textContent = `Active — VIP ${vipLevel}`;
+        }
+      }
+
+      if (!vipPassed) {
+        progressVipText.textContent = 'Not Active (VIP Required)';
+        setBadge(badgeReqVip, false);
+      } else {
+        setBadge(badgeReqVip, true);
+      }
+
+      // Rule 2: 10-Day Login Requirement
+      const loginStreak = Number(userProfile.loginStreak || 0);
+      const loginPassed = loginStreak >= 10;
+      progressLoginText.textContent = `${loginStreak} / 10 Days`;
+      setBadge(badgeReqLogin, loginPassed);
+
+      // Rule 3: Daily Task Activity Requirement
+      const taskStreak = Number(userProfile.taskStreak || 0);
+      const tasksToday = Number(userProfile.tasksCompletedToday || 0);
+      const taskPassed = taskStreak >= 1 || tasksToday >= 1;
+      progressTaskText.textContent = taskPassed ? 'Completed Today' : 'Not completed today';
+      setBadge(badgeReqTask, taskPassed);
+
+      // Overall Gate Decision
+      isWithdrawalEligible = vipPassed && loginPassed && taskPassed;
+
+      if (isWithdrawalEligible) {
+        overallEligibilityBanner.className = 'overall-eligibility-box unlocked';
+        overallStatusTitle.textContent = '✅ Withdrawal Unlocked';
+        overallStatusSub.textContent = 'All requirements satisfied. You may submit your payout request.';
+        overallBadge.className = 'status-badge pass';
+        overallBadge.textContent = 'ELIGIBLE';
+      } else {
+        overallEligibilityBanner.className = 'overall-eligibility-box locked';
+        overallStatusTitle.textContent = '🔒 Withdrawal Locked';
+        overallStatusSub.textContent = 'Complete all 3 requirements above to unlock withdrawal access.';
+        overallBadge.className = 'status-badge fail';
+        overallBadge.textContent = 'LOCKED';
+      }
+
+      toggleSubmitButtonState();
+    }
+
+    function setBadge(el, passed) {
+      if (passed) {
+        el.className = 'status-badge pass';
+        el.textContent = 'Completed';
+      } else {
+        el.className = 'status-badge fail';
+        el.textContent = 'Not Completed';
+      }
+    }
+
+    function toggleSubmitButtonState() {
+      // Disabled if not eligible OR already has an active pending withdrawal
+      if (isWithdrawalEligible && !hasPendingWithdrawal) {
+        btnSubmitWithdraw.disabled = false;
+        btnSubmitWithdraw.textContent = 'SUBMIT WITHDRAWAL';
+      } else {
+        btnSubmitWithdraw.disabled = true;
+        if (hasPendingWithdrawal) {
+          btnSubmitWithdraw.textContent = 'PENDING REQUEST IN PROGRESS';
+        } else {
+          btnSubmitWithdraw.textContent = 'WITHDRAWAL LOCKED';
+        }
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // 9. BIND USER WITHDRAWAL HISTORY & DETECT ACTIVE PENDING
+    // ------------------------------------------------------------------------
+    function bindWithdrawalHistory() {
+      const withdrawalsRef = ref(database, 'withdrawals');
+      const userWithdrawalsQuery = query(withdrawalsRef, orderByChild('uid'), equalTo(currentUser.uid));
+
+      onValue(userWithdrawalsQuery, (snapshot) => {
+        hasPendingWithdrawal = false;
+        historyList.innerHTML = '';
+
+        if (!snapshot.exists()) {
+          historyList.innerHTML = '<div class="history-empty">No withdrawal requests found.</div>';
+          pendingOrderLockBanner.classList.remove('show');
+          toggleSubmitButtonState();
+          return;
+        }
+
+        const data = snapshot.val();
+        const items = [];
+
+        Object.keys(data).forEach((key) => {
+          const item = data[key];
+          item.id = key;
+          items.push(item);
+
+          if (item.status === 'pending') {
+            hasPendingWithdrawal = true;
+          }
+        });
+
+        // Sort latest first
+        items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+        // Display pending lock if active
+        if (hasPendingWithdrawal) {
+          pendingOrderLockBanner.classList.add('show');
+          pendingOrderLockText.innerHTML = `
+            You have an active pending payout under review. A new withdrawal cannot be submitted until the current request is resolved.
+          `;
+        } else {
+          pendingOrderLockBanner.classList.remove('show');
+        }
+
+        items.forEach((req) => {
+          const method = req.method || 'bKash';
+          const maskedAcc = maskAccountNumber(req.accountNumber || '01XXXXXXXXX');
+          const amount = Number(req.amount || 0).toFixed(2);
+          const dateStr = req.createdAt ? new Date(req.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Recent';
+          const status = (req.status || 'pending').toLowerCase();
+
+          const row = document.createElement('div');
+          row.className = 'history-row';
+          row.innerHTML = `
+            <div class="h-left">
+              <span class="h-method">${escapeHtml(method)} (${escapeHtml(maskedAcc)})</span>
+              <span class="h-meta">${escapeHtml(dateStr)}</span>
+            </div>
+            <div class="h-right">
+              <span class="h-amount">৳${amount}</span>
+              <span class="h-status-tag ${status}">${status}</span>
+            </div>
+          `;
+          historyList.appendChild(row);
+        });
+
+        toggleSubmitButtonState();
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // 10. METHOD TOGGLES & FORM SUBMISSION
+    // ------------------------------------------------------------------------
+    btnMethodBkash.addEventListener('click', () => {
+      selectedMethod = 'bKash';
+      btnMethodBkash.classList.add('active');
+      btnMethodNagad.classList.remove('active');
+    });
+
+    btnMethodNagad.addEventListener('click', () => {
+      selectedMethod = 'Nagad';
+      btnMethodNagad.classList.add('active');
+      btnMethodBkash.classList.remove('active');
+    });
+
+    withdrawForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!isWithdrawalEligible) {
+        alert('Withdrawal is currently locked. Please ensure all 3 requirements are satisfied.');
+        return;
+      }
+
+      if (hasPendingWithdrawal) {
+        alert('You already have a pending withdrawal request under review. Only one pending request is permitted.');
+        return;
+      }
+
+      const rawNumber = accountNumberInput.value.trim();
+      const amountVal = parseFloat(amountInput.value);
+      const currentBal = Number(userProfile.balance || 0);
+
+      // 1. Phone validation (Bangladeshi 11-digit mobile)
+      const bdPhoneRegex = /^01[3-9]\d{8}$/;
+      if (!bdPhoneRegex.test(rawNumber)) {
+        alert('Please enter a valid 11-digit Bangladeshi mobile number (e.g. 01712345678).');
+        accountNumberInput.focus();
+        return;
+      }
+
+      // 2. Amount validation
+      if (isNaN(amountVal) || amountVal <= 0) {
+        alert('Please enter a valid withdrawal amount.');
+        amountInput.focus();
+        return;
+      }
+
+      if (amountVal < minimumWithdrawalAmount) {
+        alert(`Minimum withdrawal amount is ৳${minimumWithdrawalAmount}.`);
+        amountInput.focus();
+        return;
+      }
+
+      if (amountVal > currentBal) {
+        alert('Insufficient game balance for this withdrawal request.');
+        amountInput.focus();
+        return;
+      }
+
+      btnSubmitWithdraw.disabled = true;
+      btnSubmitWithdraw.textContent = 'SUBMITTING...';
+
+      try {
+        const withdrawalsRef = ref(database, 'withdrawals');
+        const newReqRef = push(withdrawalsRef);
+
+        const newRequestData = {
+          withdrawalId: newReqRef.key,
+          uid: currentUser.uid,
+          username: userProfile.username || 'Player',
+          method: selectedMethod,
+          accountNumber: rawNumber,
+          amount: amountVal,
+          note: noteInput.value.trim() || null,
+          status: 'pending',
+          createdAt: Date.now()
+        };
+
+        // Submit to Realtime Database
+        await set(newReqRef, newRequestData);
+
+        // Reset inputs
+        amountInput.value = '';
+        noteInput.value = '';
+
+        // Show Confirmation Dialog
+        modalReqAmount.textContent = `৳${amountVal.toFixed(2)}`;
+        modalReqMethod.textContent = selectedMethod;
+        modalReqAccount.textContent = maskAccountNumber(rawNumber);
+        successModal.classList.add('open');
+
+      } catch (err) {
+        console.error('Withdrawal submission error:', err);
+        alert('Failed to submit withdrawal request. Please verify connection and retry.');
+      } finally {
+        toggleSubmitButtonState();
+      }
+    });
+
+    btnCloseModal.addEventListener('click', () => {
+      successModal.classList.remove('open');
+    });
+
+    // ------------------------------------------------------------------------
+    // 11. HELPERS & LOGOUT
+    // ------------------------------------------------------------------------
+    function maskAccountNumber(num) {
+      if (!num || num.length < 8) return num || '---';
+      return num.substring(0, 3) + '****' + num.substring(num.length - 4);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    btnBlockedLogout.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
