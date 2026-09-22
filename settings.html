@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Settings | THE GAME WITH FUN</title>
-  <meta name="description" content="Manage your account preferences, security settings, local toggles, and privacy controls on THE GAME WITH FUN.">
+  <meta name="description" content="Manage your account preferences, security options, local toggles, and privacy controls on THE GAME WITH FUN.">
 
   <style>
     /* ==========================================================================
@@ -635,7 +635,7 @@
 
   <!-- ==========================================================================
        TOP APP HEADER
-       ========================================================================== */
+       ========================================================================== -->
   <header class="top-header">
     <div class="container header-content">
       <div class="header-left">
@@ -969,7 +969,7 @@
   </nav>
 
   <!-- ==========================================================================
-       FIREBASE INTEGRATION & CLIENT SCRIPT
+       FIREBASE INTEGRATION & CLIENT SCRIPT (AUTHENTICATION FIX APPLIED)
        ========================================================================== -->
   <script type="module">
     // ------------------------------------------------------------------------
@@ -990,16 +990,16 @@
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     // ------------------------------------------------------------------------
-    // 2. FIREBASE CONFIGURATION (REPLACE WITH YOUR PROJECT CONFIG)
+    // 2. FIREBASE CONFIGURATION
     // ------------------------------------------------------------------------
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-      projectId: "YOUR_PROJECT",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
+      authDomain: "game-with-fun-a1988.firebaseapp.com",
+      databaseURL: "https://game-with-fun-a1988-default-rtdb.firebaseio.com",
+      projectId: "game-with-fun-a1988",
+      storageBucket: "game-with-fun-a1988.firebasestorage.app",
+      messagingSenderId: "226037846599",
+      appId: "1:226037846599:web:415dc67b9d06007646d762"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -1065,32 +1065,33 @@
     let toastTimeout = null;
 
     // ------------------------------------------------------------------------
-    // 5. AUTH STATE LISTENER
+    // 5. ASYNC USER PROFILE LOADER
     // ------------------------------------------------------------------------
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = 'login.html';
-      } else {
-        currentUser = user;
-        initSettingsPortal();
-      }
-    });
-
-    // ------------------------------------------------------------------------
-    // 6. INITIALIZATION & DATA BINDINGS
-    // ------------------------------------------------------------------------
-    function initSettingsPortal() {
-      // 1. User Profile Listener
-      const userRef = ref(database, `users/${currentUser.uid}`);
+    async function loadUserProfile(uid) {
+      const userRef = ref(database, `users/${uid}`);
       onValue(userRef, (snapshot) => {
         if (!snapshot.exists()) return;
         userProfile = snapshot.val();
         renderSettingsData();
       });
 
-      // 2. Load Local Preferences
+      // Load Local Preferences
       loadLocalPreferences();
     }
+
+    // ------------------------------------------------------------------------
+    // 6. CORRECT ASYNC AUTH STATE LISTENER (FIXES PREMATURE REDIRECT BUG)
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User session successfully restored by Firebase Auth
+        currentUser = user;
+        await loadUserProfile(user.uid);
+      } else {
+        // Only redirect after Firebase Auth confirms that there is definitely no authenticated user
+        window.location.replace("login.html");
+      }
+    });
 
     // ------------------------------------------------------------------------
     // 7. RENDER PROFILE DATA IN SETTINGS
@@ -1155,7 +1156,7 @@
       });
     });
 
-    // Browser Notification API (Requested ONLY upon user click)
+    // Browser Notification API (Requested ONLY upon explicit user click)
     btnEnableBrowserNotifs.addEventListener('click', async () => {
       if (!("Notification" in window)) {
         showToast('Notifications not supported by this browser');
@@ -1172,7 +1173,7 @@
           showToast('Notification permission denied');
         }
       } else {
-        showToast('Notifications are blocked in your browser settings');
+        showToast('Notifications are blocked in browser settings');
       }
     });
 
@@ -1250,7 +1251,7 @@
       try {
         await signOut(auth);
       } finally {
-        window.location.href = 'login.html';
+        window.location.replace("login.html");
       }
     });
 
