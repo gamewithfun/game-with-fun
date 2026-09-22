@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Referral | THE GAME WITH FUN</title>
+  <meta name="description" content="Invite friends to THE GAME WITH FUN and earn promotional game rewards. Share your custom referral link today.">
+
+  <style>
+    /* ==========================================================================
+       ULTRA-PREMIUM CYBER/GAMING DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: #0a0e17;
+      --bg-card: rgba(14, 19, 32, 0.74);
+      --bg-card-hover: rgba(20, 27, 46, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(245, 158, 11, 0.35);
+      --border-cyan: rgba(0, 240, 255, 0.25);
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
+
+      --cyan-neon: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --ruby-neon: #f43f5e;
+
+      --text-white: #ffffff;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 10% 8%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
+      background-attachment: fixed;
+      padding-bottom: 95px; /* Room for mobile fixed bottom nav */
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 3rem;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ==========================================================================
+       HEADER BAR
+       ========================================================================== */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 13, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-back-link {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      transition: all 0.2s var(--smooth-ease);
+    }
+
+    .btn-back-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cyan-neon);
+      transform: translateX(-2px);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 800;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .balance-badge {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-glow);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+    }
+
+    .user-avatar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-primary), var(--purple-neon));
+      padding: 1.5px;
+      display: grid;
+      place-items: center;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      background: #0b0f1a;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+    }
+
+    /* ==========================================================================
+       PAGE BANNER
+       ========================================================================== */
+    .page-banner {
+      padding: 1.5rem 0 0.8rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       HERO CARD: INVITE & EARN ৳40
+       ========================================================================== */
+    .hero-referral-card {
+      background: linear-gradient(145deg, rgba(26, 32, 54, 0.95), rgba(11, 15, 26, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.4rem;
+      margin: 0.5rem 0 1.25rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), 0 0 35px rgba(245, 158, 11, 0.12);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-referral-card::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-icon-bubble {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--gold-primary);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      margin: 0 auto 0.85rem;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+    }
+
+    .hero-heading {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-reward-pill {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border-glow);
+      color: var(--gold-primary);
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-disclaimer-note {
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       DASHBOARD GRID & CARDS
+       ========================================================================== */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.15rem;
+    }
+
+    @media (min-width: 768px) {
+      .dash-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .col-span-2 {
+        grid-column: span 2;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .dash-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .col-span-2-lg {
+        grid-column: span 2;
+      }
+    }
+
+    .ui-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .ui-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: var(--bg-card-hover);
+    }
+
+    .card-heading {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      letter-spacing: -0.2px;
+    }
+
+    /* ==========================================================================
+       CODE & LINK CARDS
+       ========================================================================== */
+    .code-box-display {
+      background: rgba(0, 240, 255, 0.04);
+      border: 1px dashed var(--cyan-neon);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .code-text {
+      font-family: monospace;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--cyan-neon);
+    }
+
+    .btn-action-accent {
+      padding: 0.65rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--cyan-gradient);
+      color: #04060a;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-action-accent:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 15px var(--cyan-glow);
+      transform: translateY(-1px);
+    }
+
+    .link-box-display {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-bottom: 1rem;
+      user-select: all;
+    }
+
+    .link-actions-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-action-gold {
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--gold-gradient);
+      color: #04060a;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-action-gold:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 15px var(--gold-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-action-outline {
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-action-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       STATISTICS GRID (4 TILES)
+       ========================================================================== */
+    .stats-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .stats-tiles-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-tile {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.85rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .stat-num {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ==========================================================================
+       HOW IT WORKS STEPS & FAIR PLAY CARDS
+       ========================================================================== */
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0.75rem 0.85rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-sm);
+    }
+
+    .step-index-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--cyan-neon);
+      color: var(--cyan-neon);
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-content {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .step-content strong {
+      color: #fff;
+    }
+
+    .fair-play-box {
+      background: rgba(244, 63, 94, 0.06);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-left: 3px solid var(--ruby-neon);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      font-size: 0.78rem;
+      color: #fca5a5;
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       REFERRAL HISTORY LOG
+       ========================================================================== */
+    .ref-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ref-history-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .ref-history-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .rh-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rh-name {
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .rh-time {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .rh-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .rh-reward {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+      font-family: monospace;
+    }
+
+    .status-pill {
+      font-size: 0.65rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .status-pill.qualified,
+    .status-pill.rewarded {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald-neon);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-pill.pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-primary);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .history-empty-box {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.84rem;
+    }
+
+    /* ==========================================================================
+       TOAST NOTIFICATION (POPUP)
+       ========================================================================== */
+    .toast-popup {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(10, 14, 23, 0.95);
+      border: 1px solid var(--cyan-neon);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .toast-popup.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== */
+    .bottom-nav-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @media (min-width: 1024px) {
+      .bottom-nav-fixed {
+        display: none;
+      }
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+    }
+
+    .nav-tab-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--gold-primary);
+    }
+
+    /* Blocked Account Overlay */
+    .blocked-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #05070b;
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .blocked-card {
+      background: #111524;
+      border: 1px solid var(--ruby-neon);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.75rem;
+      max-width: 420px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="toast-popup" role="status" aria-live="polite">
+    <span style="color: var(--cyan-neon);">✓</span>
+    <span id="toastMessage">Copied to clipboard!</span>
+  </div>
+
+  <!-- BLOCKED ACCOUNT SCREEN -->
+  <div id="blockedScreen" class="blocked-screen">
+    <div class="blocked-card">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
+      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
+        Your account status is currently restricted. You cannot access referral features.
+      </p>
+      <button id="btnBlockedLogout" style="padding: 0.8rem 1.6rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
+        LOG OUT
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOP APP HEADER
+       ========================================================================== -->
+  <header class="top-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <a href="dashboard.html" class="btn-back-link" aria-label="Back to Dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div class="brand-meta">
+          <span class="brand-name">THE GAME WITH FUN</span>
+          <span class="brand-sub">Referral Center</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="balance-badge">
+          <span>৳</span>
+          <span id="headerBalanceText">0.00</span>
+        </div>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="avatar-inner" id="userAvatarLetter">P</div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-banner">
+      <h1 class="page-title">
+        <span>👥</span>
+        <span>Referral</span>
+      </h1>
+      <p class="page-subtitle">Invite friends & earn game rewards.</p>
+    </div>
+
+    <!-- 1. HERO REWARD CARD -->
+    <div class="hero-referral-card">
+      <div class="hero-icon-bubble">🎁</div>
+      <h2 class="hero-heading">Invite & Earn</h2>
+      <div class="hero-reward-pill">৳40 per qualified referral</div>
+      <p class="hero-disclaimer-note">
+        Referral rewards are subject to the platform’s qualification rules and fair-play checks. Credits are granted after verified qualification.
+      </p>
+    </div>
+
+    <!-- 2. CONTENT GRID -->
+    <div class="dash-grid">
+
+      <!-- Referral Code Card -->
+      <div class="ui-card">
+        <div class="card-heading">
+          <span>Your Referral Code</span>
+          <span style="font-size: 0.68rem; color: var(--cyan-neon); font-weight: 800;">UNIQUE CODE</span>
+        </div>
+        <div class="code-box-display">
+          <span class="code-text" id="valReferralCode">------</span>
+          <button type="button" id="btnCopyCode" class="btn-action-accent" aria-label="Copy Referral Code">
+            <span>COPY</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Referral Link Card -->
+      <div class="ui-card">
+        <div class="card-heading">
+          <span>Your Referral Link</span>
+          <span style="font-size: 0.68rem; color: var(--gold-primary); font-weight: 800;">SHAREABLE URL</span>
+        </div>
+        <div class="link-box-display" id="valReferralLink">Generating link...</div>
+        <div class="link-actions-row">
+          <button type="button" id="btnCopyLink" class="btn-action-outline">
+            <span>COPY LINK</span>
+          </button>
+          <button type="button" id="btnShareLink" class="btn-action-gold">
+            <span>SHARE</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Statistics Tile Widget -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Referral Performance</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">REALTIME DATA</span>
+        </div>
+        <div class="stats-tiles-grid">
+          <div class="stat-tile">
+            <span class="stat-num" id="statTotalRef">0</span>
+            <span class="stat-label">Total Referrals</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statQualifiedRef" style="color: var(--emerald-neon);">0</span>
+            <span class="stat-label">Qualified</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statEarningsRef" style="color: var(--gold-primary);">৳0.00</span>
+            <span class="stat-label">Referral Earned</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statPendingRef" style="color: var(--cyan-neon);">0</span>
+            <span class="stat-label">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works Card -->
+      <div class="ui-card">
+        <div class="card-heading">
+          <span>How Referral Works</span>
+          <span style="font-size: 0.68rem; color: var(--text-dim); font-weight: 800;">5 EASY STEPS</span>
+        </div>
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-index-badge">1</div>
+            <div class="step-content"><strong>Copy your link:</strong> Get your unique referral code or link above.</div>
+          </div>
+          <div class="step-item">
+            <div class="step-index-badge">2</div>
+            <div class="step-content"><strong>Share with friends:</strong> Send your invite to friends or community groups.</div>
+          </div>
+          <div class="step-item">
+            <div class="step-index-badge">3</div>
+            <div class="step-content"><strong>Friend registers:</strong> Your friend signs up with your referral code attached.</div>
+          </div>
+          <div class="step-item">
+            <div class="step-index-badge">4</div>
+            <div class="step-content"><strong>Qualifying activity:</strong> The referral qualifies after completing system conditions.</div>
+          </div>
+          <div class="step-item">
+            <div class="step-index-badge">5</div>
+            <div class="step-content"><strong>Reward granted:</strong> The ৳40 game credit is authorized to your wallet.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fair Play / Abuse Policy Card -->
+      <div class="ui-card">
+        <div class="card-heading">
+          <span>Fair Play Policy</span>
+          <span style="font-size: 0.68rem; color: var(--ruby-neon); font-weight: 800;">RULES</span>
+        </div>
+        <div class="fair-play-box">
+          ⚠️ <strong>Strict Policy:</strong> Self-referrals, fake registrations, and duplicate accounts are strictly forbidden. System algorithms flag multi-account abuse, resulting in permanent restriction.
+        </div>
+      </div>
+
+      <!-- Referral History Card -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Referral History</span>
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 800;">ACTIVITY LOG</span>
+        </div>
+        <div class="ref-history-list" id="refHistoryList">
+          <div class="history-empty-box">No referral activity yet.</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== -->
+  <nav class="bottom-nav-fixed">
+    <a href="dashboard.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="tasks.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <span>Tasks</span>
+    </a>
+    <a href="vip.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
+      <span>VIP</span>
+    </a>
+    <a href="balance.html" class="nav-tab-btn active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+      <span>Wallet</span>
+    </a>
+    <a href="profile.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       FIREBASE INTEGRATION & CLIENT LOGIC
+       ========================================================================== -->
+  <script type="module">
+    // ------------------------------------------------------------------------
+    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
+    // ------------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // ------------------------------------------------------------------------
+    // 2. FIREBASE CONFIGURATION
+    // ------------------------------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
+      authDomain: "game-with-fun-a1988.firebaseapp.com",
+      databaseURL: "https://game-with-fun-a1988-default-rtdb.firebaseio.com",
+      projectId: "game-with-fun-a1988",
+      storageBucket: "game-with-fun-a1988.firebasestorage.app",
+      messagingSenderId: "226037846599",
+      appId: "1:226037846599:web:415dc67b9d06007646d762"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // ------------------------------------------------------------------------
+    // 3. UI ELEMENT HOOKS
+    // ------------------------------------------------------------------------
+    const headerBalanceText = document.getElementById('headerBalanceText');
+    const userAvatarLetter = document.getElementById('userAvatarLetter');
+    const blockedScreen = document.getElementById('blockedScreen');
+    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
+
+    const valReferralCode = document.getElementById('valReferralCode');
+    const valReferralLink = document.getElementById('valReferralLink');
+    const btnCopyCode = document.getElementById('btnCopyCode');
+    const btnCopyLink = document.getElementById('btnCopyLink');
+    const btnShareLink = document.getElementById('btnShareLink');
+
+    const statTotalRef = document.getElementById('statTotalRef');
+    const statQualifiedRef = document.getElementById('statQualifiedRef');
+    const statEarningsRef = document.getElementById('statEarningsRef');
+    const statPendingRef = document.getElementById('statPendingRef');
+    const refHistoryList = document.getElementById('refHistoryList');
+
+    const toastNotification = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+
+    // ------------------------------------------------------------------------
+    // 4. CLIENT STATE
+    // ------------------------------------------------------------------------
+    let currentUser = null;
+    let userProfile = null;
+    let fullReferralLink = '';
+    let toastTimeout = null;
+
+    // ------------------------------------------------------------------------
+    // 5. AUTH STATE LISTENER
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        currentUser = user;
+        initReferralPortal();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 6. INITIALIZE DATA BINDINGS
+    // ------------------------------------------------------------------------
+    function initReferralPortal() {
+      // 1. User Profile Listener (/users/{uid})
+      const userRef = ref(database, `users/${currentUser.uid}`);
+      onValue(userRef, (snapshot) => {
+        if (!snapshot.exists()) return;
+        userProfile = snapshot.val();
+
+        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
+          blockedScreen.style.display = 'flex';
+          return;
+        }
+
+        renderUserProfile();
+      });
+
+      // 2. User Referrals Listener (/referrals/{uid})
+      const userReferralsRef = ref(database, `referrals/${currentUser.uid}`);
+      onValue(userReferralsRef, (snapshot) => {
+        renderReferralHistory(snapshot);
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // 7. RENDER USER PROFILE & LINKS
+    // ------------------------------------------------------------------------
+    function renderUserProfile() {
+      const username = userProfile.username || 'Player';
+      userAvatarLetter.textContent = username.charAt(0).toUpperCase();
+
+      const bal = Number(userProfile.balance || 0);
+      headerBalanceText.textContent = bal.toFixed(2);
+
+      const refCode = userProfile.referralCode || '------';
+      valReferralCode.textContent = refCode;
+
+      // Construct Referral URL dynamically
+      if (refCode && refCode !== '------') {
+        const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
+        // Replace current filename with register.html safely
+        const pathSegments = window.location.pathname.split('/');
+        pathSegments.pop(); // remove referral.html
+        const basePath = pathSegments.join('/');
+        fullReferralLink = `${origin}${basePath ? basePath + '/' : '/'}register.html?ref=${encodeURIComponent(refCode)}`;
+      } else {
+        fullReferralLink = 'Referral code not assigned';
+      }
+
+      valReferralLink.textContent = fullReferralLink;
+
+      // Stats directly from user profile if available
+      const totalCount = Number(userProfile.referralCount || 0);
+      const totalEarned = Number(userProfile.referralEarnings || 0).toFixed(2);
+
+      statTotalRef.textContent = totalCount;
+      statEarningsRef.textContent = `৳${totalEarned}`;
+    }
+
+    // ------------------------------------------------------------------------
+    // 8. RENDER REFERRAL HISTORY & QUALIFIED COUNTS
+    // ------------------------------------------------------------------------
+    function renderReferralHistory(snapshot) {
+      refHistoryList.innerHTML = '';
+
+      if (!snapshot.exists()) {
+        refHistoryList.innerHTML = '<div class="history-empty-box">No referral activity yet.</div>';
+        statQualifiedRef.textContent = '0';
+        statPendingRef.textContent = '0';
+        return;
+      }
+
+      const data = snapshot.val();
+      const records = [];
+      let qualifiedCount = 0;
+      let pendingCount = 0;
+
+      Object.keys(data).forEach((id) => {
+        const item = data[id];
+        item.id = id;
+        records.push(item);
+
+        const status = (item.status || 'pending').toLowerCase();
+        if (status === 'qualified' || status === 'rewarded') {
+          qualifiedCount++;
+        } else {
+          pendingCount++;
+        }
+      });
+
+      // Update calculated stats
+      statQualifiedRef.textContent = qualifiedCount;
+      statPendingRef.textContent = pendingCount;
+
+      // Sort newest first
+      records.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      records.forEach((refItem) => {
+        const rawName = refItem.username || 'User';
+        const maskedName = maskDisplayName(rawName);
+        const status = (refItem.status || 'pending').toLowerCase();
+        const rewardAmount = refItem.reward !== undefined ? `৳${Number(refItem.reward).toFixed(2)}` : '৳40.00';
+        const dateStr = refItem.createdAt ? new Date(refItem.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent';
+
+        const row = document.createElement('div');
+        row.className = 'ref-history-row';
+        row.innerHTML = `
+          <div class="rh-left">
+            <span class="rh-name">${escapeHtml(maskedName)}</span>
+            <span class="rh-time">${escapeHtml(dateStr)}</span>
+          </div>
+          <div class="rh-right">
+            <span class="rh-reward">${escapeHtml(rewardAmount)}</span>
+            <span class="status-pill ${status}">${status}</span>
+          </div>
+        `;
+        refHistoryList.appendChild(row);
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // 9. COPY & SHARE ACTIONS
+    // ------------------------------------------------------------------------
+    btnCopyCode.addEventListener('click', () => {
+      const code = valReferralCode.textContent.trim();
+      if (!code || code === '------') return;
+
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Referral code copied!');
+      }).catch(() => {
+        showToast('Code: ' + code);
+      });
+    });
+
+    btnCopyLink.addEventListener('click', () => {
+      if (!fullReferralLink || fullReferralLink.startsWith('Referral code not')) return;
+
+      navigator.clipboard.writeText(fullReferralLink).then(() => {
+        showToast('Referral link copied to clipboard!');
+      }).catch(() => {
+        showToast('Unable to copy automatically');
+      });
+    });
+
+    btnShareLink.addEventListener('click', async () => {
+      if (!fullReferralLink || fullReferralLink.startsWith('Referral code not')) return;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'THE GAME WITH FUN',
+            text: 'Join me on THE GAME WITH FUN! Play game-style challenges and enjoy the entertainment:',
+            url: fullReferralLink
+          });
+        } catch (err) {
+          // User canceled or share failed -> fallback to copy
+          copyLinkFallback();
+        }
+      } else {
+        copyLinkFallback();
+      }
+    });
+
+    function copyLinkFallback() {
+      navigator.clipboard.writeText(fullReferralLink).then(() => {
+        showToast('Share link copied to clipboard!');
+      });
+    }
+
+    function showToast(msg) {
+      toastMessage.textContent = msg;
+      toastNotification.classList.add('show');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastNotification.classList.remove('show');
+      }, 2500);
+    }
+
+    // ------------------------------------------------------------------------
+    // 10. HELPERS & SANITIZATION
+    // ------------------------------------------------------------------------
+    function maskDisplayName(name) {
+      if (!name) return 'Player';
+      if (name.length <= 4) return name.substring(0, 1) + '***';
+      return name.substring(0, 2) + '***' + name.substring(name.length - 2);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    btnBlockedLogout.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
