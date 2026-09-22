@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Profile | THE GAME WITH FUN</title>
+  <meta name="description" content="View your personal player profile, account security status, VIP rank, activity streaks, and financial metrics on THE GAME WITH FUN.">
+
+  <style>
+    /* ==========================================================================
+       ULTRA-PREMIUM CYBER/GAMING DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-base: #06080d;
+      --bg-surface: #0a0e17;
+      --bg-card: rgba(14, 19, 32, 0.74);
+      --bg-card-hover: rgba(20, 27, 46, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(245, 158, 11, 0.35);
+      --border-cyan: rgba(0, 240, 255, 0.25);
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
+
+      --cyan-neon: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+
+      --purple-neon: #a855f7;
+      --emerald-neon: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --ruby-neon: #f43f5e;
+
+      --text-white: #ffffff;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --smooth-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 10% 8%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
+      background-attachment: fixed;
+      padding-bottom: 95px; /* Ensures fixed bottom navigation never overlaps content */
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 3rem;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ==========================================================================
+       HEADER BAR
+       ========================================================================== */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 13, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-back-link {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      transition: all 0.2s var(--smooth-ease);
+    }
+
+    .btn-back-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cyan-neon);
+      transform: translateX(-2px);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 800;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-logout-header {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: var(--ruby-neon);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-logout-header:hover {
+      background: var(--ruby-neon);
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       PAGE BANNER
+       ========================================================================== */
+    .page-banner {
+      padding: 1.5rem 0 0.8rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       1. HERO PROFILE CARD
+       ========================================================================== */
+    .hero-profile-card {
+      background: linear-gradient(145deg, rgba(24, 30, 52, 0.95), rgba(10, 14, 25, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 1.85rem 1.4rem;
+      margin: 0.5rem 0 1.25rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65), 0 0 35px rgba(245, 158, 11, 0.12);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-profile-card::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 86px;
+      height: 86px;
+      margin-bottom: 1rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--gold-primary), var(--cyan-neon), var(--purple-neon), var(--gold-primary));
+      animation: rotateRing 8s linear infinite;
+      filter: blur(2px);
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .avatar-core {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      background: #090e1a;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+      box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.25);
+    }
+
+    .profile-name-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.3px;
+      margin-bottom: 2px;
+    }
+
+    .profile-handle {
+      font-size: 0.85rem;
+      color: var(--cyan-neon);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+
+    .profile-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-pill {
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.5px;
+    }
+
+    .profile-pill.account-active {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--emerald-neon);
+    }
+
+    .profile-pill.account-pending {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--gold-primary);
+    }
+
+    .profile-pill.account-blocked,
+    .profile-pill.account-suspended {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: var(--ruby-neon);
+    }
+
+    .profile-pill.vip-active {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--border-glow);
+      color: var(--gold-primary);
+    }
+
+    .profile-pill.vip-expired {
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #fda4af;
+    }
+
+    .profile-pill.vip-none {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+    }
+
+    /* Ref Code Quick Card */
+    .hero-ref-bar {
+      background: rgba(0, 240, 255, 0.04);
+      border: 1px dashed var(--cyan-neon);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-ref-text {
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--cyan-neon);
+      letter-spacing: 1.5px;
+    }
+
+    .btn-copy-ref {
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-ref:hover {
+      background: var(--cyan-neon);
+      color: #04060a;
+    }
+
+    /* ==========================================================================
+       DASHBOARD GRID & CARDS
+       ========================================================================== */
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.15rem;
+    }
+
+    @media (min-width: 768px) {
+      .dash-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .col-span-2 {
+        grid-column: span 2;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .dash-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .col-span-2-lg {
+        grid-column: span 2;
+      }
+    }
+
+    .ui-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .ui-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: var(--bg-card-hover);
+    }
+
+    .card-heading {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      letter-spacing: -0.2px;
+    }
+
+    /* ==========================================================================
+       2. STATISTICS TILES GRID
+       ========================================================================== */
+    .stats-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .stats-tiles-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-tile {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.85rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .stat-num {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ==========================================================================
+       3. ACCOUNT & SECURITY DETAILS LIST
+       ========================================================================== */
+    .details-table-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0.9rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+    }
+
+    .detail-key {
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .detail-val {
+      color: #fff;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-chip-btn {
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--cyan-neon);
+      font-size: 0.68rem;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .copy-chip-btn:hover {
+      background: var(--cyan-neon);
+      color: #04060a;
+    }
+
+    /* ==========================================================================
+       4. QUICK ACTIONS / PORTAL SHORTCUTS
+       ========================================================================== */
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 480px) {
+      .shortcuts-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .shortcut-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md);
+      padding: 1rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s var(--smooth-ease);
+      text-align: center;
+    }
+
+    .shortcut-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan-neon);
+      transform: translateY(-2px);
+    }
+
+    .shortcut-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .shortcut-name {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    /* Logout Action Button */
+    .btn-danger-logout {
+      width: 100%;
+      padding: 0.95rem;
+      border-radius: var(--radius-md);
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: var(--ruby-neon);
+      font-size: 0.88rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+
+    .btn-danger-logout:hover {
+      background: var(--ruby-neon);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
+    }
+
+    /* ==========================================================================
+       TOAST NOTIFICATION (POPUP)
+       ========================================================================== */
+    .toast-popup {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(10, 14, 23, 0.95);
+      border: 1px solid var(--cyan-neon);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .toast-popup.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== */
+    .bottom-nav-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: rgba(10, 14, 23, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @media (min-width: 1024px) {
+      .bottom-nav-fixed {
+        display: none;
+      }
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      padding: 6px 10px;
+    }
+
+    .nav-tab-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--cyan-neon);
+    }
+
+    /* Blocked Account Overlay */
+    .blocked-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #05070b;
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .blocked-card {
+      background: #111524;
+      border: 1px solid var(--ruby-neon);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.75rem;
+      max-width: 420px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="toast-popup" role="status" aria-live="polite">
+    <span style="color: var(--cyan-neon);">✓</span>
+    <span id="toastMessage">Copied to clipboard!</span>
+  </div>
+
+  <!-- BLOCKED ACCOUNT SCREEN -->
+  <div id="blockedScreen" class="blocked-screen">
+    <div class="blocked-card">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
+      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
+        Your account status is currently restricted. You cannot access player profile features.
+      </p>
+      <button id="btnBlockedLogout" style="padding: 0.8rem 1.6rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
+        LOG OUT
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOP APP HEADER
+       ========================================================================== -->
+  <header class="top-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <a href="dashboard.html" class="btn-back-link" aria-label="Back to Dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div class="brand-meta">
+          <span class="brand-name">THE GAME WITH FUN</span>
+          <span class="brand-sub">Profile & Security</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="btnHeaderLogout" class="btn-logout-header" aria-label="Logout Account">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-banner">
+      <h1 class="page-title">
+        <span>👤</span>
+        <span>My Profile</span>
+      </h1>
+      <p class="page-subtitle">Account credentials, standing, streak milestones, and statistics.</p>
+    </div>
+
+    <!-- 1. HERO PROFILE CARD -->
+    <div class="hero-profile-card">
+      <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <div class="avatar-core" id="profileAvatarInitial">P</div>
+      </div>
+
+      <h2 class="profile-name-title" id="profileWelcomeName">Welcome, Player</h2>
+      <div class="profile-handle" id="profileUsernameHandle">@player</div>
+
+      <div class="profile-badge-row">
+        <span id="badgeAccountStatus" class="profile-pill account-active">ACTIVE</span>
+        <span id="badgeVipStatus" class="profile-pill vip-none">NO VIP</span>
+      </div>
+
+      <!-- Quick Referral Code Copy Bar -->
+      <div class="hero-ref-bar">
+        <span style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800;">Referral:</span>
+        <span class="hero-ref-text" id="heroRefCode">------</span>
+        <button type="button" id="btnCopyHeroRef" class="btn-copy-ref">Copy</button>
+      </div>
+    </div>
+
+    <!-- 2. CONTENT GRID -->
+    <div class="dash-grid">
+
+      <!-- Financial & Performance Statistics (7 Metrics) -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Performance & Assets</span>
+          <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">REALTIME METRICS</span>
+        </div>
+
+        <div class="stats-tiles-grid">
+          <div class="stat-tile">
+            <span class="stat-num" id="statBalance" style="color: var(--cyan-neon);">৳0.00</span>
+            <span class="stat-label">Available Balance</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statTotalEarnings" style="color: #fff;">৳0.00</span>
+            <span class="stat-label">Total Earnings</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statTotalWithdrawal" style="color: var(--gold-primary);">৳0.00</span>
+            <span class="stat-label">Total Withdrawn</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statReferralEarnings" style="color: var(--emerald-neon);">৳0.00</span>
+            <span class="stat-label">Referral Earned</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statReferralCount">0</span>
+            <span class="stat-label">Referral Count</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statLoginStreak">0</span>
+            <span class="stat-label">Login Streak</span>
+          </div>
+          <div class="stat-tile" style="grid-column: span 2;">
+            <span class="stat-num" id="statTaskStreak" style="color: var(--purple-neon);">0</span>
+            <span class="stat-label">Task Streak</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account & Security Information Card -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Account Information</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">SECURITY AUDIT</span>
+        </div>
+
+        <div class="details-table-list">
+          <div class="detail-row">
+            <span class="detail-key">Username</span>
+            <span class="detail-val" id="detUsername">Player</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Email Address</span>
+            <span class="detail-val" id="detEmail">player@example.com</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">User ID (UID)</span>
+            <span class="detail-val">
+              <span id="detUidShort" style="font-family: monospace; font-size: 0.8rem;">------</span>
+              <button type="button" id="btnCopyUid" class="copy-chip-btn">COPY UID</button>
+            </span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Referral Code</span>
+            <span class="detail-val">
+              <span id="detReferralCode" style="font-family: monospace; font-size: 0.85rem; color: var(--cyan-neon);">------</span>
+              <button type="button" id="btnCopyDetRef" class="copy-chip-btn">COPY</button>
+            </span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Referred By</span>
+            <span class="detail-val" id="detReferredBy">None</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">VIP Expiry Date</span>
+            <span class="detail-val" id="detVipExpiry">None</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Joined Platform</span>
+            <span class="detail-val" id="detCreatedAt">---</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Last Login Date</span>
+            <span class="detail-val" id="detLastLogin">---</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Last Task Date</span>
+            <span class="detail-val" id="detLastTask">---</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-key">Account Status</span>
+            <span class="detail-val" id="detAccountStatusText" style="color: var(--emerald-neon);">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Platform Shortcuts Card -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Quick Shortcuts</span>
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 800;">PORTAL</span>
+        </div>
+
+        <div class="shortcuts-grid">
+          <a href="balance.html" class="shortcut-card">
+            <span class="shortcut-icon">💳</span>
+            <span class="shortcut-name">Wallet</span>
+          </a>
+          <a href="withdraw.html" class="shortcut-card">
+            <span class="shortcut-icon">💸</span>
+            <span class="shortcut-name">Withdraw</span>
+          </a>
+          <a href="vip.html" class="shortcut-card">
+            <span class="shortcut-icon">👑</span>
+            <span class="shortcut-name">VIP Tiers</span>
+          </a>
+          <a href="referral.html" class="shortcut-card">
+            <span class="shortcut-icon">👥</span>
+            <span class="shortcut-name">Referral</span>
+          </a>
+          <a href="tasks.html" class="shortcut-card">
+            <span class="shortcut-icon">🎮</span>
+            <span class="shortcut-name">Tasks</span>
+          </a>
+          <a href="history.html" class="shortcut-card">
+            <span class="shortcut-icon">📜</span>
+            <span class="shortcut-name">History</span>
+          </a>
+        </div>
+
+        <button type="button" id="btnMainLogout" class="btn-danger-logout">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>LOG OUT OF PLATFORM</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FIXED BOTTOM NAVIGATION (Mobile)
+       ========================================================================== -->
+  <nav class="bottom-nav-fixed">
+    <a href="dashboard.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="tasks.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <span>Tasks</span>
+    </a>
+    <a href="vip.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
+      <span>VIP</span>
+    </a>
+    <a href="balance.html" class="nav-tab-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+      <span>Wallet</span>
+    </a>
+    <a href="profile.html" class="nav-tab-btn active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       FIREBASE INTEGRATION & CLIENT LOGIC
+       ========================================================================== -->
+  <script type="module">
+    // ------------------------------------------------------------------------
+    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
+    // ------------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // ------------------------------------------------------------------------
+    // 2. FIREBASE CONFIGURATION (REPLACE WITH YOUR PROJECT CONFIG)
+    // ------------------------------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    // ------------------------------------------------------------------------
+    // 3. UI ELEMENT HOOKS
+    // ------------------------------------------------------------------------
+    const blockedScreen = document.getElementById('blockedScreen');
+    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
+    const btnHeaderLogout = document.getElementById('btnHeaderLogout');
+    const btnMainLogout = document.getElementById('btnMainLogout');
+
+    // Hero Profile Card
+    const profileAvatarInitial = document.getElementById('profileAvatarInitial');
+    const profileWelcomeName = document.getElementById('profileWelcomeName');
+    const profileUsernameHandle = document.getElementById('profileUsernameHandle');
+    const badgeAccountStatus = document.getElementById('badgeAccountStatus');
+    const badgeVipStatus = document.getElementById('badgeVipStatus');
+    const heroRefCode = document.getElementById('heroRefCode');
+    const btnCopyHeroRef = document.getElementById('btnCopyHeroRef');
+
+    // Statistics
+    const statBalance = document.getElementById('statBalance');
+    const statTotalEarnings = document.getElementById('statTotalEarnings');
+    const statTotalWithdrawal = document.getElementById('statTotalWithdrawal');
+    const statReferralEarnings = document.getElementById('statReferralEarnings');
+    const statReferralCount = document.getElementById('statReferralCount');
+    const statLoginStreak = document.getElementById('statLoginStreak');
+    const statTaskStreak = document.getElementById('statTaskStreak');
+
+    // Details List
+    const detUsername = document.getElementById('detUsername');
+    const detEmail = document.getElementById('detEmail');
+    const detUidShort = document.getElementById('detUidShort');
+    const btnCopyUid = document.getElementById('btnCopyUid');
+    const detReferralCode = document.getElementById('detReferralCode');
+    const btnCopyDetRef = document.getElementById('btnCopyDetRef');
+    const detReferredBy = document.getElementById('detReferredBy');
+    const detVipExpiry = document.getElementById('detVipExpiry');
+    const detCreatedAt = document.getElementById('detCreatedAt');
+    const detLastLogin = document.getElementById('detLastLogin');
+    const detLastTask = document.getElementById('detLastTask');
+    const detAccountStatusText = document.getElementById('detAccountStatusText');
+
+    // Toast
+    const toastNotification = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+
+    // ------------------------------------------------------------------------
+    // 4. CLIENT RUNTIME STATE
+    // ------------------------------------------------------------------------
+    let currentUser = null;
+    let userProfile = null;
+    let toastTimeout = null;
+
+    // ------------------------------------------------------------------------
+    // 5. AUTH STATE LISTENER
+    // ------------------------------------------------------------------------
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        currentUser = user;
+        initProfileData();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 6. INITIALIZE DATA STREAM
+    // ------------------------------------------------------------------------
+    function initProfileData() {
+      const userRef = ref(database, `users/${currentUser.uid}`);
+      onValue(userRef, (snapshot) => {
+        if (!snapshot.exists()) return;
+        userProfile = snapshot.val();
+
+        // Handle blocked/suspended account state
+        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
+          blockedScreen.style.display = 'flex';
+          return;
+        }
+
+        renderProfileUI();
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // 7. RENDER PROFILE UI
+    // ------------------------------------------------------------------------
+    function renderProfileUI() {
+      const username = userProfile.username || 'Player';
+      const email = userProfile.email || currentUser.email || 'N/A';
+      const initial = username.charAt(0).toUpperCase();
+
+      // Avatar & Names
+      profileAvatarInitial.textContent = initial;
+      profileWelcomeName.textContent = `Welcome, ${username}`;
+      profileUsernameHandle.textContent = `@${username.toLowerCase()}`;
+
+      // Account Status Badge
+      const accStatus = (userProfile.accountStatus || 'active').toLowerCase();
+      badgeAccountStatus.textContent = accStatus.toUpperCase();
+      badgeAccountStatus.className = `profile-pill account-${accStatus}`;
+      detAccountStatusText.textContent = capitalizeFirst(accStatus);
+      detAccountStatusText.style.color = (accStatus === 'active') ? 'var(--emerald-neon)' : 'var(--gold-primary)';
+
+      // VIP Status Calculations
+      const vipLevel = Number(userProfile.vipLevel || 0);
+      const rawVipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
+      const now = Date.now();
+      let isVipActive = false;
+      let isVipExpired = false;
+
+      if (rawVipStatus === 'active' && vipLevel > 0) {
+        if (userProfile.vipExpiry) {
+          const expTime = new Date(userProfile.vipExpiry).getTime();
+          if (!isNaN(expTime) && expTime < now) {
+            isVipExpired = true;
+          } else {
+            isVipActive = true;
+          }
+        } else {
+          isVipActive = true;
+        }
+      }
+
+      if (isVipActive) {
+        badgeVipStatus.className = 'profile-pill vip-active';
+        badgeVipStatus.textContent = `VIP ${vipLevel} ACTIVE`;
+      } else if (isVipExpired) {
+        badgeVipStatus.className = 'profile-pill vip-expired';
+        badgeVipStatus.textContent = 'VIP EXPIRED';
+      } else {
+        badgeVipStatus.className = 'profile-pill vip-none';
+        badgeVipStatus.textContent = 'NO VIP';
+      }
+
+      // Referral Code Display
+      const refCode = userProfile.referralCode || '------';
+      heroRefCode.textContent = refCode;
+      detReferralCode.textContent = refCode;
+
+      // Statistics (Formatted safely with 0 fallbacks)
+      statBalance.textContent = `৳${Number(userProfile.balance || 0).toFixed(2)}`;
+      statTotalEarnings.textContent = `৳${Number(userProfile.totalEarnings || 0).toFixed(2)}`;
+      statTotalWithdrawal.textContent = `৳${Number(userProfile.totalWithdrawal || 0).toFixed(2)}`;
+      statReferralEarnings.textContent = `৳${Number(userProfile.referralEarnings || 0).toFixed(2)}`;
+      statReferralCount.textContent = userProfile.referralCount || 0;
+      statLoginStreak.textContent = userProfile.loginStreak || 0;
+      statTaskStreak.textContent = userProfile.taskStreak || 0;
+
+      // Account & Security Details
+      detUsername.textContent = username;
+      detEmail.textContent = email;
+
+      const rawUid = currentUser.uid;
+      detUidShort.textContent = maskUid(rawUid);
+
+      // Mask referredBy if present
+      if (userProfile.referredBy) {
+        detReferredBy.textContent = maskCode(userProfile.referredBy);
+      } else {
+        detReferredBy.textContent = 'None';
+      }
+
+      detVipExpiry.textContent = userProfile.vipExpiry ? formatReadableDate(userProfile.vipExpiry) : 'None';
+      detCreatedAt.textContent = userProfile.createdAt ? formatReadableDate(userProfile.createdAt) : 'Recent';
+      detLastLogin.textContent = userProfile.lastLoginDate ? formatReadableDate(userProfile.lastLoginDate) : 'Today';
+      detLastTask.textContent = userProfile.lastTaskDate ? formatReadableDate(userProfile.lastTaskDate) : 'None';
+    }
+
+    // ------------------------------------------------------------------------
+    // 8. CLIPBOARD COPY HANDLERS
+    // ------------------------------------------------------------------------
+    function copyText(val, successLabel) {
+      if (!val || val === '------') return;
+      navigator.clipboard.writeText(val).then(() => {
+        showToast(successLabel);
+      }).catch(() => {
+        showToast(val);
+      });
+    }
+
+    btnCopyHeroRef.addEventListener('click', () => {
+      copyText(userProfile?.referralCode, 'Referral code copied!');
+    });
+
+    btnCopyDetRef.addEventListener('click', () => {
+      copyText(userProfile?.referralCode, 'Referral code copied!');
+    });
+
+    btnCopyUid.addEventListener('click', () => {
+      copyText(currentUser?.uid, 'UID copied to clipboard!');
+    });
+
+    function showToast(msg) {
+      toastMessage.textContent = msg;
+      toastNotification.classList.add('show');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastNotification.classList.remove('show');
+      }, 2500);
+    }
+
+    // ------------------------------------------------------------------------
+    // 9. LOGOUT ACTIONS
+    // ------------------------------------------------------------------------
+    async function doLogout() {
+      try {
+        await signOut(auth);
+      } finally {
+        window.location.href = 'login.html';
+      }
+    }
+
+    btnHeaderLogout.addEventListener('click', doLogout);
+    btnMainLogout.addEventListener('click', doLogout);
+    btnBlockedLogout.addEventListener('click', doLogout);
+
+    // ------------------------------------------------------------------------
+    // 10. FORMATTING & MASKING HELPERS
+    // ------------------------------------------------------------------------
+    function maskUid(uid) {
+      if (!uid || uid.length < 8) return uid || '------';
+      return uid.slice(0, 4) + '...' + uid.slice(-4);
+    }
+
+    function maskCode(code) {
+      if (!code) return 'None';
+      const str = String(code);
+      if (str.length <= 4) return str.slice(0, 1) + '***';
+      return str.slice(0, 3) + '***' + str.slice(-2);
+    }
+
+    function formatReadableDate(val) {
+      if (!val) return '---';
+      try {
+        const d = new Date(val);
+        if (isNaN(d.getTime())) return '---';
+        return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+      } catch {
+        return '---';
+      }
+    }
+
+    function capitalizeFirst(str) {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  </script>
+</body>
+</html>
