@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Referral | THE GAME WITH FUN</title>
-  <meta name="description" content="Invite friends to THE GAME WITH FUN and earn promotional game rewards. Share your custom referral link today.">
+  <title>Referral Arena | THE GAME WITH FUN</title>
+  <meta name="description" content="3-Level Referral System for THE GAME WITH FUN. Earn ৳60 for Level 1, ৳30 for Level 2, and ৳15 for Level 3 qualified referrals.">
 
   <style>
     /* ==========================================================================
@@ -13,8 +13,8 @@
     :root {
       --bg-base: #06080d;
       --bg-surface: #0a0e17;
-      --bg-card: rgba(14, 19, 32, 0.74);
-      --bg-card-hover: rgba(20, 27, 46, 0.88);
+      --bg-card: rgba(14, 19, 32, 0.78);
+      --bg-card-hover: rgba(20, 27, 46, 0.92);
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-glow: rgba(245, 158, 11, 0.35);
       --border-cyan: rgba(0, 240, 255, 0.25);
@@ -28,8 +28,10 @@
       --cyan-gradient: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
 
       --purple-neon: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.35);
+      --purple-gradient: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7e22ce 100%);
+
       --emerald-neon: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.35);
       --ruby-neon: #f43f5e;
 
       --text-white: #ffffff;
@@ -37,9 +39,9 @@
       --text-muted: #94a3b8;
       --text-dim: #64748b;
 
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
       --radius-full: 9999px;
 
       --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -65,10 +67,10 @@
     body {
       background-image:
         radial-gradient(circle at 10% 8%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.07) 0%, transparent 50%),
         radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
       background-attachment: fixed;
-      padding-bottom: 95px; /* Room for mobile fixed bottom nav */
+      padding-bottom: 95px;
     }
 
     @media (min-width: 1024px) {
@@ -96,9 +98,7 @@
       padding: 0 1rem;
     }
 
-    /* ==========================================================================
-       HEADER BAR
-       ========================================================================== */
+    /* Top Header */
     .top-header {
       position: sticky;
       top: 0;
@@ -202,9 +202,7 @@
       color: var(--gold-primary);
     }
 
-    /* ==========================================================================
-       PAGE BANNER
-       ========================================================================== */
+    /* Page Banner */
     .page-banner {
       padding: 1.5rem 0 0.8rem;
     }
@@ -226,7 +224,7 @@
     }
 
     /* ==========================================================================
-       HERO CARD: INVITE & EARN ৳40
+       HERO REWARD BANNER
        ========================================================================== */
     .hero-referral-card {
       background: linear-gradient(145deg, rgba(26, 32, 54, 0.95), rgba(11, 15, 26, 0.95));
@@ -265,41 +263,52 @@
     }
 
     .hero-heading {
-      font-size: 1.45rem;
+      font-size: 1.55rem;
       font-weight: 900;
       color: #fff;
       letter-spacing: -0.3px;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
     }
 
-    .hero-reward-pill {
-      display: inline-block;
-      padding: 5px 14px;
+    .hero-tiers-pill-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 0.85rem;
+    }
+
+    .tier-chip {
+      padding: 4px 12px;
       border-radius: var(--radius-full);
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid var(--border-glow);
-      color: var(--gold-primary);
-      font-size: 1.15rem;
+      font-size: 0.76rem;
       font-weight: 900;
       letter-spacing: 0.5px;
-      margin-bottom: 0.65rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
+    .tier-chip.l1 { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--border-glow); color: var(--gold-primary); }
+    .tier-chip.l2 { background: rgba(0, 240, 255, 0.15); border: 1px solid var(--border-cyan); color: var(--cyan-neon); }
+    .tier-chip.l3 { background: rgba(168, 85, 247, 0.15); border: 1px solid var(--purple-glow); color: var(--purple-neon); }
+
     .hero-disclaimer-note {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--text-dim);
-      max-width: 520px;
+      max-width: 540px;
       margin: 0 auto;
       line-height: 1.45;
     }
 
     /* ==========================================================================
-       DASHBOARD GRID & CARDS
+       GRID SYSTEM & CARDS
        ========================================================================== */
     .dash-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.15rem;
+      margin-bottom: 1.5rem;
     }
 
     @media (min-width: 768px) {
@@ -348,9 +357,7 @@
       letter-spacing: -0.2px;
     }
 
-    /* ==========================================================================
-       CODE & LINK CARDS
-       ========================================================================== */
+    /* Codes & Links */
     .code-box-display {
       background: rgba(0, 240, 255, 0.04);
       border: 1px dashed var(--cyan-neon);
@@ -380,16 +387,12 @@
       background: var(--cyan-gradient);
       color: #04060a;
       transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       white-space: nowrap;
     }
 
     .btn-action-accent:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.15);
       box-shadow: 0 0 15px var(--cyan-glow);
-      transform: translateY(-1px);
     }
 
     .link-box-display {
@@ -431,7 +434,6 @@
     .btn-action-gold:hover {
       filter: brightness(1.1);
       box-shadow: 0 0 15px var(--gold-glow);
-      transform: translateY(-1px);
     }
 
     .btn-action-outline {
@@ -455,11 +457,81 @@
       background: rgba(255, 255, 255, 0.08);
       border-color: var(--cyan-neon);
       color: var(--cyan-neon);
-      transform: translateY(-1px);
     }
 
     /* ==========================================================================
-       STATISTICS GRID (4 TILES)
+       3 REFERRAL LEVEL CARDS (L1, L2, L3)
+       ========================================================================== */
+    .tiers-card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .tiers-card-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .tier-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .tier-box:hover {
+      transform: translateY(-3px);
+    }
+
+    .tier-box.level-1 { border-top: 3px solid var(--gold-primary); }
+    .tier-box.level-2 { border-top: 3px solid var(--cyan-neon); }
+    .tier-box.level-3 { border-top: 3px solid var(--purple-neon); }
+
+    .tier-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-badge-title {
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .level-1 .tier-badge-title { background: rgba(245, 158, 11, 0.15); color: var(--gold-primary); border: 1px solid var(--border-glow); }
+    .level-2 .tier-badge-title { background: rgba(0, 240, 255, 0.15); color: var(--cyan-neon); border: 1px solid var(--border-cyan); }
+    .level-3 .tier-badge-title { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid var(--purple-glow); }
+
+    .tier-amount {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: monospace;
+      letter-spacing: -0.5px;
+    }
+
+    .tier-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       STATISTICS (6 TILES)
        ========================================================================== */
     .stats-tiles-grid {
       display: grid;
@@ -469,7 +541,13 @@
 
     @media (min-width: 640px) {
       .stats-tiles-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .stats-tiles-grid {
+        grid-template-columns: repeat(6, 1fr);
       }
     }
 
@@ -485,14 +563,15 @@
     }
 
     .stat-num {
-      font-size: 1.55rem;
+      font-size: 1.5rem;
       font-weight: 900;
       color: #fff;
       line-height: 1.1;
+      font-family: monospace;
     }
 
     .stat-label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 800;
       color: var(--text-dim);
       text-transform: uppercase;
@@ -500,49 +579,142 @@
     }
 
     /* ==========================================================================
-       HOW IT WORKS STEPS & FAIR PLAY CARDS
+       REFERRAL TREE VISUALIZATION (LEVELS 1, 2, 3)
        ========================================================================== */
-    .steps-list {
+    .tree-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-family: var(--font-stack);
+    }
+
+    .tree-branch {
+      border-left: 2px dashed rgba(255, 255, 255, 0.12);
+      padding-left: 1.25rem;
+      margin-left: 0.75rem;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      position: relative;
     }
 
-    .step-item {
+    .tree-node-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 0.75rem 0.85rem;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tree-pill-count {
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+
+    .tree-pill-count.l1 { background: rgba(245, 158, 11, 0.15); color: var(--gold-primary); }
+    .tree-pill-count.l2 { background: rgba(0, 240, 255, 0.15); color: var(--cyan-neon); }
+    .tree-pill-count.l3 { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+    .tree-members-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .tree-member-tag {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: monospace;
+    }
+
+    /* ==========================================================================
+       REFERRAL REWARDS HISTORY TABLE
+       ========================================================================== */
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .history-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
     }
 
-    .step-index-badge {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid var(--cyan-neon);
-      color: var(--cyan-neon);
-      display: grid;
-      place-items: center;
-      font-size: 0.75rem;
-      font-weight: 900;
-      flex-shrink: 0;
-      margin-top: 1px;
+    .history-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
-    .step-content {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.45;
+    .h-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .step-content strong {
+    .h-user {
+      font-size: 0.88rem;
+      font-weight: 800;
       color: #fff;
     }
 
+    .h-date {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .h-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .h-reward {
+      font-size: 0.98rem;
+      font-weight: 900;
+      color: var(--emerald-neon);
+      font-family: monospace;
+    }
+
+    .h-level-badge {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .h-level-badge.l1 { background: rgba(245, 158, 11, 0.15); color: var(--gold-primary); }
+    .h-level-badge.l2 { background: rgba(0, 240, 255, 0.15); color: var(--cyan-neon); }
+    .h-level-badge.l3 { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+    .empty-state-box {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.84rem;
+    }
+
+    /* Policy box */
     .fair-play-box {
       background: rgba(244, 63, 94, 0.06);
       border: 1px solid rgba(244, 63, 94, 0.25);
@@ -554,93 +726,7 @@
       line-height: 1.45;
     }
 
-    /* ==========================================================================
-       REFERRAL HISTORY LOG
-       ========================================================================== */
-    .ref-history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .ref-history-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.85rem 1rem;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-md);
-      transition: all 0.2s ease;
-    }
-
-    .ref-history-row:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .rh-left {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .rh-name {
-      font-size: 0.86rem;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .rh-time {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-    }
-
-    .rh-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 3px;
-    }
-
-    .rh-reward {
-      font-size: 0.95rem;
-      font-weight: 900;
-      color: var(--gold-primary);
-      font-family: monospace;
-    }
-
-    .status-pill {
-      font-size: 0.65rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-
-    .status-pill.qualified,
-    .status-pill.rewarded {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald-neon);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .status-pill.pending {
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--gold-primary);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-
-    .history-empty-box {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      color: var(--text-dim);
-      font-size: 0.84rem;
-    }
-
-    /* ==========================================================================
-       TOAST NOTIFICATION (POPUP)
-       ========================================================================== */
+    /* Toast */
     .toast-popup {
       position: fixed;
       bottom: 80px;
@@ -669,9 +755,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ==========================================================================
-       FIXED BOTTOM NAVIGATION (Mobile)
-       ========================================================================== */
+    /* Fixed Bottom Nav (Mobile) */
     .bottom-nav-fixed {
       position: fixed;
       bottom: 0;
@@ -716,28 +800,6 @@
     .nav-tab-btn.active {
       color: var(--gold-primary);
     }
-
-    /* Blocked Account Overlay */
-    .blocked-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #05070b;
-      z-index: 3000;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    .blocked-card {
-      background: #111524;
-      border: 1px solid var(--ruby-neon);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem 1.75rem;
-      max-width: 420px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-    }
   </style>
 </head>
 <body>
@@ -748,23 +810,7 @@
     <span id="toastMessage">Copied to clipboard!</span>
   </div>
 
-  <!-- BLOCKED ACCOUNT SCREEN -->
-  <div id="blockedScreen" class="blocked-screen">
-    <div class="blocked-card">
-      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
-      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
-      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
-        Your account status is currently restricted. You cannot access referral features.
-      </p>
-      <button id="btnBlockedLogout" style="padding: 0.8rem 1.6rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
-        LOG OUT
-      </button>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       TOP APP HEADER
-       ========================================================================== -->
+  <!-- TOP APP HEADER -->
   <header class="top-header">
     <div class="container header-content">
       <div class="header-left">
@@ -776,7 +822,7 @@
         </a>
         <div class="brand-meta">
           <span class="brand-name">THE GAME WITH FUN</span>
-          <span class="brand-sub">Referral Center</span>
+          <span class="brand-sub">3-Level Referral System</span>
         </div>
       </div>
 
@@ -792,147 +838,186 @@
     </div>
   </header>
 
-  <!-- ==========================================================================
-       MAIN CONTENT
-       ========================================================================== -->
+  <!-- MAIN WORKSPACE -->
   <main class="container">
-    <!-- Page Header -->
     <div class="page-banner">
       <h1 class="page-title">
         <span>👥</span>
-        <span>Referral</span>
+        <span>Referral System</span>
       </h1>
-      <p class="page-subtitle">Invite friends & earn game rewards.</p>
+      <p class="page-subtitle">Earn tiered rewards across 3 generational levels when invited players qualify.</p>
     </div>
 
-    <!-- 1. HERO REWARD CARD -->
+    <!-- HERO REWARD CARD -->
     <div class="hero-referral-card">
       <div class="hero-icon-bubble">🎁</div>
-      <h2 class="hero-heading">Invite & Earn</h2>
-      <div class="hero-reward-pill">৳40 per qualified referral</div>
+      <h2 class="hero-heading">3-Level Referral Arena</h2>
+      <div class="hero-tiers-pill-bar">
+        <span class="tier-chip l1">Level 1: ৳60</span>
+        <span class="tier-chip l2">Level 2: ৳30</span>
+        <span class="tier-chip l3">Level 3: ৳15</span>
+      </div>
       <p class="hero-disclaimer-note">
-        Referral rewards are subject to the platform’s qualification rules and fair-play checks. Credits are granted after verified qualification.
+        Referral rewards are credited only after your referred users complete qualification. Never rewarded upon basic registration alone.
       </p>
     </div>
 
-    <!-- 2. CONTENT GRID -->
-    <div class="dash-grid">
+    <!-- 3 REFERRAL LEVEL BENEFIT CARDS -->
+    <div class="tiers-card-grid">
+      <!-- Level 1 -->
+      <div class="tier-box level-1">
+        <div class="tier-header-row">
+          <span class="tier-badge-title">LEVEL 1 • DIRECT</span>
+          <span style="font-size:0.75rem; color:var(--text-dim); font-weight:800;">1st Generation</span>
+        </div>
+        <div class="tier-amount" style="color:var(--gold-primary);">৳60</div>
+        <p class="tier-desc">Earn ৳60 for each qualified direct referral who registers with your personal code.</p>
+      </div>
 
+      <!-- Level 2 -->
+      <div class="tier-box level-2">
+        <div class="tier-header-row">
+          <span class="tier-badge-title">LEVEL 2 • SECOND TIER</span>
+          <span style="font-size:0.75rem; color:var(--text-dim); font-weight:800;">2nd Generation</span>
+        </div>
+        <div class="tier-amount" style="color:var(--cyan-neon);">৳30</div>
+        <p class="tier-desc">Earn ৳30 when your direct referral's referral qualifies on the platform.</p>
+      </div>
+
+      <!-- Level 3 -->
+      <div class="tier-box level-3">
+        <div class="tier-header-row">
+          <span class="tier-badge-title">LEVEL 3 • THIRD TIER</span>
+          <span style="font-size:0.75rem; color:var(--text-dim); font-weight:800;">3rd Generation</span>
+        </div>
+        <div class="tier-amount" style="color:#c084fc;">৳15</div>
+        <p class="tier-desc">Earn ৳15 from the third tier when that referral satisfies the qualifying condition.</p>
+      </div>
+    </div>
+
+    <!-- CONTENT GRID (CODE & LINK) -->
+    <div class="dash-grid">
       <!-- Referral Code Card -->
       <div class="ui-card">
         <div class="card-heading">
-          <span>Your Referral Code</span>
-          <span style="font-size: 0.68rem; color: var(--cyan-neon); font-weight: 800;">UNIQUE CODE</span>
+          <span>My Referral Code</span>
+          <span style="font-size: 0.68rem; color: var(--cyan-neon); font-weight: 800;">PERMANENT</span>
         </div>
         <div class="code-box-display">
           <span class="code-text" id="valReferralCode">------</span>
-          <button type="button" id="btnCopyCode" class="btn-action-accent" aria-label="Copy Referral Code">
-            <span>COPY</span>
-          </button>
+          <button type="button" id="btnCopyCode" class="btn-action-accent">COPY</button>
         </div>
       </div>
 
       <!-- Referral Link Card -->
-      <div class="ui-card">
+      <div class="ui-card col-span-2-lg">
         <div class="card-heading">
-          <span>Your Referral Link</span>
-          <span style="font-size: 0.68rem; color: var(--gold-primary); font-weight: 800;">SHAREABLE URL</span>
+          <span>My Shareable Referral Link</span>
+          <span style="font-size: 0.68rem; color: var(--gold-primary); font-weight: 800;">URL INVITATION</span>
         </div>
         <div class="link-box-display" id="valReferralLink">Generating link...</div>
         <div class="link-actions-row">
-          <button type="button" id="btnCopyLink" class="btn-action-outline">
-            <span>COPY LINK</span>
-          </button>
-          <button type="button" id="btnShareLink" class="btn-action-gold">
-            <span>SHARE</span>
-          </button>
+          <button type="button" id="btnCopyLink" class="btn-action-outline">COPY LINK</button>
+          <button type="button" id="btnShareLink" class="btn-action-gold">SHARE</button>
         </div>
       </div>
 
-      <!-- Statistics Tile Widget -->
+      <!-- Statistics Tile Widget (6 Metrics) -->
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
-          <span>Referral Performance</span>
-          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">REALTIME DATA</span>
+          <span>Referral Telemetry & Earnings</span>
+          <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">REALTIME DATA</span>
         </div>
         <div class="stats-tiles-grid">
           <div class="stat-tile">
-            <span class="stat-num" id="statTotalRef">0</span>
-            <span class="stat-label">Total Referrals</span>
+            <span class="stat-num" id="statL1Count">0</span>
+            <span class="stat-label">Direct (L1) Users</span>
           </div>
           <div class="stat-tile">
-            <span class="stat-num" id="statQualifiedRef" style="color: var(--emerald-neon);">0</span>
-            <span class="stat-label">Qualified</span>
+            <span class="stat-num" id="statL2Count" style="color:var(--cyan-neon);">0</span>
+            <span class="stat-label">Level 2 Users</span>
           </div>
           <div class="stat-tile">
-            <span class="stat-num" id="statEarningsRef" style="color: var(--gold-primary);">৳0.00</span>
-            <span class="stat-label">Referral Earned</span>
+            <span class="stat-num" id="statL3Count" style="color:#c084fc;">0</span>
+            <span class="stat-label">Level 3 Users</span>
           </div>
           <div class="stat-tile">
-            <span class="stat-num" id="statPendingRef" style="color: var(--cyan-neon);">0</span>
-            <span class="stat-label">Pending</span>
+            <span class="stat-num" id="statL1Earn" style="color:var(--gold-primary);">৳0.00</span>
+            <span class="stat-label">L1 Earned (৳60)</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statL2Earn" style="color:var(--cyan-neon);">৳0.00</span>
+            <span class="stat-label">L2 Earned (৳30)</span>
+          </div>
+          <div class="stat-tile">
+            <span class="stat-num" id="statL3Earn" style="color:#c084fc;">৳0.00</span>
+            <span class="stat-label">L3 Earned (৳15)</span>
           </div>
         </div>
       </div>
 
-      <!-- How It Works Card -->
-      <div class="ui-card">
-        <div class="card-heading">
-          <span>How Referral Works</span>
-          <span style="font-size: 0.68rem; color: var(--text-dim); font-weight: 800;">5 EASY STEPS</span>
-        </div>
-        <div class="steps-list">
-          <div class="step-item">
-            <div class="step-index-badge">1</div>
-            <div class="step-content"><strong>Copy your link:</strong> Get your unique referral code or link above.</div>
-          </div>
-          <div class="step-item">
-            <div class="step-index-badge">2</div>
-            <div class="step-content"><strong>Share with friends:</strong> Send your invite to friends or community groups.</div>
-          </div>
-          <div class="step-item">
-            <div class="step-index-badge">3</div>
-            <div class="step-content"><strong>Friend registers:</strong> Your friend signs up with your referral code attached.</div>
-          </div>
-          <div class="step-item">
-            <div class="step-index-badge">4</div>
-            <div class="step-content"><strong>Qualifying activity:</strong> The referral qualifies after completing system conditions.</div>
-          </div>
-          <div class="step-item">
-            <div class="step-index-badge">5</div>
-            <div class="step-content"><strong>Reward granted:</strong> The ৳40 game credit is authorized to your wallet.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fair Play / Abuse Policy Card -->
-      <div class="ui-card">
-        <div class="card-heading">
-          <span>Fair Play Policy</span>
-          <span style="font-size: 0.68rem; color: var(--ruby-neon); font-weight: 800;">RULES</span>
-        </div>
-        <div class="fair-play-box">
-          ⚠️ <strong>Strict Policy:</strong> Self-referrals, fake registrations, and duplicate accounts are strictly forbidden. System algorithms flag multi-account abuse, resulting in permanent restriction.
-        </div>
-      </div>
-
-      <!-- Referral History Card -->
+      <!-- Visual Referral Tree Structure -->
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
-          <span>Referral History</span>
-          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 800;">ACTIVITY LOG</span>
+          <span>Referral Hierarchy Tree</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">3-TIER MAP</span>
         </div>
-        <div class="ref-history-list" id="refHistoryList">
-          <div class="history-empty-box">No referral activity yet.</div>
+        <div class="tree-container">
+          <div class="tree-node-title">
+            <span>👑 YOU (Root Player)</span>
+          </div>
+
+          <div class="tree-branch">
+            <div class="tree-node-title">
+              <span>├── Level 1: Direct Referrals (৳60)</span>
+              <span class="tree-pill-count l1" id="treeL1Badge">0 Members</span>
+            </div>
+            <div class="tree-members-preview" id="treeL1List">No direct members yet.</div>
+
+            <div class="tree-branch">
+              <div class="tree-node-title">
+                <span>├── Level 2: Second Generation (৳30)</span>
+                <span class="tree-pill-count l2" id="treeL2Badge">0 Members</span>
+              </div>
+              <div class="tree-members-preview" id="treeL2List">No level 2 members yet.</div>
+
+              <div class="tree-branch">
+                <div class="tree-node-title">
+                  <span>└── Level 3: Third Generation (৳15)</span>
+                  <span class="tree-pill-count l3" id="treeL3Badge">0 Members</span>
+                </div>
+                <div class="tree-members-preview" id="treeL3List">No level 3 members yet.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Fair Play & Anti-Abuse Warning -->
+      <div class="ui-card">
+        <div class="card-heading">
+          <span>Anti-Abuse Policy</span>
+          <span style="font-size: 0.68rem; color: var(--ruby-neon); font-weight: 800;">STRICT</span>
+        </div>
+        <div class="fair-play-box">
+          ⚠️ <strong>Fair-Play Rules:</strong> Self-referral (User A → User A) or looping accounts are blocked by system security. Fake accounts or automated scripts will result in permanent account restriction and reward forfeiture.
+        </div>
+      </div>
+
+      <!-- Referral Rewards History -->
+      <div class="ui-card col-span-2-lg">
+        <div class="card-heading">
+          <span>Earned Referral Rewards History</span>
+          <span style="font-size: 0.72rem; color: var(--emerald-neon); font-weight: 800;">LEDGER</span>
+        </div>
+        <div class="history-list" id="refRewardHistoryList">
+          <div class="empty-state-box">No referral rewards credited yet.</div>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- ==========================================================================
-       FIXED BOTTOM NAVIGATION (Mobile)
-       ========================================================================== -->
+  <!-- FIXED BOTTOM NAVIGATION (MOBILE) -->
   <nav class="bottom-nav-fixed">
     <a href="dashboard.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -946,38 +1031,33 @@
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
       <span>VIP</span>
     </a>
-    <a href="balance.html" class="nav-tab-btn active">
+    <a href="balance.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
       <span>Wallet</span>
     </a>
-    <a href="profile.html" class="nav-tab-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      <span>Profile</span>
+    <a href="referral.html" class="nav-tab-btn active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      <span>Referral</span>
     </a>
   </nav>
 
-  <!-- ==========================================================================
-       FIREBASE INTEGRATION & CLIENT LOGIC
-       ========================================================================== -->
+  <!-- FIREBASE REALTIME DATABASE 3-LEVEL REFERRAL SYSTEM ENGINE -->
   <script type="module">
-    // ------------------------------------------------------------------------
-    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
-    // ------------------------------------------------------------------------
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
       getAuth, 
-      onAuthStateChanged, 
-      signOut 
+      onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { 
       getDatabase, 
       ref, 
-      onValue 
+      onValue, 
+      get, 
+      update, 
+      push, 
+      set 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // ------------------------------------------------------------------------
-    // 2. FIREBASE CONFIGURATION
-    // ------------------------------------------------------------------------
     const firebaseConfig = {
       apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
       authDomain: "game-with-fun-a1988.firebaseapp.com",
@@ -992,236 +1072,343 @@
     const auth = getAuth(app);
     const database = getDatabase(app);
 
-    // ------------------------------------------------------------------------
-    // 3. UI ELEMENT HOOKS
-    // ------------------------------------------------------------------------
+    // UI Hooks
     const headerBalanceText = document.getElementById('headerBalanceText');
     const userAvatarLetter = document.getElementById('userAvatarLetter');
-    const blockedScreen = document.getElementById('blockedScreen');
-    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
-
     const valReferralCode = document.getElementById('valReferralCode');
     const valReferralLink = document.getElementById('valReferralLink');
     const btnCopyCode = document.getElementById('btnCopyCode');
     const btnCopyLink = document.getElementById('btnCopyLink');
     const btnShareLink = document.getElementById('btnShareLink');
 
-    const statTotalRef = document.getElementById('statTotalRef');
-    const statQualifiedRef = document.getElementById('statQualifiedRef');
-    const statEarningsRef = document.getElementById('statEarningsRef');
-    const statPendingRef = document.getElementById('statPendingRef');
-    const refHistoryList = document.getElementById('refHistoryList');
+    // Stats
+    const statL1Count = document.getElementById('statL1Count');
+    const statL2Count = document.getElementById('statL2Count');
+    const statL3Count = document.getElementById('statL3Count');
+    const statL1Earn = document.getElementById('statL1Earn');
+    const statL2Earn = document.getElementById('statL2Earn');
+    const statL3Earn = document.getElementById('statL3Earn');
 
+    // Tree
+    const treeL1Badge = document.getElementById('treeL1Badge');
+    const treeL1List = document.getElementById('treeL1List');
+    const treeL2Badge = document.getElementById('treeL2Badge');
+    const treeL2List = document.getElementById('treeL2List');
+    const treeL3Badge = document.getElementById('treeL3Badge');
+    const treeL3List = document.getElementById('treeL3List');
+
+    const refRewardHistoryList = document.getElementById('refRewardHistoryList');
     const toastNotification = document.getElementById('toastNotification');
     const toastMessage = document.getElementById('toastMessage');
 
-    // ------------------------------------------------------------------------
-    // 4. CLIENT STATE
-    // ------------------------------------------------------------------------
     let currentUser = null;
     let userProfile = null;
     let fullReferralLink = '';
     let toastTimeout = null;
 
-    // ------------------------------------------------------------------------
-    // 5. AUTH STATE LISTENER
-    // ------------------------------------------------------------------------
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = 'login.html';
-      } else {
-        currentUser = user;
-        initReferralPortal();
-      }
-    });
-
-    // ------------------------------------------------------------------------
-    // 6. INITIALIZE DATA BINDINGS
-    // ------------------------------------------------------------------------
-    function initReferralPortal() {
-      // 1. User Profile Listener (/users/{uid})
-      const userRef = ref(database, `users/${currentUser.uid}`);
-      onValue(userRef, (snapshot) => {
-        if (!snapshot.exists()) return;
-        userProfile = snapshot.val();
-
-        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
-          blockedScreen.style.display = 'flex';
-          return;
-        }
-
-        renderUserProfile();
-      });
-
-      // 2. User Referrals Listener (/referrals/{uid})
-      const userReferralsRef = ref(database, `referrals/${currentUser.uid}`);
-      onValue(userReferralsRef, (snapshot) => {
-        renderReferralHistory(snapshot);
-      });
-    }
-
-    // ------------------------------------------------------------------------
-    // 7. RENDER USER PROFILE & LINKS
-    // ------------------------------------------------------------------------
-    function renderUserProfile() {
-      const username = userProfile.username || 'Player';
-      userAvatarLetter.textContent = username.charAt(0).toUpperCase();
-
-      const bal = Number(userProfile.balance || 0);
-      headerBalanceText.textContent = bal.toFixed(2);
-
-      const refCode = userProfile.referralCode || '------';
-      valReferralCode.textContent = refCode;
-
-      // Construct Referral URL dynamically
-      if (refCode && refCode !== '------') {
-        const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
-        // Replace current filename with register.html safely
-        const pathSegments = window.location.pathname.split('/');
-        pathSegments.pop(); // remove referral.html
-        const basePath = pathSegments.join('/');
-        fullReferralLink = `${origin}${basePath ? basePath + '/' : '/'}register.html?ref=${encodeURIComponent(refCode)}`;
-      } else {
-        fullReferralLink = 'Referral code not assigned';
-      }
-
-      valReferralLink.textContent = fullReferralLink;
-
-      // Stats directly from user profile if available
-      const totalCount = Number(userProfile.referralCount || 0);
-      const totalEarned = Number(userProfile.referralEarnings || 0).toFixed(2);
-
-      statTotalRef.textContent = totalCount;
-      statEarningsRef.textContent = `৳${totalEarned}`;
-    }
-
-    // ------------------------------------------------------------------------
-    // 8. RENDER REFERRAL HISTORY & QUALIFIED COUNTS
-    // ------------------------------------------------------------------------
-    function renderReferralHistory(snapshot) {
-      refHistoryList.innerHTML = '';
-
-      if (!snapshot.exists()) {
-        refHistoryList.innerHTML = '<div class="history-empty-box">No referral activity yet.</div>';
-        statQualifiedRef.textContent = '0';
-        statPendingRef.textContent = '0';
-        return;
-      }
-
-      const data = snapshot.val();
-      const records = [];
-      let qualifiedCount = 0;
-      let pendingCount = 0;
-
-      Object.keys(data).forEach((id) => {
-        const item = data[id];
-        item.id = id;
-        records.push(item);
-
-        const status = (item.status || 'pending').toLowerCase();
-        if (status === 'qualified' || status === 'rewarded') {
-          qualifiedCount++;
-        } else {
-          pendingCount++;
-        }
-      });
-
-      // Update calculated stats
-      statQualifiedRef.textContent = qualifiedCount;
-      statPendingRef.textContent = pendingCount;
-
-      // Sort newest first
-      records.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
-      records.forEach((refItem) => {
-        const rawName = refItem.username || 'User';
-        const maskedName = maskDisplayName(rawName);
-        const status = (refItem.status || 'pending').toLowerCase();
-        const rewardAmount = refItem.reward !== undefined ? `৳${Number(refItem.reward).toFixed(2)}` : '৳40.00';
-        const dateStr = refItem.createdAt ? new Date(refItem.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent';
-
-        const row = document.createElement('div');
-        row.className = 'ref-history-row';
-        row.innerHTML = `
-          <div class="rh-left">
-            <span class="rh-name">${escapeHtml(maskedName)}</span>
-            <span class="rh-time">${escapeHtml(dateStr)}</span>
-          </div>
-          <div class="rh-right">
-            <span class="rh-reward">${escapeHtml(rewardAmount)}</span>
-            <span class="status-pill ${status}">${status}</span>
-          </div>
-        `;
-        refHistoryList.appendChild(row);
-      });
-    }
-
-    // ------------------------------------------------------------------------
-    // 9. COPY & SHARE ACTIONS
-    // ------------------------------------------------------------------------
-    btnCopyCode.addEventListener('click', () => {
-      const code = valReferralCode.textContent.trim();
-      if (!code || code === '------') return;
-
-      navigator.clipboard.writeText(code).then(() => {
-        showToast('Referral code copied!');
-      }).catch(() => {
-        showToast('Code: ' + code);
-      });
-    });
-
-    btnCopyLink.addEventListener('click', () => {
-      if (!fullReferralLink || fullReferralLink.startsWith('Referral code not')) return;
-
-      navigator.clipboard.writeText(fullReferralLink).then(() => {
-        showToast('Referral link copied to clipboard!');
-      }).catch(() => {
-        showToast('Unable to copy automatically');
-      });
-    });
-
-    btnShareLink.addEventListener('click', async () => {
-      if (!fullReferralLink || fullReferralLink.startsWith('Referral code not')) return;
-
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: 'THE GAME WITH FUN',
-            text: 'Join me on THE GAME WITH FUN! Play game-style challenges and enjoy the entertainment:',
-            url: fullReferralLink
-          });
-        } catch (err) {
-          // User canceled or share failed -> fallback to copy
-          copyLinkFallback();
-        }
-      } else {
-        copyLinkFallback();
-      }
-    });
-
-    function copyLinkFallback() {
-      navigator.clipboard.writeText(fullReferralLink).then(() => {
-        showToast('Share link copied to clipboard!');
-      });
-    }
-
     function showToast(msg) {
       toastMessage.textContent = msg;
       toastNotification.classList.add('show');
-
       clearTimeout(toastTimeout);
       toastTimeout = setTimeout(() => {
         toastNotification.classList.remove('show');
       }, 2500);
     }
 
-    // ------------------------------------------------------------------------
-    // 10. HELPERS & SANITIZATION
-    // ------------------------------------------------------------------------
-    function maskDisplayName(name) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        initReferralSystem();
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    function initReferralSystem() {
+      // 1. Listen to Profile (/users/{uid})
+      onValue(ref(database, `users/${currentUser.uid}`), (snapshot) => {
+        if (!snapshot.exists()) return;
+        userProfile = snapshot.val();
+        renderUserProfile();
+      });
+
+      // 2. Build 3-Tier Hierarchy Tree & Metrics from /users
+      onValue(ref(database, 'users'), (snapshot) => {
+        if (!snapshot.exists()) return;
+        buildThreeTierNetwork(snapshot.val());
+      });
+
+      // 3. Listen to Transactions for Referral Reward History
+      onValue(ref(database, `transactions/${currentUser.uid}`), (snapshot) => {
+        renderRewardHistory(snapshot.val());
+      });
+    }
+
+    function renderUserProfile() {
+      const username = userProfile.username || 'Player';
+      userAvatarLetter.textContent = username.charAt(0).toUpperCase();
+      headerBalanceText.textContent = Number(userProfile.balance || 0).toFixed(2);
+
+      const refCode = userProfile.referralCode || '------';
+      valReferralCode.textContent = refCode;
+
+      const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
+      const pathParts = window.location.pathname.split('/');
+      pathParts.pop();
+      const basePath = pathParts.join('/');
+      fullReferralLink = `${origin}${basePath ? basePath + '/' : '/'}register.html?ref=${encodeURIComponent(refCode)}`;
+      valReferralLink.textContent = fullReferralLink;
+    }
+
+    // =========================================================================
+    // 3-LEVEL TREE & METRIC BUILDER
+    // =========================================================================
+    function buildThreeTierNetwork(allUsersMap) {
+      const myUid = currentUser.uid;
+
+      const level1Users = [];
+      const level2Users = [];
+      const level3Users = [];
+
+      const l1Uids = new Set();
+      const l2Uids = new Set();
+
+      // Step 1: Find Level 1 (Direct: referredBy === myUid)
+      Object.keys(allUsersMap).forEach((uid) => {
+        const u = allUsersMap[uid];
+        if (u.referredBy === myUid && uid !== myUid) {
+          level1Users.push({ uid, username: u.username || 'User' });
+          l1Uids.add(uid);
+        }
+      });
+
+      // Step 2: Find Level 2 (Referred by any Level 1 user)
+      Object.keys(allUsersMap).forEach((uid) => {
+        const u = allUsersMap[uid];
+        if (u.referredBy && l1Uids.has(u.referredBy) && uid !== myUid && !l1Uids.has(uid)) {
+          level2Users.push({ uid, username: u.username || 'User' });
+          l2Uids.add(uid);
+        }
+      });
+
+      // Step 3: Find Level 3 (Referred by any Level 2 user)
+      Object.keys(allUsersMap).forEach((uid) => {
+        const u = allUsersMap[uid];
+        if (u.referredBy && l2Uids.has(u.referredBy) && uid !== myUid && !l1Uids.has(uid) && !l2Uids.has(uid)) {
+          level3Users.push({ uid, username: u.username || 'User' });
+        }
+      });
+
+      // Update Counts
+      statL1Count.textContent = level1Users.length;
+      statL2Count.textContent = level2Users.length;
+      statL3Count.textContent = level3Users.length;
+
+      // Update Tree UI Badges
+      treeL1Badge.textContent = `${level1Users.length} Members`;
+      treeL2Badge.textContent = `${level2Users.length} Members`;
+      treeL3Badge.textContent = `${level3Users.length} Members`;
+
+      renderTreeList(treeL1List, level1Users, 'No direct members yet.');
+      renderTreeList(treeL2List, level2Users, 'No second tier members yet.');
+      renderTreeList(treeL3List, level3Users, 'No third tier members yet.');
+    }
+
+    function renderTreeList(container, userList, emptyText) {
+      container.innerHTML = '';
+      if (userList.length === 0) {
+        container.textContent = emptyText;
+        return;
+      }
+      userList.slice(0, 10).forEach(u => {
+        const tag = document.createElement('span');
+        tag.className = 'tree-member-tag';
+        tag.textContent = maskUsername(u.username);
+        container.appendChild(tag);
+      });
+      if (userList.length > 10) {
+        const more = document.createElement('span');
+        more.className = 'tree-member-tag';
+        more.textContent = `+${userList.length - 10} more`;
+        container.appendChild(more);
+      }
+    }
+
+    // =========================================================================
+    // RENDER EARNED REWARD HISTORY (LEDGER)
+    // =========================================================================
+    function renderRewardHistory(transactions) {
+      refRewardHistoryList.innerHTML = '';
+
+      let l1Total = 0, l2Total = 0, l3Total = 0;
+      const refTxList = [];
+
+      if (transactions) {
+        Object.keys(transactions).forEach(txId => {
+          const tx = transactions[txId];
+          if (tx.type === 'referral_reward') {
+            refTxList.push(tx);
+            const amt = Number(tx.amount || 0);
+            const lvl = Number(tx.level || 1);
+            if (lvl === 1) l1Total += amt;
+            else if (lvl === 2) l2Total += amt;
+            else if (lvl === 3) l3Total += amt;
+          }
+        });
+      }
+
+      statL1Earn.textContent = `৳${l1Total.toFixed(2)}`;
+      statL2Earn.textContent = `৳${l2Total.toFixed(2)}`;
+      statL3Earn.textContent = `৳${l3Total.toFixed(2)}`;
+
+      if (refTxList.length === 0) {
+        refRewardHistoryList.innerHTML = '<div class="empty-state-box">No referral rewards credited yet.</div>';
+        return;
+      }
+
+      refTxList.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      refTxList.forEach(item => {
+        const lvl = Number(item.level || 1);
+        const amt = Number(item.amount || 0).toFixed(2);
+        const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' }) : 'Recent';
+        const userLabel = item.qualifiedUsername ? maskUsername(item.qualifiedUsername) : 'Referred Player';
+
+        const row = document.createElement('div');
+        row.className = 'history-row';
+        row.innerHTML = `
+          <div class="h-left">
+            <span class="h-user">${escapeHtml(userLabel)}</span>
+            <span class="h-date">${dateStr} • ${escapeHtml(item.description || 'Tier Reward')}</span>
+          </div>
+          <div class="h-right">
+            <span class="h-reward">+৳${amt}</span>
+            <span class="h-level-badge l${lvl}">Level ${lvl} • Credited</span>
+          </div>
+        `;
+        refRewardHistoryList.appendChild(row);
+      });
+    }
+
+    // =========================================================================
+    // AUTOMATED 3-LEVEL QUALIFICATION PROCESSOR
+    // (Call this when a user completes their qualifying event)
+    // =========================================================================
+    export async function process3LevelReferralRewards(db, qualifiedUserId) {
+      if (!qualifiedUserId) return;
+
+      const REWARD_AMOUNTS = { 1: 60, 2: 30, 3: 15 };
+
+      try {
+        // 1. Get Qualified User Details
+        const qSnap = await get(ref(db, `users/${qualifiedUserId}`));
+        if (!qSnap.exists()) return;
+        const qUser = qSnap.val();
+        const qualifiedUsername = qUser.username || 'User';
+
+        let currentParentUid = qUser.referredBy;
+
+        // Traverse exactly 3 levels
+        for (let level = 1; level <= 3; level++) {
+          if (!currentParentUid || currentParentUid === qualifiedUserId) break;
+
+          const beneficiaryUid = currentParentUid;
+          const rewardAmount = REWARD_AMOUNTS[level];
+          const deterministicKey = `${qualifiedUserId}_${beneficiaryUid}_${level}`;
+
+          // Duplicate Protection: Check if reward already credited
+          const rewardCheckRef = ref(db, `referralRewards/${deterministicKey}`);
+          const rewardSnap = await get(rewardCheckRef);
+
+          if (!rewardSnap.exists()) {
+            // Read Beneficiary's Current Wallet
+            const bSnap = await get(ref(db, `users/${beneficiaryUid}`));
+            if (bSnap.exists()) {
+              const bUser = bSnap.val();
+              const newBal = Number(bUser.balance || 0) + rewardAmount;
+              const newRefEarn = Number(bUser.referralEarnings || 0) + rewardAmount;
+
+              // 1. Update Beneficiary's Balance & referralEarnings
+              await update(ref(db, `users/${beneficiaryUid}`), {
+                balance: newBal,
+                referralEarnings: newRefEarn
+              });
+
+              // 2. Record Transaction
+              const txRef = push(ref(db, `transactions/${beneficiaryUid}`));
+              await set(txRef, {
+                type: "referral_reward",
+                amount: rewardAmount,
+                level: level,
+                qualifiedUserId: qualifiedUserId,
+                qualifiedUsername: qualifiedUsername,
+                description: `Level ${level} referral reward`,
+                createdAt: Date.now()
+              });
+
+              // 3. Mark in /referralRewards (Prevents duplicate reward forever)
+              await set(rewardCheckRef, {
+                rewardId: deterministicKey,
+                qualifiedUserId: qualifiedUserId,
+                beneficiaryUid: beneficiaryUid,
+                level: level,
+                amount: rewardAmount,
+                status: "credited",
+                createdAt: Date.now()
+              });
+
+              // Move to next parent in chain
+              currentParentUid = bUser.referredBy || null;
+            } else {
+              break;
+            }
+          } else {
+            // Already processed this reward level, follow chain up
+            const bSnap = await get(ref(db, `users/${beneficiaryUid}`));
+            currentParentUid = bSnap.exists() ? (bSnap.val().referredBy || null) : null;
+          }
+        }
+      } catch (err) {
+        console.error("Referral 3-tier processor error:", err);
+      }
+    }
+
+    // Expose processor to window for integration with qualification triggers
+    window.process3LevelReferralRewards = (uid) => process3LevelReferralRewards(database, uid);
+
+    // =========================================================================
+    // COPY & SHARE INTERACTIONS
+    // =========================================================================
+    btnCopyCode.addEventListener('click', () => {
+      const code = valReferralCode.textContent.trim();
+      if (!code || code === '------') return;
+      navigator.clipboard.writeText(code).then(() => showToast('Referral code copied!'));
+    });
+
+    btnCopyLink.addEventListener('click', () => {
+      if (!fullReferralLink) return;
+      navigator.clipboard.writeText(fullReferralLink).then(() => showToast('3-Level invite link copied!'));
+    });
+
+    btnShareLink.addEventListener('click', async () => {
+      if (!fullReferralLink) return;
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'THE GAME WITH FUN',
+            text: 'Join me on THE GAME WITH FUN! Play games and earn rewards in the 3-level referral arena:',
+            url: fullReferralLink
+          });
+        } catch {}
+      } else {
+        navigator.clipboard.writeText(fullReferralLink).then(() => showToast('Invite link copied!'));
+      }
+    });
+
+    function maskUsername(name) {
       if (!name) return 'Player';
-      if (name.length <= 4) return name.substring(0, 1) + '***';
-      return name.substring(0, 2) + '***' + name.substring(name.length - 2);
+      if (name.length <= 4) return name.slice(0, 1) + '***';
+      return name.slice(0, 2) + '***' + name.slice(-2);
     }
 
     function escapeHtml(text) {
@@ -1233,11 +1420,6 @@
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
-
-    btnBlockedLogout.addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = 'login.html';
-    });
   </script>
 </body>
 </html>
