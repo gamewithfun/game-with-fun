@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Referral Arena | THE GAME WITH FUN</title>
-  <meta name="description" content="3-Level Referral System for THE GAME WITH FUN. Earn ৳60 for Level 1, ৳30 for Level 2, and ৳15 for Level 3 qualified referrals.">
+  <meta name="description" content="3-Level Referral System for THE GAME WITH FUN. Earn ৳60 for Level 1, ৳30 for Level 2, and ৳15 for Level 3 immediately when friends register.">
 
   <style>
     /* ==========================================================================
@@ -79,17 +79,8 @@
       }
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-      border: none;
-      outline: none;
-      cursor: pointer;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; border: none; outline: none; cursor: pointer; }
 
     .container {
       width: 100%;
@@ -202,7 +193,6 @@
       color: var(--gold-primary);
     }
 
-    /* Page Banner */
     .page-banner {
       padding: 1.5rem 0 0.8rem;
     }
@@ -223,9 +213,7 @@
       margin-top: 2px;
     }
 
-    /* ==========================================================================
-       HERO REWARD BANNER
-       ========================================================================== */
+    /* Hero Banner */
     .hero-referral-card {
       background: linear-gradient(145deg, rgba(26, 32, 54, 0.95), rgba(11, 15, 26, 0.95));
       border: 1px solid var(--border-glow);
@@ -301,9 +289,73 @@
       line-height: 1.45;
     }
 
-    /* ==========================================================================
-       GRID SYSTEM & CARDS
-       ========================================================================== */
+    /* 3 Referral Level Benefit Cards */
+    .tiers-card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .tiers-card-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .tier-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      transition: all 0.3s var(--smooth-ease);
+    }
+
+    .tier-box:hover { transform: translateY(-3px); }
+    .tier-box.level-1 { border-top: 3px solid var(--gold-primary); }
+    .tier-box.level-2 { border-top: 3px solid var(--cyan-neon); }
+    .tier-box.level-3 { border-top: 3px solid var(--purple-neon); }
+
+    .tier-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-badge-title {
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .level-1 .tier-badge-title { background: rgba(245, 158, 11, 0.15); color: var(--gold-primary); border: 1px solid var(--border-glow); }
+    .level-2 .tier-badge-title { background: rgba(0, 240, 255, 0.15); color: var(--cyan-neon); border: 1px solid var(--border-cyan); }
+    .level-3 .tier-badge-title { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid var(--purple-glow); }
+
+    .tier-amount {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: monospace;
+      letter-spacing: -0.5px;
+    }
+
+    .tier-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Content Grid */
     .dash-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -357,7 +409,6 @@
       letter-spacing: -0.2px;
     }
 
-    /* Codes & Links */
     .code-box-display {
       background: rgba(0, 240, 255, 0.04);
       border: 1px dashed var(--cyan-neon);
@@ -459,80 +510,7 @@
       color: var(--cyan-neon);
     }
 
-    /* ==========================================================================
-       3 REFERRAL LEVEL CARDS (L1, L2, L3)
-       ========================================================================== */
-    .tiers-card-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .tiers-card-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .tier-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 1.35rem;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 10px;
-      transition: all 0.3s var(--smooth-ease);
-    }
-
-    .tier-box:hover {
-      transform: translateY(-3px);
-    }
-
-    .tier-box.level-1 { border-top: 3px solid var(--gold-primary); }
-    .tier-box.level-2 { border-top: 3px solid var(--cyan-neon); }
-    .tier-box.level-3 { border-top: 3px solid var(--purple-neon); }
-
-    .tier-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .tier-badge-title {
-      font-size: 0.74rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-    }
-
-    .level-1 .tier-badge-title { background: rgba(245, 158, 11, 0.15); color: var(--gold-primary); border: 1px solid var(--border-glow); }
-    .level-2 .tier-badge-title { background: rgba(0, 240, 255, 0.15); color: var(--cyan-neon); border: 1px solid var(--border-cyan); }
-    .level-3 .tier-badge-title { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid var(--purple-glow); }
-
-    .tier-amount {
-      font-size: 2rem;
-      font-weight: 900;
-      color: #fff;
-      font-family: monospace;
-      letter-spacing: -0.5px;
-    }
-
-    .tier-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    /* ==========================================================================
-       STATISTICS (6 TILES)
-       ========================================================================== */
+    /* Stats Grid */
     .stats-tiles-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -578,9 +556,7 @@
       letter-spacing: 0.5px;
     }
 
-    /* ==========================================================================
-       REFERRAL TREE VISUALIZATION (LEVELS 1, 2, 3)
-       ========================================================================== */
+    /* Referral Tree Hierarchy */
     .tree-container {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.06);
@@ -589,7 +565,6 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      font-family: var(--font-stack);
     }
 
     .tree-branch {
@@ -599,7 +574,6 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      position: relative;
     }
 
     .tree-node-title {
@@ -639,9 +613,7 @@
       font-family: monospace;
     }
 
-    /* ==========================================================================
-       REFERRAL REWARDS HISTORY TABLE
-       ========================================================================== */
+    /* History Table */
     .history-list {
       display: flex;
       flex-direction: column;
@@ -714,7 +686,6 @@
       font-size: 0.84rem;
     }
 
-    /* Policy box */
     .fair-play-box {
       background: rgba(244, 63, 94, 0.06);
       border: 1px solid rgba(244, 63, 94, 0.25);
@@ -726,7 +697,6 @@
       line-height: 1.45;
     }
 
-    /* Toast */
     .toast-popup {
       position: fixed;
       bottom: 80px;
@@ -755,7 +725,6 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Fixed Bottom Nav (Mobile) */
     .bottom-nav-fixed {
       position: fixed;
       bottom: 0;
@@ -810,7 +779,7 @@
     <span id="toastMessage">Copied to clipboard!</span>
   </div>
 
-  <!-- TOP APP HEADER -->
+  <!-- TOP HEADER -->
   <header class="top-header">
     <div class="container header-content">
       <div class="header-left">
@@ -822,7 +791,7 @@
         </a>
         <div class="brand-meta">
           <span class="brand-name">THE GAME WITH FUN</span>
-          <span class="brand-sub">3-Level Referral System</span>
+          <span class="brand-sub">Instant 3-Level Referral</span>
         </div>
       </div>
 
@@ -838,31 +807,31 @@
     </div>
   </header>
 
-  <!-- MAIN WORKSPACE -->
+  <!-- MAIN CONTAINER -->
   <main class="container">
     <div class="page-banner">
       <h1 class="page-title">
         <span>👥</span>
         <span>Referral System</span>
       </h1>
-      <p class="page-subtitle">Earn tiered rewards across 3 generational levels when invited players qualify.</p>
+      <p class="page-subtitle">Instant automatic referral rewards across 3 generational tiers upon registration.</p>
     </div>
 
     <!-- HERO REWARD CARD -->
     <div class="hero-referral-card">
       <div class="hero-icon-bubble">🎁</div>
-      <h2 class="hero-heading">3-Level Referral Arena</h2>
+      <h2 class="hero-heading">Instant 3-Level Referral Arena</h2>
       <div class="hero-tiers-pill-bar">
         <span class="tier-chip l1">Level 1: ৳60</span>
         <span class="tier-chip l2">Level 2: ৳30</span>
         <span class="tier-chip l3">Level 3: ৳15</span>
       </div>
       <p class="hero-disclaimer-note">
-        Referral rewards are credited only after your referred users complete qualification. Never rewarded upon basic registration alone.
+        Referral rewards are credited automatically and immediately to the parent balances as soon as a new player registers with a valid code.
       </p>
     </div>
 
-    <!-- 3 REFERRAL LEVEL BENEFIT CARDS -->
+    <!-- 3 REFERRAL LEVEL CARDS -->
     <div class="tiers-card-grid">
       <!-- Level 1 -->
       <div class="tier-box level-1">
@@ -871,7 +840,7 @@
           <span style="font-size:0.75rem; color:var(--text-dim); font-weight:800;">1st Generation</span>
         </div>
         <div class="tier-amount" style="color:var(--gold-primary);">৳60</div>
-        <p class="tier-desc">Earn ৳60 for each qualified direct referral who registers with your personal code.</p>
+        <p class="tier-desc">Direct referrer receives ৳60 immediately after a new player registers with their referral code.</p>
       </div>
 
       <!-- Level 2 -->
@@ -881,7 +850,7 @@
           <span style="font-size:0.75rem; color:var(--text-dim); font-weight:800;">2nd Generation</span>
         </div>
         <div class="tier-amount" style="color:var(--cyan-neon);">৳30</div>
-        <p class="tier-desc">Earn ৳30 when your direct referral's referral qualifies on the platform.</p>
+        <p class="tier-desc">The direct referrer's parent receives ৳30 immediately when an indirect 2nd-generation player registers.</p>
       </div>
 
       <!-- Level 3 -->
@@ -891,7 +860,7 @@
           <span style="font-size:0.75rem; color:var(--text-dim); font-weight:800;">3rd Generation</span>
         </div>
         <div class="tier-amount" style="color:#c084fc;">৳15</div>
-        <p class="tier-desc">Earn ৳15 from the third tier when that referral satisfies the qualifying condition.</p>
+        <p class="tier-desc">The second-level parent's parent receives ৳15 immediately upon 3rd-generation player registration.</p>
       </div>
     </div>
 
@@ -926,7 +895,7 @@
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
           <span>Referral Telemetry & Earnings</span>
-          <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">REALTIME DATA</span>
+          <span style="font-size: 0.72rem; color: var(--gold-primary); font-weight: 800;">REALTIME BALANCE</span>
         </div>
         <div class="stats-tiles-grid">
           <div class="stat-tile">
@@ -960,7 +929,7 @@
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
           <span>Referral Hierarchy Tree</span>
-          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">3-TIER MAP</span>
+          <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;">3-GENERATION NETWORK</span>
         </div>
         <div class="tree-container">
           <div class="tree-node-title">
@@ -1000,7 +969,7 @@
           <span style="font-size: 0.68rem; color: var(--ruby-neon); font-weight: 800;">STRICT</span>
         </div>
         <div class="fair-play-box">
-          ⚠️ <strong>Fair-Play Rules:</strong> Self-referral (User A → User A) or looping accounts are blocked by system security. Fake accounts or automated scripts will result in permanent account restriction and reward forfeiture.
+          ⚠️ <strong>Strict Policy:</strong> Self-referral (User A → User A) or looping accounts are blocked by system security. Duplicate accounts will lead to permanent restriction and balance deduction.
         </div>
       </div>
 
@@ -1008,7 +977,7 @@
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
           <span>Earned Referral Rewards History</span>
-          <span style="font-size: 0.72rem; color: var(--emerald-neon); font-weight: 800;">LEDGER</span>
+          <span style="font-size: 0.72rem; color: var(--emerald-neon); font-weight: 800;">INSTANT LEDGER</span>
         </div>
         <div class="history-list" id="refRewardHistoryList">
           <div class="empty-state-box">No referral rewards credited yet.</div>
@@ -1041,7 +1010,7 @@
     </a>
   </nav>
 
-  <!-- FIREBASE REALTIME DATABASE 3-LEVEL REFERRAL SYSTEM ENGINE -->
+  <!-- FIREBASE REALTIME DATABASE ENGINE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
@@ -1051,11 +1020,7 @@
     import { 
       getDatabase, 
       ref, 
-      onValue, 
-      get, 
-      update, 
-      push, 
-      set 
+      onValue 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
@@ -1081,7 +1046,6 @@
     const btnCopyLink = document.getElementById('btnCopyLink');
     const btnShareLink = document.getElementById('btnShareLink');
 
-    // Stats
     const statL1Count = document.getElementById('statL1Count');
     const statL2Count = document.getElementById('statL2Count');
     const statL3Count = document.getElementById('statL3Count');
@@ -1089,7 +1053,6 @@
     const statL2Earn = document.getElementById('statL2Earn');
     const statL3Earn = document.getElementById('statL3Earn');
 
-    // Tree
     const treeL1Badge = document.getElementById('treeL1Badge');
     const treeL1List = document.getElementById('treeL1List');
     const treeL2Badge = document.getElementById('treeL2Badge');
@@ -1138,7 +1101,7 @@
         buildThreeTierNetwork(snapshot.val());
       });
 
-      // 3. Listen to Transactions for Referral Reward History
+      // 3. Listen to Transactions for Instant Referral Reward History
       onValue(ref(database, `transactions/${currentUser.uid}`), (snapshot) => {
         renderRewardHistory(snapshot.val());
       });
@@ -1235,7 +1198,7 @@
     }
 
     // =========================================================================
-    // RENDER EARNED REWARD HISTORY (LEDGER)
+    // RENDER INSTANT REWARD HISTORY
     // =========================================================================
     function renderRewardHistory(transactions) {
       refRewardHistoryList.innerHTML = '';
@@ -1272,7 +1235,7 @@
         const lvl = Number(item.level || 1);
         const amt = Number(item.amount || 0).toFixed(2);
         const dateStr = item.createdAt ? new Date(item.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' }) : 'Recent';
-        const userLabel = item.qualifiedUsername ? maskUsername(item.qualifiedUsername) : 'Referred Player';
+        const userLabel = item.sourceUsername ? maskUsername(item.sourceUsername) : 'New Player';
 
         const row = document.createElement('div');
         row.className = 'history-row';
@@ -1283,102 +1246,13 @@
           </div>
           <div class="h-right">
             <span class="h-reward">+৳${amt}</span>
-            <span class="h-level-badge l${lvl}">Level ${lvl} • Credited</span>
+            <span class="h-level-badge l${lvl}">Level ${lvl} • Instant</span>
           </div>
         `;
         refRewardHistoryList.appendChild(row);
       });
     }
 
-    // =========================================================================
-    // AUTOMATED 3-LEVEL QUALIFICATION PROCESSOR
-    // (Call this when a user completes their qualifying event)
-    // =========================================================================
-    export async function process3LevelReferralRewards(db, qualifiedUserId) {
-      if (!qualifiedUserId) return;
-
-      const REWARD_AMOUNTS = { 1: 60, 2: 30, 3: 15 };
-
-      try {
-        // 1. Get Qualified User Details
-        const qSnap = await get(ref(db, `users/${qualifiedUserId}`));
-        if (!qSnap.exists()) return;
-        const qUser = qSnap.val();
-        const qualifiedUsername = qUser.username || 'User';
-
-        let currentParentUid = qUser.referredBy;
-
-        // Traverse exactly 3 levels
-        for (let level = 1; level <= 3; level++) {
-          if (!currentParentUid || currentParentUid === qualifiedUserId) break;
-
-          const beneficiaryUid = currentParentUid;
-          const rewardAmount = REWARD_AMOUNTS[level];
-          const deterministicKey = `${qualifiedUserId}_${beneficiaryUid}_${level}`;
-
-          // Duplicate Protection: Check if reward already credited
-          const rewardCheckRef = ref(db, `referralRewards/${deterministicKey}`);
-          const rewardSnap = await get(rewardCheckRef);
-
-          if (!rewardSnap.exists()) {
-            // Read Beneficiary's Current Wallet
-            const bSnap = await get(ref(db, `users/${beneficiaryUid}`));
-            if (bSnap.exists()) {
-              const bUser = bSnap.val();
-              const newBal = Number(bUser.balance || 0) + rewardAmount;
-              const newRefEarn = Number(bUser.referralEarnings || 0) + rewardAmount;
-
-              // 1. Update Beneficiary's Balance & referralEarnings
-              await update(ref(db, `users/${beneficiaryUid}`), {
-                balance: newBal,
-                referralEarnings: newRefEarn
-              });
-
-              // 2. Record Transaction
-              const txRef = push(ref(db, `transactions/${beneficiaryUid}`));
-              await set(txRef, {
-                type: "referral_reward",
-                amount: rewardAmount,
-                level: level,
-                qualifiedUserId: qualifiedUserId,
-                qualifiedUsername: qualifiedUsername,
-                description: `Level ${level} referral reward`,
-                createdAt: Date.now()
-              });
-
-              // 3. Mark in /referralRewards (Prevents duplicate reward forever)
-              await set(rewardCheckRef, {
-                rewardId: deterministicKey,
-                qualifiedUserId: qualifiedUserId,
-                beneficiaryUid: beneficiaryUid,
-                level: level,
-                amount: rewardAmount,
-                status: "credited",
-                createdAt: Date.now()
-              });
-
-              // Move to next parent in chain
-              currentParentUid = bUser.referredBy || null;
-            } else {
-              break;
-            }
-          } else {
-            // Already processed this reward level, follow chain up
-            const bSnap = await get(ref(db, `users/${beneficiaryUid}`));
-            currentParentUid = bSnap.exists() ? (bSnap.val().referredBy || null) : null;
-          }
-        }
-      } catch (err) {
-        console.error("Referral 3-tier processor error:", err);
-      }
-    }
-
-    // Expose processor to window for integration with qualification triggers
-    window.process3LevelReferralRewards = (uid) => process3LevelReferralRewards(database, uid);
-
-    // =========================================================================
-    // COPY & SHARE INTERACTIONS
-    // =========================================================================
     btnCopyCode.addEventListener('click', () => {
       const code = valReferralCode.textContent.trim();
       if (!code || code === '------') return;
