@@ -12,17 +12,17 @@
        ========================================================================== */
     :root {
       --bg-base: #06080d;
-      --bg-card: rgba(13, 18, 30, 0.76);
+      --bg-card: rgba(13, 18, 30, 0.78);
       --bg-card-border: rgba(255, 255, 255, 0.08);
       --bg-input: rgba(255, 255, 255, 0.035);
-      --bg-input-focus: rgba(255, 255, 255, 0.065);
+      --bg-input-focus: rgba(255, 255, 255, 0.06);
 
       --gold-primary: #f59e0b;
       --gold-btn: linear-gradient(135deg, #a37c3f 0%, #cda35a 50%, #856128 100%);
-      --gold-glow: rgba(205, 163, 90, 0.35);
+      --gold-glow: rgba(205, 163, 90, 0.25);
 
       --cyan-neon: #00f0ff;
-      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-glow: rgba(0, 240, 255, 0.25);
       --purple-neon: #a855f7;
       --ruby-neon: #f43f5e;
       --emerald-neon: #10b981;
@@ -64,20 +64,22 @@
       justify-content: flex-start;
       padding: 1.5rem 1.25rem 2.5rem;
       position: relative;
+      /* Subtle, low-intensity ambient background gradients */
       background-image:
-        radial-gradient(circle at 50% 12%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 60%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+        radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 10% 25%, rgba(168, 85, 247, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 60%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
       background-attachment: fixed;
     }
 
+    /* Subtle static Cyber Grid (Low contrast for calm visuals) */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
       background-size: 38px 38px;
       pointer-events: none;
       z-index: 0;
@@ -87,6 +89,7 @@
     button { font-family: inherit; border: none; outline: none; cursor: pointer; }
     input { font-family: inherit; outline: none; border: none; }
 
+    /* Gentle Initial Page Fade-in */
     .app-wrapper {
       position: relative;
       z-index: 10;
@@ -95,8 +98,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      animation: pageGentleFade 0.65s var(--smooth-ease) forwards;
     }
 
+    @keyframes pageGentleFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       TOP BUTTON: BACK TO HOME
+       ========================================================================== */
     .top-bar {
       width: 100%;
       display: flex;
@@ -114,18 +126,21 @@
       padding: 7px 16px;
       border-radius: var(--radius-full);
       background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.09);
       backdrop-filter: blur(10px);
-      transition: all 0.25s var(--smooth-ease);
+      transition: all 0.2s var(--smooth-ease);
     }
 
     .btn-back-home:hover {
       color: var(--cyan-neon);
-      border-color: var(--cyan-glow);
-      background: rgba(0, 240, 255, 0.06);
+      border-color: rgba(0, 240, 255, 0.25);
+      background: rgba(0, 240, 255, 0.04);
       transform: translateX(-2px);
     }
 
+    /* ==========================================================================
+       BRANDING & SUBTLE GLOWING LOGO
+       ========================================================================== */
     .brand-section {
       text-align: center;
       margin-bottom: 1.75rem;
@@ -143,17 +158,18 @@
       place-items: center;
     }
 
+    /* Subdued, slow rotation halo */
     .brand-halo-ring {
       position: absolute;
-      inset: -5px;
+      inset: -4px;
       border-radius: 50%;
       background: conic-gradient(from 180deg, #f59e0b, #a855f7, #00f0ff, #3b82f6, #f59e0b);
-      animation: rotateHalo 7s linear infinite;
+      animation: rotateHaloSlow 16s linear infinite;
       filter: blur(8px);
-      opacity: 0.85;
+      opacity: 0.6;
     }
 
-    @keyframes rotateHalo {
+    @keyframes rotateHaloSlow {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
@@ -164,11 +180,15 @@
       height: 68px;
       border-radius: 20px;
       background: radial-gradient(circle at 35% 30%, #151b2d 0%, #080a11 85%);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       display: grid;
       place-items: center;
       color: #f59e0b;
-      box-shadow: inset 0 0 16px rgba(0, 240, 255, 0.2), 0 8px 20px rgba(0, 0, 0, 0.6);
+      box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.15), 0 6px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand-core svg {
+      filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.3));
     }
 
     .brand-title {
@@ -188,21 +208,23 @@
       margin-top: 5px;
     }
 
+    /* ==========================================================================
+       MAIN REGISTRATION GLASS CARD
+       ========================================================================== */
     .register-card {
       width: 100%;
       background: var(--bg-card);
       border: 1px solid var(--bg-card-border);
       border-radius: var(--radius-lg);
       padding: 2.2rem 1.65rem 2rem;
-      box-shadow: 
-        0 25px 60px -10px rgba(0, 0, 0, 0.85),
-        0 0 35px -10px rgba(0, 240, 255, 0.08);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       position: relative;
       overflow: hidden;
     }
 
+    /* Subtle top accent gradient line */
     .register-card::after {
       content: "";
       position: absolute;
@@ -210,7 +232,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent 5%, #00f0ff 30%, #f59e0b 70%, transparent 95%);
+      background: linear-gradient(90deg, transparent 5%, rgba(0, 240, 255, 0.7) 30%, rgba(245, 158, 11, 0.7) 70%, transparent 95%);
     }
 
     .card-header {
@@ -232,7 +254,9 @@
       line-height: 1.4;
     }
 
-    /* ERROR NOTIFICATION BANNER (STRICTLY HIDDEN BY DEFAULT) */
+    /* ==========================================================================
+       ERROR NOTIFICATION BANNER (STRICTLY HIDDEN BY DEFAULT)
+       ========================================================================== */
     .error-box-banner {
       display: none;
       align-items: flex-start;
@@ -243,17 +267,20 @@
       font-weight: 700;
       line-height: 1.4;
       margin-bottom: 1.25rem;
-      background: rgba(244, 63, 94, 0.12);
-      border: 1px solid rgba(244, 63, 94, 0.35);
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.3);
       color: #fda4af;
       animation: smoothSlideDown 0.25s var(--smooth-ease) forwards;
     }
 
     @keyframes smoothSlideDown {
-      from { opacity: 0; transform: translateY(-6px); }
+      from { opacity: 0; transform: translateY(-5px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ==========================================================================
+       FORM INPUT FIELDS
+       ========================================================================== */
     .form-group {
       margin-bottom: 1.15rem;
     }
@@ -289,18 +316,18 @@
       background: var(--bg-input);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: var(--radius-md);
-      transition: all 0.25s var(--smooth-ease);
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .field-wrapper:hover {
       background: var(--bg-input-focus);
-      border-color: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.15);
     }
 
     .field-wrapper:focus-within {
       background: var(--bg-input-focus);
       border-color: var(--cyan-neon);
-      box-shadow: 0 0 16px rgba(0, 240, 255, 0.22);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
     }
 
     .field-icon {
@@ -309,7 +336,7 @@
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      transition: color 0.2s;
+      transition: color 0.2s ease;
     }
 
     .field-wrapper:focus-within .field-icon {
@@ -338,11 +365,14 @@
       display: grid;
       place-items: center;
       cursor: pointer;
+      transition: color 0.2s ease;
     }
 
-    .btn-toggle-eye:hover { color: #fff; }
+    .btn-toggle-eye:hover {
+      color: #fff;
+    }
 
-    /* Referral Banner Badge */
+    /* Referral Verified Indicator */
     .referral-resolved-banner {
       display: none;
       align-items: center;
@@ -352,8 +382,8 @@
       font-size: 0.76rem;
       font-weight: 800;
       margin-top: 6px;
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid var(--border-cyan);
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid rgba(0, 240, 255, 0.2);
       color: var(--cyan-neon);
     }
 
@@ -363,6 +393,9 @@
       color: var(--ruby-neon);
     }
 
+    /* ==========================================================================
+       TERMS & CONDITIONS CONTAINER
+       ========================================================================== */
     .terms-box {
       margin: 1.25rem 0 1.5rem;
       padding: 0.95rem 1.1rem;
@@ -387,13 +420,13 @@
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .custom-checkbox:checked {
       background: var(--cyan-neon);
       border-color: var(--cyan-neon);
-      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
     }
 
     .custom-checkbox:checked::after {
@@ -417,8 +450,16 @@
       font-weight: 800;
       text-decoration: underline;
       cursor: pointer;
+      transition: color 0.2s;
     }
 
+    .terms-link:hover {
+      color: #67e8f9;
+    }
+
+    /* ==========================================================================
+       SUBMIT BUTTON (BRONZE/GOLD GRADIENT)
+       ========================================================================== */
     .btn-submit-gold {
       width: 100%;
       padding: 1.05rem 1.5rem;
@@ -429,21 +470,42 @@
       letter-spacing: 0.75px;
       background: var(--gold-btn);
       color: #171106;
-      box-shadow: 0 4px 20px var(--gold-glow);
-      transition: all 0.25s var(--smooth-ease);
+      box-shadow: 0 4px 16px var(--gold-glow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .btn-submit-gold:hover:not(:disabled) {
-      filter: brightness(1.12);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(205, 163, 90, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(205, 163, 90, 0.4);
+    }
+
+    .btn-submit-gold:active:not(:disabled) {
+      transform: translateY(0);
     }
 
     .btn-submit-gold:disabled {
-      opacity: 0.5;
+      opacity: 0.55;
       cursor: not-allowed;
-      filter: grayscale(0.4);
       transform: none !important;
+    }
+
+    /* Subtle loading spinner for registration button */
+    .btn-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(23, 17, 6, 0.35);
+      border-top-color: #171106;
+      border-radius: 50%;
+      animation: spinSpinner 0.7s linear infinite;
+    }
+
+    @keyframes spinSpinner {
+      to { transform: rotate(360deg); }
     }
 
     .card-footer {
@@ -459,6 +521,10 @@
       margin-left: 4px;
     }
 
+    .card-footer a:hover {
+      text-decoration: underline;
+    }
+
     .bottom-footnote {
       margin-top: 1.75rem;
       text-align: center;
@@ -469,22 +535,27 @@
       text-transform: uppercase;
     }
 
-    /* Modal */
+    /* ==========================================================================
+       SCROLLABLE TERMS & CONDITIONS MODAL
+       ========================================================================== */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(4, 6, 12, 0.9);
-      backdrop-filter: blur(18px);
+      background: rgba(4, 6, 12, 0.85);
+      backdrop-filter: blur(14px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 1.25rem;
       z-index: 2000;
       opacity: 0;
-      transition: opacity 0.3s var(--smooth-ease);
+      transition: opacity 0.25s var(--smooth-ease);
     }
 
-    .modal-overlay.open { display: flex; opacity: 1; }
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
 
     .modal-card {
       width: 100%;
@@ -496,13 +567,15 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius-lg);
       padding: 1.75rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
       position: relative;
-      transform: scale(0.95);
-      transition: transform 0.3s var(--smooth-ease);
+      transform: scale(0.96);
+      transition: transform 0.25s var(--smooth-ease);
     }
 
-    .modal-overlay.open .modal-card { transform: scale(1); }
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
 
     .modal-close-btn {
       position: absolute;
@@ -516,6 +589,12 @@
       display: grid;
       place-items: center;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .modal-head-title {
@@ -538,6 +617,20 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+    }
+
+    .modal-scroll-body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .modal-scroll-body::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+    }
+
+    .modal-scroll-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
     }
 
     .rule-item {
@@ -573,14 +666,188 @@
       color: #04060a;
       box-shadow: 0 4px 15px var(--cyan-glow);
     }
+
+    /* ==========================================================================
+       PREMIUM SUCCESS ANIMATION POPUP (MODAL)
+       ========================================================================== */
+    .success-modal-card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(160deg, rgba(20, 26, 44, 0.95), rgba(10, 14, 25, 0.98));
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.75rem 2rem;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 240, 255, 0.1);
+      position: relative;
+      transform: scale(0.92);
+      transition: transform 0.4s var(--smooth-ease);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-overlay.open .success-modal-card {
+      transform: scale(1);
+    }
+
+    /* Animated Checkmark and Subtle Particle Accent */
+    .success-icon-wrap {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 1.5rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .success-circle-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.2) 0%, rgba(245, 158, 11, 0.1) 70%, transparent 100%);
+      filter: blur(8px);
+      animation: pulseGlow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { transform: scale(0.95); opacity: 0.7; }
+      to { transform: scale(1.15); opacity: 1; }
+    }
+
+    .checkmark-svg {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 3;
+      stroke: var(--cyan-neon);
+      stroke-miterlimit: 10;
+      box-shadow: inset 0px 0px 0px var(--cyan-neon);
+    }
+
+    .checkmark-circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 3;
+      stroke-miterlimit: 10;
+      stroke: rgba(0, 240, 255, 0.35);
+      animation: strokeCircle 0.6s var(--smooth-ease) forwards;
+    }
+
+    .checkmark-check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      stroke: var(--cyan-neon);
+      animation: strokeCheck 0.4s var(--smooth-ease) 0.4s forwards;
+    }
+
+    @keyframes strokeCircle {
+      100% { stroke-dashoffset: 0; stroke: var(--cyan-neon); }
+    }
+
+    @keyframes strokeCheck {
+      100% { stroke-dashoffset: 0; }
+    }
+
+    /* Subtle Tiny Floating Particles Burst (CSS-Only, No heavy confetti) */
+    .particle-burst {
+      position: absolute;
+      inset: -10px;
+      pointer-events: none;
+    }
+
+    .p-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFly 1.2s ease-out 0.4s forwards;
+    }
+
+    .p1 { top: 10%; left: 20%; background: var(--cyan-neon); --tx: -18px; --ty: -18px; }
+    .p2 { top: 12%; right: 20%; background: var(--gold-primary); --tx: 18px; --ty: -18px; }
+    .p3 { bottom: 15%; left: 15%; background: var(--gold-primary); --tx: -18px; --ty: 18px; }
+    .p4 { bottom: 12%; right: 18%; background: var(--cyan-neon); --tx: 18px; --ty: 18px; }
+    .p5 { top: 50%; left: 2%; background: var(--purple-neon); --tx: -20px; --ty: 0; }
+    .p6 { top: 50%; right: 2%; background: var(--cyan-neon); --tx: 20px; --ty: 0; }
+
+    @keyframes particleFly {
+      0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 0; }
+    }
+
+    .success-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.75rem;
+    }
+
+    .btn-dashboard-redirect {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1.05rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      background: var(--gold-btn);
+      color: #171106;
+      box-shadow: 0 4px 18px var(--gold-glow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-dashboard-redirect:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(205, 163, 90, 0.45);
+    }
+
+    /* ==========================================================================
+       ACCESSIBILITY: PREFERS-REDUCED-MOTION
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      .app-wrapper, .modal-card, .success-modal-card {
+        animation: none !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .brand-halo-ring {
+        animation: none !important;
+      }
+      .checkmark-circle, .checkmark-check {
+        stroke-dashoffset: 0 !important;
+        animation: none !important;
+      }
+      .p-dot {
+        display: none !important;
+      }
+      .btn-submit-gold:hover {
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="app-wrapper">
+    <!-- Top Bar: Back to Home -->
     <div class="top-bar">
       <a href="index.html" class="btn-back-home">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
@@ -588,12 +855,12 @@
       </a>
     </div>
 
-    <!-- Header Branding with Animated Halo Logo -->
+    <!-- Header Branding with Subtle Glowing Halo Logo -->
     <header class="brand-section">
       <div class="brand-emblem-wrap">
         <div class="brand-halo-ring"></div>
         <div class="brand-core">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="6" width="20" height="12" rx="6"></rect>
             <line x1="6" y1="12" x2="10" y2="12"></line>
             <line x1="8" y1="10" x2="8" y2="14"></line>
@@ -613,9 +880,9 @@
         <p class="card-subtitle">Join the game and enjoy the experience.</p>
       </div>
 
-      <!-- ERROR NOTIFICATION BANNER (HIDDEN BY DEFAULT) -->
+      <!-- ERROR NOTIFICATION BANNER (STRICTLY HIDDEN BY DEFAULT) -->
       <div id="errorBox" class="error-box-banner" hidden>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0;">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="8" x2="12" y2="12"></line>
           <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -624,7 +891,7 @@
       </div>
 
       <form id="registerForm" novalidate>
-        <!-- Username -->
+        <!-- 1. Username Field -->
         <div class="form-group">
           <label for="usernameInput" class="field-label">
             <span>USERNAME</span>
@@ -641,7 +908,7 @@
           </div>
         </div>
 
-        <!-- Email Address -->
+        <!-- 2. Email Address Field -->
         <div class="form-group">
           <label for="emailInput" class="field-label">
             <span>EMAIL ADDRESS</span>
@@ -657,7 +924,7 @@
           </div>
         </div>
 
-        <!-- Password -->
+        <!-- 3. Password Field -->
         <div class="form-group">
           <label for="passwordInput" class="field-label">
             <span>PASSWORD</span>
@@ -680,7 +947,7 @@
           </div>
         </div>
 
-        <!-- Confirm Password -->
+        <!-- 4. Confirm Password Field -->
         <div class="form-group">
           <label for="confirmPassInput" class="field-label">
             <span>CONFIRM PASSWORD</span>
@@ -701,7 +968,7 @@
           </div>
         </div>
 
-        <!-- Referral Code Input with Dynamic Parent Match -->
+        <!-- 5. Referral Code Field -->
         <div class="form-group">
           <label for="referralInput" class="field-label">
             <span>REFERRAL CODE</span>
@@ -732,7 +999,9 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" id="btnSubmit" class="btn-submit-gold">CREATE ACCOUNT</button>
+        <button type="submit" id="btnSubmit" class="btn-submit-gold">
+          <span id="btnSubmitText">CREATE ACCOUNT</span>
+        </button>
       </form>
 
       <div class="card-footer">
@@ -740,12 +1009,15 @@
       </div>
     </main>
 
+    <!-- Bottom Footnote -->
     <div class="bottom-footnote">
       CASUAL GAME HUB • JUST FOR FUN • NO GUARANTEED EARNINGS
     </div>
   </div>
 
-  <!-- TERMS & CONDITIONS MODAL -->
+  <!-- ==========================================================================
+       SCROLLABLE TERMS & CONDITIONS MODAL
+       ========================================================================== -->
   <div id="termsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTermsTitle">
     <div class="modal-card">
       <button type="button" class="modal-close-btn" id="btnCloseTermsModal" aria-label="Close">✕</button>
@@ -809,7 +1081,38 @@
     </div>
   </div>
 
-  <!-- FIREBASE INTEGRATION & INSTANT REFERRAL REWARD ENGINE -->
+  <!-- ==========================================================================
+       PREMIUM ACCOUNT CREATION SUCCESS MODAL POPUP
+       ========================================================================== -->
+  <div id="successModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="success-modal-card">
+      <div class="success-icon-wrap">
+        <!-- Subtle particle burst -->
+        <div class="particle-burst">
+          <span class="p-dot p1"></span>
+          <span class="p-dot p2"></span>
+          <span class="p-dot p3"></span>
+          <span class="p-dot p4"></span>
+          <span class="p-dot p5"></span>
+          <span class="p-dot p6"></span>
+        </div>
+        <div class="success-circle-glow"></div>
+        <svg class="checkmark-svg" viewBox="0 0 52 52">
+          <circle class="checkmark-circle" cx="26" cy="26" r="23" fill="none"/>
+          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+
+      <h3 id="successTitle" class="success-title">Account Created Successfully!</h3>
+      <p class="success-subtitle">Welcome to THE GAME WITH FUN! Your gaming journey starts here.</p>
+
+      <a href="dashboard.html" class="btn-dashboard-redirect">GO TO DASHBOARD</a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FIREBASE INTEGRATION & CLIENT LOGIC
+       ========================================================================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
@@ -826,6 +1129,9 @@
       push
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+    // ------------------------------------------------------------------------
+    // FIREBASE CONFIGURATION
+    // ------------------------------------------------------------------------
     const firebaseConfig = {
       apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
       authDomain: "game-with-fun-a1988.firebaseapp.com",
@@ -840,7 +1146,7 @@
     const auth = getAuth(app);
     const database = getDatabase(app);
 
-    // DOM References
+    // DOM Elements
     const registerForm = document.getElementById('registerForm');
     const usernameInput = document.getElementById('usernameInput');
     const emailInput = document.getElementById('emailInput');
@@ -852,6 +1158,7 @@
     const termsCheck = document.getElementById('termsCheck');
     const openTermsLink = document.getElementById('openTermsLink');
     const btnSubmit = document.getElementById('btnSubmit');
+    const btnSubmitText = document.getElementById('btnSubmitText');
 
     const btnTogglePass = document.getElementById('btnTogglePass');
     const btnToggleConfirm = document.getElementById('btnToggleConfirm');
@@ -862,15 +1169,18 @@
     const errorBox = document.getElementById('errorBox');
     const errorMsgText = document.getElementById('errorMsgText');
 
-    // Modal
+    // Modals
     const termsModal = document.getElementById('termsModal');
     const btnCloseTermsModal = document.getElementById('btnCloseTermsModal');
     const btnModalAgree = document.getElementById('btnModalAgree');
+    const successModal = document.getElementById('successModal');
 
     let resolvedParentUid = null;
     let validateDebounce = null;
 
-    // Error Box Handlers
+    // ------------------------------------------------------------------------
+    // ERROR DISPLAY AND DYNAMIC CLEARING
+    // ------------------------------------------------------------------------
     function showError(msg) {
       errorMsgText.textContent = msg;
       errorBox.removeAttribute('hidden');
@@ -888,7 +1198,9 @@
     });
     termsCheck.addEventListener('change', clearError);
 
-    // Modal Interactions
+    // ------------------------------------------------------------------------
+    // TERMS & CONDITIONS MODAL
+    // ------------------------------------------------------------------------
     openTermsLink.addEventListener('click', () => termsModal.classList.add('open'));
     btnCloseTermsModal.addEventListener('click', () => termsModal.classList.remove('open'));
     termsModal.addEventListener('click', (e) => {
@@ -901,7 +1213,9 @@
       termsModal.classList.remove('open');
     });
 
-    // Toggle Eye Icons
+    // ------------------------------------------------------------------------
+    // PASSWORD VISIBILITY TOGGLE
+    // ------------------------------------------------------------------------
     function toggleEye(input, svgEl) {
       const isPass = input.type === 'password';
       input.type = isPass ? 'text' : 'password';
@@ -923,7 +1237,9 @@
     btnTogglePass.addEventListener('click', () => toggleEye(passwordInput, eyePassSvg));
     btnToggleConfirm.addEventListener('click', () => toggleEye(confirmPassInput, eyeConfirmSvg));
 
-    // Auto-detect ?ref= from URL
+    // ------------------------------------------------------------------------
+    // REFERRAL CODE RESOLUTION
+    // ------------------------------------------------------------------------
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const refParam = params.get('ref') || params.get('referral');
@@ -995,10 +1311,10 @@
       return code;
     }
 
-    // =========================================================================
-    // AUTOMATIC 3-LEVEL INSTANT REFERRAL REWARD PROCESSOR
-    // Levels: Level 1 = ৳60 | Level 2 = ৳30 | Level 3 = ৳15
-    // =========================================================================
+    // ------------------------------------------------------------------------
+    // INSTANT 3-LEVEL REFERRAL REWARDS PROCESSOR
+    // Level 1: ৳60 | Level 2: ৳30 | Level 3: ৳15
+    // ------------------------------------------------------------------------
     async function processInstant3LevelReferral(db, newUid, parentUid, newUsername) {
       if (!parentUid || parentUid === newUid) return;
 
@@ -1011,7 +1327,6 @@
         const rewardRecordRef = ref(db, `referralRewards/${newUid}/${level}`);
         const rewardSnap = await get(rewardRecordRef);
 
-        // Duplicate prevention: If reward for (newUid + level) doesn't exist, process it!
         if (!rewardSnap.exists()) {
           const amount = REWARDS[level];
           const bUserRef = ref(db, `users/${currentBeneficiaryUid}`);
@@ -1028,15 +1343,12 @@
               referralEarnings: Math.round((curRefEarnings + amount) * 100) / 100
             };
 
-            // Increment direct referral count for Level 1 parent only
             if (level === 1) {
               updates.referralCount = curRefCount + 1;
             }
 
-            // 1. Immediately credit beneficiary's balance & referral earnings
             await update(bUserRef, updates);
 
-            // 2. Record in /referralRewards/{newUid}/{level} (prevents duplicates forever)
             await set(rewardRecordRef, {
               beneficiaryUid: currentBeneficiaryUid,
               level: level,
@@ -1046,7 +1358,6 @@
               createdAt: Date.now()
             });
 
-            // 3. Create record in /transactions/{beneficiaryUid}/{transactionId}
             const txRef = push(ref(db, `transactions/${currentBeneficiaryUid}`));
             await set(txRef, {
               type: "referral_reward",
@@ -1058,22 +1369,20 @@
               createdAt: Date.now()
             });
 
-            // Advance to the parent's parent for next tier
             currentBeneficiaryUid = bData.referredBy || null;
           } else {
             break;
           }
         } else {
-          // If already processed, follow chain up
           const bUserSnap = await get(ref(db, `users/${currentBeneficiaryUid}`));
           currentBeneficiaryUid = bUserSnap.exists() ? (bUserSnap.val().referredBy || null) : null;
         }
       }
     }
 
-    // =========================================================================
-    // REGISTRATION SUBMISSION FORM
-    // =========================================================================
+    // ------------------------------------------------------------------------
+    // REGISTRATION SUBMISSION & LOADING STATE
+    // ------------------------------------------------------------------------
     registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearError();
@@ -1144,8 +1453,12 @@
         return;
       }
 
+      // Enter Loading State
       btnSubmit.disabled = true;
-      btnSubmit.textContent = 'CREATING ACCOUNT...';
+      btnSubmit.innerHTML = `
+        <span class="btn-spinner"></span>
+        <span>Creating Account...</span>
+      `;
 
       try {
         // 1. Check unique username in Realtime Database
@@ -1159,8 +1472,7 @@
           if (usernameTaken) {
             showError("This username is already taken. Please choose another.");
             usernameInput.focus();
-            btnSubmit.disabled = false;
-            btnSubmit.textContent = 'CREATE ACCOUNT';
+            resetButtonState();
             return;
           }
         }
@@ -1169,7 +1481,7 @@
         const cred = await createUserWithEmailAndPassword(auth, email, password);
         const uid = cred.user.uid;
 
-        // 3. Self-referral prevention
+        // 3. Prevent Self-Referral
         let finalParentUid = resolvedParentUid;
         if (finalParentUid === uid) {
           finalParentUid = null;
@@ -1197,19 +1509,18 @@
 
         await set(ref(database, `users/${uid}`), userProfile);
 
-        // 5. Instantly and automatically distribute 3-level referral rewards!
+        // 5. Automatic 3-Level Instant Referral Reward Distribution
         if (finalParentUid) {
           await processInstant3LevelReferral(database, uid, finalParentUid, username);
         }
 
-        // 6. Success Feedback & Redirect
-        alert(`Account Created Successfully\nWelcome to THE GAME WITH FUN.\n\nYour Referral Code is: ${newUniqueRefCode}`);
-        window.location.href = 'dashboard.html';
+        // 6. Show Premium Animated Success Modal Popup
+        resetButtonState();
+        successModal.classList.add('open');
 
       } catch (err) {
         console.error('Registration Error:', err);
-        btnSubmit.disabled = false;
-        btnSubmit.textContent = 'CREATE ACCOUNT';
+        resetButtonState();
 
         if (err.code === 'auth/email-already-in-use') {
           showError("This email is already registered.");
@@ -1224,6 +1535,11 @@
         }
       }
     });
+
+    function resetButtonState() {
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = `<span>CREATE ACCOUNT</span>`;
+    }
 
     onAuthStateChanged(auth, (user) => {});
   </script>
