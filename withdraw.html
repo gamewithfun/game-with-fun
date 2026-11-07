@@ -68,7 +68,7 @@
         radial-gradient(circle at 90% 25%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
         radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.04) 0%, transparent 55%);
       background-attachment: fixed;
-      padding-bottom: 95px; /* Ensures mobile fixed bottom nav never overlaps content */
+      padding-bottom: 95px;
     }
 
     @media (min-width: 1024px) {
@@ -77,17 +77,9 @@
       }
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-      border: none;
-      outline: none;
-      cursor: pointer;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; border: none; outline: none; cursor: pointer; }
+    input { font-family: inherit; outline: none; border: none; }
 
     .container {
       width: 100%;
@@ -96,9 +88,6 @@
       padding: 0 1rem;
     }
 
-    /* ==========================================================================
-       HEADER BAR
-       ========================================================================== */
     .top-header {
       position: sticky;
       top: 0;
@@ -202,9 +191,6 @@
       color: var(--gold-primary);
     }
 
-    /* ==========================================================================
-       PAGE BANNER & NOTICES
-       ========================================================================== */
     .page-banner {
       padding: 1.5rem 0 0.8rem;
     }
@@ -250,9 +236,7 @@
       font-weight: 600;
     }
 
-    /* ==========================================================================
-       DASHBOARD GRID & CARDS
-       ========================================================================== */
+    /* GRID & CARDS */
     .dash-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -261,21 +245,13 @@
     }
 
     @media (min-width: 768px) {
-      .dash-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .col-span-2 {
-        grid-column: span 2;
-      }
+      .dash-grid { grid-template-columns: repeat(2, 1fr); }
+      .col-span-2 { grid-column: span 2; }
     }
 
     @media (min-width: 1024px) {
-      .dash-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .col-span-2-lg {
-        grid-column: span 2;
-      }
+      .dash-grid { grid-template-columns: repeat(3, 1fr); }
+      .col-span-2-lg { grid-column: span 2; }
     }
 
     .ui-card {
@@ -284,15 +260,9 @@
       border-radius: var(--radius-lg);
       padding: 1.45rem;
       backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
       position: relative;
       overflow: hidden;
       transition: all 0.3s var(--smooth-ease);
-    }
-
-    .ui-card:hover {
-      border-color: rgba(255, 255, 255, 0.16);
-      background: var(--bg-card-hover);
     }
 
     .card-heading {
@@ -306,7 +276,7 @@
       letter-spacing: -0.2px;
     }
 
-    /* 1. BALANCE OVERVIEW CARD */
+    /* 1. BALANCE OVERVIEW */
     .balance-overview-card {
       background: linear-gradient(145deg, rgba(24, 30, 52, 0.95), rgba(10, 14, 25, 0.95));
       border: 1px solid var(--border-glow);
@@ -388,7 +358,7 @@
       color: #fff;
     }
 
-    /* 2. ELIGIBILITY CARD */
+    /* 2. ELIGIBILITY CARD (UPDATED) */
     .checklist-stack {
       display: flex;
       flex-direction: column;
@@ -400,7 +370,7 @@
       background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
+      padding: 1rem 1.15rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -413,7 +383,7 @@
     }
 
     .req-name {
-      font-size: 0.84rem;
+      font-size: 0.88rem;
       font-weight: 800;
       color: #fff;
       display: flex;
@@ -422,14 +392,14 @@
     }
 
     .req-progress {
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
     }
 
     .status-badge {
       font-size: 0.7rem;
       font-weight: 900;
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: var(--radius-full);
       text-transform: uppercase;
     }
@@ -448,7 +418,7 @@
 
     .overall-eligibility-box {
       border-radius: var(--radius-md);
-      padding: 1rem;
+      padding: 1rem 1.15rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -466,7 +436,6 @@
       color: #a7f3d0;
     }
 
-    /* Active Pending Order Notice */
     .pending-lock-banner {
       background: rgba(245, 158, 11, 0.08);
       border: 1px solid rgba(245, 158, 11, 0.35);
@@ -549,12 +518,6 @@
       letter-spacing: 0.5px;
     }
 
-    .input-control::placeholder {
-      color: #475569;
-      font-weight: 500;
-      font-size: 0.88rem;
-    }
-
     .btn-submit-withdraw {
       width: 100%;
       padding: 1rem;
@@ -582,7 +545,7 @@
       filter: grayscale(0.5);
     }
 
-    /* 4. WITHDRAWAL HISTORY FEED */
+    /* 4. HISTORY */
     .history-list {
       display: flex;
       flex-direction: column;
@@ -598,11 +561,6 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: var(--radius-md);
       transition: all 0.2s ease;
-    }
-
-    .history-row:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .h-left {
@@ -721,9 +679,7 @@
       color: var(--gold-primary);
     }
 
-    /* ==========================================================================
-       FIXED BOTTOM NAVIGATION (Mobile)
-       ========================================================================== */
+    /* BOTTOM NAV */
     .bottom-nav-fixed {
       position: fixed;
       bottom: 0;
@@ -732,7 +688,6 @@
       height: 65px;
       background: rgba(10, 14, 23, 0.92);
       backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
       border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
@@ -742,9 +697,7 @@
     }
 
     @media (min-width: 1024px) {
-      .bottom-nav-fixed {
-        display: none;
-      }
+      .bottom-nav-fixed { display: none; }
     }
 
     .nav-tab-btn {
@@ -768,49 +721,11 @@
     .nav-tab-btn.active {
       color: var(--gold-primary);
     }
-
-    /* Blocked Account Modal */
-    .blocked-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #05070b;
-      z-index: 3000;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    .blocked-card {
-      background: #111524;
-      border: 1px solid var(--ruby-neon);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem 1.75rem;
-      max-width: 420px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-    }
   </style>
 </head>
 <body>
 
-  <!-- BLOCKED ACCOUNT OVERLAY -->
-  <div id="blockedScreen" class="blocked-screen">
-    <div class="blocked-card">
-      <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
-      <h2 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Access Restricted</h2>
-      <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;">
-        Your account status is currently restricted. You cannot access withdrawal or wallet services.
-      </p>
-      <button id="btnBlockedLogout" style="padding: 0.8rem 1.6rem; background: var(--ruby-neon); color: #fff; border-radius: var(--radius-sm); font-weight: 800;">
-        LOG OUT
-      </button>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       TOP APP HEADER
-       ========================================================================== -->
+  <!-- TOP HEADER -->
   <header class="top-header">
     <div class="container header-content">
       <div class="header-left">
@@ -838,11 +753,8 @@
     </div>
   </header>
 
-  <!-- ==========================================================================
-       MAIN CONTENT
-       ========================================================================== -->
+  <!-- MAIN CONTAINER -->
   <main class="container">
-    <!-- Page Title -->
     <div class="page-banner">
       <h1 class="page-title">
         <span>💸</span>
@@ -855,13 +767,11 @@
     <div class="disclaimer-banner">
       <span class="icon">⚠️</span>
       <p>
-        <strong>Notice:</strong> This is a game-style "Just for Fun" platform. Withdrawals are subject to verification and platform rules. They do not constitute a promise of guaranteed income or financial return.
+        <strong>Notice:</strong> This is a game-style "Just for Fun" platform. Withdrawals require an active VIP and completing at least 100 tasks.
       </p>
     </div>
 
-    <!-- Content Grid -->
     <div class="dash-grid">
-
       <!-- 1. AVAILABLE BALANCE CARD -->
       <div class="ui-card balance-overview-card col-span-2-lg">
         <div class="b-top-row">
@@ -887,7 +797,7 @@
         </div>
       </div>
 
-      <!-- 2. WITHDRAWAL ELIGIBILITY CHECKLIST CARD -->
+      <!-- 2. WITHDRAWAL ELIGIBILITY CHECKLIST CARD (UPDATED) -->
       <div class="ui-card col-span-2-lg">
         <div class="card-heading">
           <span>Withdrawal Eligibility</span>
@@ -898,28 +808,19 @@
           <!-- Requirement 1: Active VIP -->
           <div class="req-item">
             <div class="req-info">
-              <span class="req-name">👑 Active VIP Tier</span>
+              <span class="req-name">👑 Active VIP Tier Requirement</span>
               <span class="req-progress" id="progressVipText">Checking VIP status...</span>
             </div>
             <span class="status-badge fail" id="badgeReqVip">Not Completed</span>
           </div>
 
-          <!-- Requirement 2: 10-Day Login Streak -->
+          <!-- Requirement 2: 100 Tasks Completed -->
           <div class="req-item">
             <div class="req-info">
-              <span class="req-name">🔥 10-Day Login Streak</span>
-              <span class="req-progress" id="progressLoginText">0 / 10 Days</span>
+              <span class="req-name">🎮 100 Tasks Completed Requirement</span>
+              <span class="req-progress" id="progress100TaskText">0 / 100 Tasks</span>
             </div>
-            <span class="status-badge fail" id="badgeReqLogin">Not Completed</span>
-          </div>
-
-          <!-- Requirement 3: Daily Task Activity -->
-          <div class="req-item">
-            <div class="req-info">
-              <span class="req-name">✅ Daily Task Requirement</span>
-              <span class="req-progress" id="progressTaskText">Incomplete today</span>
-            </div>
-            <span class="status-badge fail" id="badgeReqTask">Not Completed</span>
+            <span class="status-badge fail" id="badgeReq100Task">Not Completed</span>
           </div>
         </div>
 
@@ -927,7 +828,7 @@
         <div class="overall-eligibility-box locked" id="overallEligibilityBanner">
           <div>
             <div style="font-size: 0.88rem; font-weight: 900;" id="overallStatusTitle">🔒 Withdrawal Locked</div>
-            <div style="font-size: 0.72rem; opacity: 0.85;" id="overallStatusSub">All 3 conditions above must be completed before you can submit a payout.</div>
+            <div style="font-size: 0.74rem; opacity: 0.85;" id="overallStatusSub">You must have an active VIP tier and complete at least 100 tasks to unlock withdrawal.</div>
           </div>
           <span class="status-badge fail" id="overallBadge">LOCKED</span>
         </div>
@@ -940,18 +841,16 @@
           <span style="font-size: 0.72rem; color: var(--cyan-neon); font-weight: 800;" id="minWithdrawLabel">Min: ৳100</span>
         </div>
 
-        <!-- Existing Pending Order Alert -->
         <div id="pendingOrderLockBanner" class="pending-lock-banner">
           <div style="font-size: 0.85rem; font-weight: 800; color: var(--gold-primary); margin-bottom: 2px;">
             ⚠️ Pending Request In Progress
           </div>
-          <div style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.4;" id="pendingOrderLockText">
+          <div style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.4;">
             You currently have a withdrawal request waiting for admin verification. Only one pending request is permitted at a time.
           </div>
         </div>
 
         <form id="withdrawForm" novalidate>
-          <!-- Payment Method Selection -->
           <label class="form-label">Payout Method</label>
           <div class="method-selector-grid">
             <button type="button" class="method-tab-btn active" id="btnMethodBkash">
@@ -962,7 +861,6 @@
             </button>
           </div>
 
-          <!-- Mobile Account Number -->
           <div class="form-group">
             <label class="form-label" for="accountNumberInput">
               <span>Mobile Account Number</span>
@@ -980,7 +878,6 @@
             </div>
           </div>
 
-          <!-- Withdrawal Amount -->
           <div class="form-group">
             <label class="form-label" for="amountInput">
               <span>Withdrawal Amount (BDT)</span>
@@ -999,7 +896,6 @@
             </div>
           </div>
 
-          <!-- Optional Reference/Note -->
           <div class="form-group">
             <label class="form-label" for="noteInput">
               <span>Reference Note</span>
@@ -1016,9 +912,8 @@
             </div>
           </div>
 
-          <!-- Submit Button -->
           <button type="submit" id="btnSubmitWithdraw" class="btn-submit-withdraw" disabled>
-            SUBMIT WITHDRAWAL
+            WITHDRAWAL LOCKED
           </button>
         </form>
       </div>
@@ -1034,13 +929,10 @@
           <div class="history-empty">No withdrawal requests found.</div>
         </div>
       </div>
-
     </div>
   </main>
 
-  <!-- ==========================================================================
-       SUBMISSION CONFIRMATION MODAL
-       ========================================================================== -->
+  <!-- CONFIRMATION MODAL -->
   <div id="successModal" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-card">
       <div class="modal-icon-badge">✓</div>
@@ -1074,9 +966,7 @@
     </div>
   </div>
 
-  <!-- ==========================================================================
-       FIXED BOTTOM NAVIGATION (Mobile)
-       ========================================================================== -->
+  <!-- FIXED BOTTOM NAVIGATION -->
   <nav class="bottom-nav-fixed">
     <a href="dashboard.html" class="nav-tab-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -1100,18 +990,12 @@
     </a>
   </nav>
 
-  <!-- ==========================================================================
-       FIREBASE INTEGRATION & CLIENT LOGIC
-       ========================================================================== -->
+  <!-- FIREBASE INTEGRATION -->
   <script type="module">
-    // ------------------------------------------------------------------------
-    // 1. FIREBASE SDK IMPORTS (Modular Auth & Realtime Database Only)
-    // ------------------------------------------------------------------------
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
       getAuth, 
-      onAuthStateChanged, 
-      signOut 
+      onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { 
       getDatabase, 
@@ -1125,9 +1009,6 @@
       equalTo 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // ------------------------------------------------------------------------
-    // 2. FIREBASE CONFIGURATION
-    // ------------------------------------------------------------------------
     const firebaseConfig = {
       apiKey: "AIzaSyCypPyOyk2gh42SS8z8bnK5emKQmr40v5U",
       authDomain: "game-with-fun-a1988.firebaseapp.com",
@@ -1142,35 +1023,25 @@
     const auth = getAuth(app);
     const database = getDatabase(app);
 
-    // ------------------------------------------------------------------------
-    // 3. UI ELEMENT HOOKS
-    // ------------------------------------------------------------------------
-    const blockedScreen = document.getElementById('blockedScreen');
-    const btnBlockedLogout = document.getElementById('btnBlockedLogout');
-
+    // DOM Hooks
     const headerBalanceText = document.getElementById('headerBalanceText');
     const userAvatarLetter = document.getElementById('userAvatarLetter');
-
     const valAvailableBalance = document.getElementById('valAvailableBalance');
     const valTotalEarnings = document.getElementById('valTotalEarnings');
     const valTotalWithdrawal = document.getElementById('valTotalWithdrawal');
 
-    // Checklist Elements
+    // Updated Checklist DOM Elements
     const progressVipText = document.getElementById('progressVipText');
     const badgeReqVip = document.getElementById('badgeReqVip');
-    const progressLoginText = document.getElementById('progressLoginText');
-    const badgeReqLogin = document.getElementById('badgeReqLogin');
-    const progressTaskText = document.getElementById('progressTaskText');
-    const badgeReqTask = document.getElementById('badgeReqTask');
+    const progress100TaskText = document.getElementById('progress100TaskText');
+    const badgeReq100Task = document.getElementById('badgeReq100Task');
 
     const overallEligibilityBanner = document.getElementById('overallEligibilityBanner');
     const overallStatusTitle = document.getElementById('overallStatusTitle');
     const overallStatusSub = document.getElementById('overallStatusSub');
     const overallBadge = document.getElementById('overallBadge');
 
-    // Form Hooks
     const pendingOrderLockBanner = document.getElementById('pendingOrderLockBanner');
-    const pendingOrderLockText = document.getElementById('pendingOrderLockText');
     const minWithdrawLabel = document.getElementById('minWithdrawLabel');
     const btnMethodBkash = document.getElementById('btnMethodBkash');
     const btnMethodNagad = document.getElementById('btnMethodNagad');
@@ -1179,30 +1050,22 @@
     const noteInput = document.getElementById('noteInput');
     const btnSubmitWithdraw = document.getElementById('btnSubmitWithdraw');
     const withdrawForm = document.getElementById('withdrawForm');
-
-    // History
     const historyList = document.getElementById('historyList');
 
-    // Modal
     const successModal = document.getElementById('successModal');
     const btnCloseModal = document.getElementById('btnCloseModal');
     const modalReqAmount = document.getElementById('modalReqAmount');
     const modalReqMethod = document.getElementById('modalReqMethod');
     const modalReqAccount = document.getElementById('modalReqAccount');
 
-    // ------------------------------------------------------------------------
-    // 4. CLIENT RUNTIME STATE
-    // ------------------------------------------------------------------------
     let currentUser = null;
     let userProfile = null;
     let selectedMethod = 'bKash';
-    let minimumWithdrawalAmount = 100; // Default fallback
+    let minimumWithdrawalAmount = 100;
     let isWithdrawalEligible = false;
     let hasPendingWithdrawal = false;
+    let totalCompletedTasksCount = 0;
 
-    // ------------------------------------------------------------------------
-    // 5. AUTH STATE LISTENER
-    // ------------------------------------------------------------------------
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         window.location.href = 'login.html';
@@ -1212,44 +1075,42 @@
       }
     });
 
-    // ------------------------------------------------------------------------
-    // 6. INITIALIZATION & LIVE DATA BINDINGS
-    // ------------------------------------------------------------------------
     function initWithdrawPortal() {
-      // 1. User Profile Listener
-      const userRef = ref(database, `users/${currentUser.uid}`);
-      onValue(userRef, (snapshot) => {
+      // 1. User Profile
+      onValue(ref(database, `users/${currentUser.uid}`), (snapshot) => {
         if (!snapshot.exists()) return;
         userProfile = snapshot.val();
-
-        if (userProfile.accountStatus === 'blocked' || userProfile.accountStatus === 'disabled') {
-          blockedScreen.style.display = 'flex';
-          return;
-        }
-
         renderUserData();
         evaluateEligibility();
       });
 
-      // 2. Minimum Withdrawal Settings
-      const minSettingRef = ref(database, 'settings/withdrawal/minimumAmount');
-      onValue(minSettingRef, (snapshot) => {
+      // 2. Count Total Completed Tasks (/taskCompletions/{uid})
+      onValue(ref(database, `taskCompletions/${currentUser.uid}`), (snapshot) => {
+        totalCompletedTasksCount = 0;
+        if (snapshot.exists()) {
+          const comps = snapshot.val();
+          Object.values(comps).forEach(c => {
+            if (c.status === 'completed' || !c.status) {
+              totalCompletedTasksCount++;
+            }
+          });
+        }
+        evaluateEligibility();
+      });
+
+      // 3. Minimum Withdrawal Setting
+      onValue(ref(database, 'settings/withdrawal/minimumAmount'), (snapshot) => {
         if (snapshot.exists()) {
           const val = Number(snapshot.val());
-          if (!isNaN(val) && val > 0) {
-            minimumWithdrawalAmount = val;
-          }
+          if (!isNaN(val) && val > 0) minimumWithdrawalAmount = val;
         }
         minWithdrawLabel.textContent = `Min: ৳${minimumWithdrawalAmount}`;
       });
 
-      // 3. User Withdrawal History Listener
+      // 4. Withdrawal History
       bindWithdrawalHistory();
     }
 
-    // ------------------------------------------------------------------------
-    // 7. RENDER USER BALANCE AND PROFILE STATS
-    // ------------------------------------------------------------------------
     function renderUserData() {
       const username = userProfile.username || 'Player';
       userAvatarLetter.textContent = username.charAt(0).toUpperCase();
@@ -1261,15 +1122,18 @@
       valTotalWithdrawal.textContent = Number(userProfile.totalWithdrawal || 0).toFixed(2);
     }
 
-    // ------------------------------------------------------------------------
-    // 8. ELIGIBILITY EVALUATION & REQUIREMENTS VERIFICATION
-    // ------------------------------------------------------------------------
+    // =========================================================================
+    // UPDATED ELIGIBILITY CHECK:
+    // 1. Active VIP required
+    // 2. 100 Completed Tasks required
+    // =========================================================================
     function evaluateEligibility() {
+      if (!userProfile) return;
       const now = Date.now();
       const vipLevel = Number(userProfile.vipLevel || 0);
       const vipStatus = (userProfile.vipStatus || 'inactive').toLowerCase();
 
-      // Rule 1: Active VIP requirement
+      // Rule 1: Active VIP Check
       let vipPassed = false;
       if (vipStatus === 'active' && vipLevel > 0 && userProfile.vipExpiry) {
         const exp = new Date(userProfile.vipExpiry).getTime();
@@ -1286,32 +1150,25 @@
         setBadge(badgeReqVip, true);
       }
 
-      // Rule 2: 10-Day Login Requirement
-      const loginStreak = Number(userProfile.loginStreak || 0);
-      const loginPassed = loginStreak >= 10;
-      progressLoginText.textContent = `${loginStreak} / 10 Days`;
-      setBadge(badgeReqLogin, loginPassed);
+      // Rule 2: 100 Completed Tasks Check
+      const totalTasks = Math.max(totalCompletedTasksCount, Number(userProfile.totalTasksCompleted || 0));
+      const task100Passed = totalTasks >= 100;
+      progress100TaskText.textContent = `${totalTasks} / 100 Tasks`;
+      setBadge(badgeReq100Task, task100Passed);
 
-      // Rule 3: Daily Task Activity Requirement
-      const taskStreak = Number(userProfile.taskStreak || 0);
-      const tasksToday = Number(userProfile.tasksCompletedToday || 0);
-      const taskPassed = taskStreak >= 1 || tasksToday >= 1;
-      progressTaskText.textContent = taskPassed ? 'Completed Today' : 'Not completed today';
-      setBadge(badgeReqTask, taskPassed);
-
-      // Overall Gate Decision
-      isWithdrawalEligible = vipPassed && loginPassed && taskPassed;
+      // Final Gate Decision
+      isWithdrawalEligible = vipPassed && task100Passed;
 
       if (isWithdrawalEligible) {
         overallEligibilityBanner.className = 'overall-eligibility-box unlocked';
         overallStatusTitle.textContent = '✅ Withdrawal Unlocked';
-        overallStatusSub.textContent = 'All requirements satisfied. You may submit your payout request.';
+        overallStatusSub.textContent = 'VIP is active and 100 tasks are completed. You can submit your payout.';
         overallBadge.className = 'status-badge pass';
         overallBadge.textContent = 'ELIGIBLE';
       } else {
         overallEligibilityBanner.className = 'overall-eligibility-box locked';
         overallStatusTitle.textContent = '🔒 Withdrawal Locked';
-        overallStatusSub.textContent = 'Complete all 3 requirements above to unlock withdrawal access.';
+        overallStatusSub.textContent = 'An active VIP tier and at least 100 completed tasks are required.';
         overallBadge.className = 'status-badge fail';
         overallBadge.textContent = 'LOCKED';
       }
@@ -1330,7 +1187,6 @@
     }
 
     function toggleSubmitButtonState() {
-      // Disabled if not eligible OR already has an active pending withdrawal
       if (isWithdrawalEligible && !hasPendingWithdrawal) {
         btnSubmitWithdraw.disabled = false;
         btnSubmitWithdraw.textContent = 'SUBMIT WITHDRAWAL';
@@ -1344,14 +1200,9 @@
       }
     }
 
-    // ------------------------------------------------------------------------
-    // 9. BIND USER WITHDRAWAL HISTORY & DETECT ACTIVE PENDING
-    // ------------------------------------------------------------------------
     function bindWithdrawalHistory() {
-      const withdrawalsRef = ref(database, 'withdrawals');
-      const userWithdrawalsQuery = query(withdrawalsRef, orderByChild('uid'), equalTo(currentUser.uid));
-
-      onValue(userWithdrawalsQuery, (snapshot) => {
+      const q = query(ref(database, 'withdrawals'), orderByChild('uid'), equalTo(currentUser.uid));
+      onValue(q, (snapshot) => {
         hasPendingWithdrawal = false;
         historyList.innerHTML = '';
 
@@ -1369,21 +1220,13 @@
           const item = data[key];
           item.id = key;
           items.push(item);
-
-          if (item.status === 'pending') {
-            hasPendingWithdrawal = true;
-          }
+          if (item.status === 'pending') hasPendingWithdrawal = true;
         });
 
-        // Sort latest first
         items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
-        // Display pending lock if active
         if (hasPendingWithdrawal) {
           pendingOrderLockBanner.classList.add('show');
-          pendingOrderLockText.innerHTML = `
-            You have an active pending payout under review. A new withdrawal cannot be submitted until the current request is resolved.
-          `;
         } else {
           pendingOrderLockBanner.classList.remove('show');
         }
@@ -1414,9 +1257,6 @@
       });
     }
 
-    // ------------------------------------------------------------------------
-    // 10. METHOD TOGGLES & FORM SUBMISSION
-    // ------------------------------------------------------------------------
     btnMethodBkash.addEventListener('click', () => {
       selectedMethod = 'bKash';
       btnMethodBkash.classList.add('active');
@@ -1433,12 +1273,12 @@
       e.preventDefault();
 
       if (!isWithdrawalEligible) {
-        alert('Withdrawal is currently locked. Please ensure all 3 requirements are satisfied.');
+        alert('Withdrawal is locked. Make sure you have an active VIP and have completed 100 tasks.');
         return;
       }
 
       if (hasPendingWithdrawal) {
-        alert('You already have a pending withdrawal request under review. Only one pending request is permitted.');
+        alert('You already have a pending withdrawal under review.');
         return;
       }
 
@@ -1446,15 +1286,13 @@
       const amountVal = parseFloat(amountInput.value);
       const currentBal = Number(userProfile.balance || 0);
 
-      // 1. Phone validation (Bangladeshi 11-digit mobile)
       const bdPhoneRegex = /^01[3-9]\d{8}$/;
       if (!bdPhoneRegex.test(rawNumber)) {
-        alert('Please enter a valid 11-digit Bangladeshi mobile number (e.g. 01712345678).');
+        alert('Please enter a valid 11-digit Bangladeshi mobile number.');
         accountNumberInput.focus();
         return;
       }
 
-      // 2. Amount validation
       if (isNaN(amountVal) || amountVal <= 0) {
         alert('Please enter a valid withdrawal amount.');
         amountInput.focus();
@@ -1477,9 +1315,7 @@
       btnSubmitWithdraw.textContent = 'SUBMITTING...';
 
       try {
-        const withdrawalsRef = ref(database, 'withdrawals');
-        const newReqRef = push(withdrawalsRef);
-
+        const newReqRef = push(ref(database, 'withdrawals'));
         const newRequestData = {
           withdrawalId: newReqRef.key,
           uid: currentUser.uid,
@@ -1492,22 +1328,18 @@
           createdAt: Date.now()
         };
 
-        // Submit to Realtime Database
         await set(newReqRef, newRequestData);
 
-        // Reset inputs
         amountInput.value = '';
         noteInput.value = '';
 
-        // Show Confirmation Dialog
         modalReqAmount.textContent = `৳${amountVal.toFixed(2)}`;
         modalReqMethod.textContent = selectedMethod;
         modalReqAccount.textContent = maskAccountNumber(rawNumber);
         successModal.classList.add('open');
-
       } catch (err) {
-        console.error('Withdrawal submission error:', err);
-        alert('Failed to submit withdrawal request. Please verify connection and retry.');
+        console.error('Withdrawal error:', err);
+        alert('Failed to submit withdrawal request. Check connection.');
       } finally {
         toggleSubmitButtonState();
       }
@@ -1517,9 +1349,6 @@
       successModal.classList.remove('open');
     });
 
-    // ------------------------------------------------------------------------
-    // 11. HELPERS & LOGOUT
-    // ------------------------------------------------------------------------
     function maskAccountNumber(num) {
       if (!num || num.length < 8) return num || '---';
       return num.substring(0, 3) + '****' + num.substring(num.length - 4);
@@ -1534,11 +1363,6 @@
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
-
-    btnBlockedLogout.addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = 'login.html';
-    });
   </script>
 </body>
 </html>
